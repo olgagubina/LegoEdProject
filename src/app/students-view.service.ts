@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import PointItem from '../models/point_item';
 import Student from '../models/student';
+import { HttpClient } from '@angular/common/http';
 
-var PRIZES: Array<PointItem> = [{_id: 1, category_id: 3, description:'movie for 2', amount: 200}, {_id: 2, category_id: 2, description:'you choose next topic', amount: 300}, {_id: 3, category_id: 1, description:'lead the next activity', amount: 200}, {_id: 4, category_id: 3, description:'Choose your own project', amount: 100}, {_id: 5, category_id: 3, description:'be teacher for a day', amount: 500}];
+var PRIZES: Array<PointItem> = [{ _id: 1, category_id: 3, description: 'movie for 2', amount: 200 }, { _id: 2, category_id: 2, description: 'you choose next topic', amount: 300 }, { _id: 3, category_id: 1, description: 'lead the next activity', amount: 200 }, { _id: 4, category_id: 3, description: 'Choose your own project', amount: 100 }, { _id: 5, category_id: 3, description: 'be teacher for a day', amount: 500 }];
 var STUDENTS: Array<Student> = [{
   "_id": 1,
   "firstName": "Gabbi",
@@ -88,13 +89,13 @@ var STUDENTS: Array<Student> = [{
 @Injectable()
 export class StudentsViewService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-getPrizes(){
- return PRIZES;
-}
+  getPrizes() {
+    return PRIZES;
+  }
 
-getStudents(){
-  return STUDENTS;
-}
+  getStudents() {
+    return STUDENTS;
+  }
 }
