@@ -1,5 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { RouterModule, Routes } from '@angular/router';
+
+import { StudentsViewService } from "./students-view.service";
 
 
 import { AppComponent } from './app.component';
@@ -16,8 +22,25 @@ import { AllStudentsComponent } from './Teacher View/Students/all-students/all-s
 import { PresentStudentsComponent } from './Teacher View/Students/present-students/present-students.component';
 import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
-import { StudentsViewService } from "./students-view.service";
-import { FlexLayoutModule } from "@angular/flex-layout";
+
+const appRoutes: Routes = [
+  {path: 'teacher/students',
+    component: TvStudentsComponent,
+    data: {title: "Students"}
+  },
+  {path: 'teacher/points',
+    component: TvPointsComponent,
+    data: {title: "Achievments"}
+  },
+  {path: 'students',
+    component: StudentViewComponent,
+    data: {}
+  },
+  { path: '',
+    redirectTo: '/teacher/students',
+    pathMatch: 'prefix'
+  }
+];
 
 @NgModule({
   declarations: [
@@ -38,7 +61,13 @@ import { FlexLayoutModule } from "@angular/flex-layout";
   ],
   imports: [
     BrowserModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging 
+    )
   ],
   providers: [StudentsViewService],
   bootstrap: [AppComponent]

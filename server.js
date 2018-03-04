@@ -13,13 +13,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/teacher/students', students_api);
-app.use('/teacher/points', points_api);
+app.use('/api/students', students_api);
+app.use('/api/points', points_api);
 
-app.get('/', (req, res) => {
-  // res.send('this is root');
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
