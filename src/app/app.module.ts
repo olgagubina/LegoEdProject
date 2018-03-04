@@ -22,6 +22,12 @@ import { AllStudentsComponent } from './Teacher View/Students/all-students/all-s
 import { PresentStudentsComponent } from './Teacher View/Students/present-students/present-students.component';
 import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
+import { MaterialImportsModule } from '../material.module';
+// import {MatTableModule} from '@angular/material/table';
+// import {MatButtonToggleModule} from '@angular/material/button-toggle';
+// import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
+
 
 const appRoutes: Routes = [
   {path: 'teacher/students',
@@ -64,6 +70,7 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
+    MaterialImportsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging 

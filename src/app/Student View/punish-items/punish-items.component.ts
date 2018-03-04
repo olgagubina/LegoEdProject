@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../students-view.service';
-import PointItem from '../../../models/point_item';
+import PointItem from '../../../models/point-model';
 
 @Component({
   selector: 'app-punish-items',

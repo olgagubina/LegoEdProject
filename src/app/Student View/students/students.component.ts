@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../students-view.service';
-import Student from '../../../models/student';
+import Student from '../../../models/student-model';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
