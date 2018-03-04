@@ -3,7 +3,9 @@ import PointItem from '../models/point_item';
 import Student from '../models/student';
 import { HttpClient } from '@angular/common/http';
 
-var PRIZES: Array<PointItem> = [{ _id: 1, category_id: 3, description: 'movie for 2', amount: 200 }, { _id: 2, category_id: 2, description: 'you choose next topic', amount: 300 }, { _id: 3, category_id: 1, description: 'lead the next activity', amount: 200 }, { _id: 4, category_id: 3, description: 'Choose your own project', amount: 100 }, { _id: 5, category_id: 3, description: 'be teacher for a day', amount: 500 }];
+var PENALTIES: Array<PointItem> = [{_id: 1, category_id: 2, description:'pushing', amount: 300}, {_id: 2, category_id: 2, description:'yelling', amount: 100}, {_id: 3, category_id: 3, description:'missing class', amount: 100}, {_id: 4, category_id: 1, description:'no homework', amount: 200}, {_id: 5, category_id: 3, description:'making fun of', amount: 200}]
+var REWARDS: Array<PointItem> = [{_id: 1, category_id: 2, description:'helping student', amount: 300}, {_id: 2, category_id: 2, description:'extra credit', amount: 100}, {_id: 3, category_id: 3, description:'helping teacher', amount: 100}, {_id: 4, category_id: 1, description:'help clean', amount: 200}, {_id: 5, category_id: 3, description:'exceptional work', amount: 200}]
+var PRIZES: Array<PointItem> = [{_id: 1, category_id: 3, description:'movie for 2', amount: 200}, {_id: 2, category_id: 2, description:'you choose next topic', amount: 300}, {_id: 3, category_id: 1, description:'lead the next activity', amount: 200}, {_id: 4, category_id: 3, description:'Choose your own project', amount: 100}, {_id: 5, category_id: 3, description:'be teacher for a day', amount: 500}];
 var STUDENTS: Array<Student> = [{
   "_id": 1,
   "firstName": "Gabbi",
@@ -93,9 +95,17 @@ export class StudentsViewService {
 
   getPrizes() {
     return PRIZES;
-  }
+}
+  
+getStudents(){
+  return STUDENTS;
+}
 
-  getStudents() {
-    return STUDENTS;
-  }
+getPenalties(){
+  return PENALTIES;
+}
+
+getRewards(){
+  return REWARDS;
+}
 }

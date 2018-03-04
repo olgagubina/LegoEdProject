@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentsViewService } from '../../students-view.service';
+import PointItem from '../../../models/point_item';
 
 @Component({
   selector: 'app-punish-items',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./punish-items.component.css']
 })
 export class PunishItemsComponent implements OnInit {
+penalties: any[];
 
-  constructor() { }
+  constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
+    this.penalties = this.studentsViewService.getPenalties();
   }
 
 }

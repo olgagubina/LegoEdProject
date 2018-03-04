@@ -1,12 +1,18 @@
+.students {
+    flex-wrap: wrap;
+}
 .student {
-    background-color: #9BB8A4;
+    /* display: flex; */
+    width: 10%;
+    background-color: #7C5DAF;
     padding:30px;
     margin: 5px;
     text-align: center;
     text-transform: capitalize;
     font-size: 20px;
+    /* width: 20%; */
 }
-
 h1{
     text-align: center;
 }
+
