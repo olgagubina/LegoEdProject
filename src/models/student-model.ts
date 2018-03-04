@@ -1,4 +1,4 @@
-export class Student {
+export default class Student {
     studentId: number;
     firstName: string;
     lastName: string;
