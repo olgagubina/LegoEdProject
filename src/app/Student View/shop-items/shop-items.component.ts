@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentsViewService } from '../../students-view.service';
+import PointItem from '../../../models/point_item';
 
 @Component({
   selector: 'app-shop-items',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop-items.component.css']
 })
 export class ShopItemsComponent implements OnInit {
-
-  constructor() { }
+prizes: any[];
+  constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
+    this.prizes = this.studentsViewService.getPrizes();
   }
 
 }

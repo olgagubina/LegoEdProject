@@ -1,3 +1,6 @@
-<p>
-  shop-items works!
-</p>
+<h1>CHOOSE YOUR REWARD!</h1>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+<div  *ngFor="let prize of prizes; let i = index" class="prize">
+  {{prize.description}}<br>{{prize.amount}}
+</div>
+</div>

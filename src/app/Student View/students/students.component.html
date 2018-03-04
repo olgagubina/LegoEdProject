@@ -1,3 +1,6 @@
-<p>
-  students works!
-</p>
+<h1>Students</h1>
+<div fxLayout="row" fxLayoutAlign="space-between">
+<div  *ngFor="let student of students; let i = index" fxFlex="10" class="student">
+  {{student.firstName}}{{student.lastName}}
+</div>
+</div>
