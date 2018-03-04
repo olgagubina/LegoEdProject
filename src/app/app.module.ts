@@ -15,7 +15,6 @@ import { TvStudentsComponent } from './Teacher View/Students/tv-students/tv-stud
 import { TvPointsComponent } from './Teacher View/Points/tv-points/tv-points.component';
 import { ShopItemsComponent } from './Student View/shop-items/shop-items.component';
 import { StudentsComponent } from './Student View/students/students.component';
-import { PointItemsComponent } from './Student View/point-items/point-items.component';
 import { RewardItemsComponent } from './Student View/reward-items/reward-items.component';
 import { PunishItemsComponent } from './Student View/punish-items/punish-items.component';
 import { AllStudentsComponent } from './Teacher View/Students/all-students/all-students.component';
@@ -51,7 +50,6 @@ const appRoutes: Routes = [
     TvPointsComponent,
     ShopItemsComponent,
     StudentsComponent,
-    PointItemsComponent,
     RewardItemsComponent,
     PunishItemsComponent,
     AllStudentsComponent,
