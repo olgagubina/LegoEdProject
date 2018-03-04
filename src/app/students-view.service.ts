@@ -1,92 +1,168 @@
 import { Injectable } from '@angular/core';
-import PointItem from '../models/point_item';
-import Student from '../models/student';
+import PointItem from '../models/point-model';
+import Student from '../models/student-model';
 import { HttpClient } from '@angular/common/http';
 
-var PENALTIES: Array<PointItem> = [{_id: 1, category_id: 2, description:'pushing', amount: 300}, {_id: 2, category_id: 2, description:'yelling', amount: 100}, {_id: 3, category_id: 3, description:'missing class', amount: 100}, {_id: 4, category_id: 1, description:'no homework', amount: 200}, {_id: 5, category_id: 3, description:'making fun of', amount: 200}]
-var REWARDS: Array<PointItem> = [{_id: 1, category_id: 2, description:'helping student', amount: 300}, {_id: 2, category_id: 2, description:'extra credit', amount: 100}, {_id: 3, category_id: 3, description:'helping teacher', amount: 100}, {_id: 4, category_id: 1, description:'help clean', amount: 200}, {_id: 5, category_id: 3, description:'exceptional work', amount: 200}]
-var PRIZES: Array<PointItem> = [{_id: 1, category_id: 3, description:'movie for 2', amount: 200}, {_id: 2, category_id: 2, description:'you choose next topic', amount: 300}, {_id: 3, category_id: 1, description:'lead the next activity', amount: 200}, {_id: 4, category_id: 3, description:'Choose your own project', amount: 100}, {_id: 5, category_id: 3, description:'be teacher for a day', amount: 500}];
+var PENALTIES: Array<PointItem> = [{ pointId: 1, catId  : 2, description:'pushing', amount: 300}, { pointId: 2, catId : 2, description:'yelling', amount: 100}, { pointId: 3, catId : 3, description:'missing class', amount: 100}, { pointId: 4, catId : 1, description:'no homework', amount: 200}, { pointId: 5, catId : 3, description:'making fun of', amount: 200}]
+var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description:'helping student', amount: 300}, { pointId: 2, catId
+  : 2, description:'extra credit', amount: 100}, { pointId: 3, catId
+  : 3, description:'helping teacher', amount: 100}, { pointId: 4, catId
+  : 1, description:'help clean', amount: 200}, { pointId: 5, catId
+  : 3, description:'exceptional work', amount: 200}]
+var PRIZES: Array<PointItem> = [{ pointId: 1, catId
+  : 3, description:'movie for 2', amount: 200}, { pointId: 2, catId
+  : 2, description:'you choose next topic', amount: 300}, { pointId: 3, catId
+  : 1, description:'lead the next activity', amount: 200}, { pointId: 4, catId
+  : 3, description:'Choose your own project', amount: 100}, { pointId: 5, catId
+  : 3, description:'be teacher for a day', amount: 500}];
 var STUDENTS: Array<Student> = [{
-  "_id": 1,
-  "firstName": "Gabbi",
-  "lastName": "Brightie"
+  "studentId": 1,
+  "firstName": "Eugen",
+  "lastName": "Whitton",
+  "rating": 67,
+  "balance": 26,
+  "present": false
 }, {
-  "_id": 2,
-  "firstName": "Sile",
-  "lastName": "Yuranovev"
+  "studentId": 2,
+  "firstName": "Saul",
+  "lastName": "Garza",
+  "rating": 99,
+  "balance": 9,
+  "present": true
 }, {
-  "_id": 3,
-  "firstName": "Trueman",
-  "lastName": "Pengelly"
+  "studentId": 3,
+  "firstName": "Lilias",
+  "lastName": "Bramer",
+  "rating": 98,
+  "balance": 11,
+  "present": true
 }, {
-  "_id": 4,
-  "firstName": "Roderich",
-  "lastName": "Dibden"
+  "studentId": 4,
+  "firstName": "Colver",
+  "lastName": "Vuitte",
+  "rating": 68,
+  "balance": 32,
+  "present": true
 }, {
-  "_id": 5,
-  "firstName": "Josefina",
-  "lastName": "Chopin"
+  "studentId": 5,
+  "firstName": "Joannes",
+  "lastName": "Mecozzi",
+  "rating": 94,
+  "balance": 35,
+  "present": false
 }, {
-  "_id": 6,
-  "firstName": "Charley",
-  "lastName": "Starsmeare"
+  "studentId": 6,
+  "firstName": "Gothart",
+  "lastName": "Vasyutkin",
+  "rating": 87,
+  "balance": 16,
+  "present": true
 }, {
-  "_id": 7,
-  "firstName": "Julie",
-  "lastName": "Zaczek"
+  "studentId": 7,
+  "firstName": "Emogene",
+  "lastName": "Hassall",
+  "rating": 82,
+  "balance": 18,
+  "present": false
 }, {
-  "_id": 8,
-  "firstName": "Arnuad",
-  "lastName": "Bome"
+  "studentId": 8,
+  "firstName": "Franzen",
+  "lastName": "Aery",
+  "rating": 78,
+  "balance": 36,
+  "present": false
 }, {
-  "_id": 9,
-  "firstName": "Sam",
-  "lastName": "Le Borgne"
+  "studentId": 9,
+  "firstName": "Peadar",
+  "lastName": "Hutfield",
+  "rating": 77,
+  "balance": 41,
+  "present": false
 }, {
-  "_id": 10,
-  "firstName": "Courtney",
-  "lastName": "Lowes"
+  "studentId": 10,
+  "firstName": "Cobbie",
+  "lastName": "Scandroot",
+  "rating": 68,
+  "balance": 34,
+  "present": true
 }, {
-  "_id": 11,
-  "firstName": "Gilbert",
-  "lastName": "McTear"
+  "studentId": 11,
+  "firstName": "Claresta",
+  "lastName": "Bidewell",
+  "rating": 88,
+  "balance": 13,
+  "present": true
 }, {
-  "_id": 12,
-  "firstName": "Geordie",
-  "lastName": "Cahey"
+  "studentId": 12,
+  "firstName": "Borg",
+  "lastName": "Bestwerthick",
+  "rating": 66,
+  "balance": 25,
+  "present": false
 }, {
-  "_id": 13,
-  "firstName": "Barnabas",
-  "lastName": "Cosstick"
+  "studentId": 13,
+  "firstName": "Malena",
+  "lastName": "Mosby",
+  "rating": 97,
+  "balance": 16,
+  "present": false
 }, {
-  "_id": 14,
-  "firstName": "Albertina",
-  "lastName": "Bradburne"
+  "studentId": 14,
+  "firstName": "Calypso",
+  "lastName": "Svanetti",
+  "rating": 100,
+  "balance": 36,
+  "present": true
 }, {
-  "_id": 15,
-  "firstName": "Cortney",
-  "lastName": "MacCauley"
+  "studentId": 15,
+  "firstName": "Dianne",
+  "lastName": "Robart",
+  "rating": 60,
+  "balance": 30,
+  "present": true
 }, {
-  "_id": 16,
-  "firstName": "Esdras",
-  "lastName": "Kleinstein"
+  "studentId": 16,
+  "firstName": "Dore",
+  "lastName": "Bertelet",
+  "rating": 100,
+  "balance": 11,
+  "present": false
 }, {
-  "_id": 17,
-  "firstName": "Anastassia",
-  "lastName": "Mauchlen"
+  "studentId": 17,
+  "firstName": "Koo",
+  "lastName": "Bray",
+  "rating": 78,
+  "balance": 24,
+  "present": false
 }, {
-  "_id": 18,
-  "firstName": "Francisca",
-  "lastName": "Dale"
+  "studentId": 18,
+  "firstName": "Maxy",
+  "lastName": "Hainey`",
+  "rating": 90,
+  "balance": 34,
+  "present": false
 }, {
-  "_id": 19,
-  "firstName": "Cris",
-  "lastName": "St Louis"
+  "studentId": 19,
+  "firstName": "Kaitlin",
+  "lastName": "Bog",
+  "rating": 54,
+  "balance": 12,
+  "present": true
 }, {
-  "_id": 20,
-  "firstName": "Vin",
-  "lastName": "Presnall"
-}]
+  "studentId": 20,
+  "firstName": "Marilin",
+  "lastName": "Littley",
+  "rating": 80,
+  "balance": 5,
+  "present": false
+},  {
+  "studentId": 16,
+  "firstName": "Dore",
+  "lastName": "Bertelet",
+  "rating": 100,
+  "balance": 11,
+  "present": false
+}];
 
 @Injectable()
 export class StudentsViewService {
