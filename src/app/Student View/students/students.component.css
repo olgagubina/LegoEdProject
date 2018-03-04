@@ -1,5 +1,7 @@
 .students {
     flex-wrap: wrap;
+    margin-left: 75px;
+    margin-bottom: 30px;
 }
 .student {
     /* display: flex; */
@@ -16,3 +18,7 @@ h1{
     text-align: center;
 }
 
+p {
+    color: white;
+    font-size: 24px;
+}
