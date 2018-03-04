@@ -1,3 +1,4 @@
-<p>
-  punish-items works!
-</p>
+
+    <div *ngFor="let penalty of penalties; let i = index" class="penalty">
+      {{penalty.description}}<br>{{penalty.amount}}
+    </div>

@@ -1,0 +1,10 @@
+
+.penalty {
+ display: flex;   
+ background-color: #DE8888; 
+ padding:30px;
+ margin: 5px;
+ width: 125px;
+ height: 125px;
+}
+

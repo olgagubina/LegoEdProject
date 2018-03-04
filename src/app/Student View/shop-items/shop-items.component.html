@@ -1,5 +1,5 @@
-<h1>CHOOSE YOUR REWARD!</h1>
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<h1>CHOOSE YOUR PRIZE!</h1>
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-between center">
 <div  *ngFor="let prize of prizes; let i = index" class="prize">
   {{prize.description}}<br>{{prize.amount}}
 </div>
