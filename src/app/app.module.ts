@@ -16,7 +16,8 @@ import { AllStudentsComponent } from './Teacher View/Students/all-students/all-s
 import { PresentStudentsComponent } from './Teacher View/Students/present-students/present-students.component';
 import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
-
+import { StudentsViewService } from "./students-view.service";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -36,9 +37,10 @@ import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dia
     PointsFormDialogComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [StudentsViewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
