@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { RouterModule, Routes } from '@angular/router';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule, MatInputModule, MatFormFieldModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StudentsViewService } from "./students-view.service";
-
 
 import { AppComponent } from './app.component';
 import { TeacherViewComponent } from './Teacher View/teacher-view/teacher-view.component';
@@ -65,8 +67,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging 
-    )
+    ),
+    MatDialogModule, 
+    MatInputModule, 
+    MatFormFieldModule,
+    BrowserAnimationsModule 
   ],
+  entryComponents:[StudentFormDialogComponent, PointsFormDialogComponent],
   providers: [StudentsViewService],
   bootstrap: [AppComponent]
 })
