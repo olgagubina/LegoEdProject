@@ -1,0 +1,13 @@
+
+.tables {
+    display: inline-block;
+    flex-wrap: wrap;
+    width: 30%;
+    /* height:300px; */
+    margin: 1%;
+    background-color: rgba(142, 138, 138, 0.39);
+}
+
+.all-tables {
+    border: 1px solid red;
+}

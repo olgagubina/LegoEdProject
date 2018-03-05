@@ -167,23 +167,42 @@ var STUDENTS: Array<Student> = [{
 
 @Injectable()
 export class StudentsViewService {
+  students: Student[] = STUDENTS;
+  prizes: PointItem[] = PRIZES;
+  penalties: PointItem[] = PENALTIES;
+  rewards: PointItem[] = REWARDS;
 
   constructor(private http: HttpClient) { }
 
-getPrizes() {
-  return PRIZES;
-}
+  //STUDENT VIEW FUNCS
+  getPrizes() {
+      return this.prizes;
+  }
+    
+  getStudents(){
+    return this.students;
+  }
 
-getStudents() {
-  return STUDENTS;
-}
+  getPenalties(){
+    return this.penalties;
+  }
 
-getPenalties() {
-  return PENALTIES;
-}
+  getRewards(){
+    return this.rewards;
+  }
 
-getRewards() {
-  return REWARDS;
-}
+  //ADD STUDENT
+
+  addStudent(newStudent:Student)  {
+    newStudent.studentId = this.generateId();
+    newStudent.rating = 0;
+    newStudent.balance = 0;
+    newStudent.present = false;
+    this.students.push(newStudent);
+  }
+
+  generateId() {
+    return this.students[this.students.length - 1].studentId + 1;
+  }
 
 }
