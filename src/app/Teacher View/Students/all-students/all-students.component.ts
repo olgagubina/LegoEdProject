@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentsViewService } from '../../../students-view.service';
+import Student from '../../../../models/student-model';
+import {MatTableDataSource} from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { StudentsViewService } from '../../../students-view.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
-import Student from '../../../../models/student-model'
-
 
 @Component({
   selector: 'app-all-students',
@@ -14,11 +16,19 @@ import Student from '../../../../models/student-model'
 })
 
 export class AllStudentsComponent implements OnInit {
+  displayedColumns = ['firstName', 'lastName', 'edit' ];
+  allStudents: Student[];
+  dataSource: MatTableDataSource<Student>;
+  title: String;
   student: Student = new Student;
 
-  constructor(private dataService: StudentsViewService, public dialog: MatDialog) { }
+  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
+  // this.service.getStudents();
+  this.title = 'Master List';
+  this.allStudents = this.service.getStudents();
+  this.dataSource = new MatTableDataSource(this.allStudents);
   }
 
   //ADD CUSTOMER
@@ -37,11 +47,10 @@ export class AllStudentsComponent implements OnInit {
       console.log(newStudent);
 
       //Add to data array on service
-      this.dataService.addStudent(newStudent);
+      this.service.addStudent(newStudent);
 
       //Clean the input
       this.student = new Student;
     });
   }
-
 }

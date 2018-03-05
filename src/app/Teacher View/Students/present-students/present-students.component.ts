@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentsViewService } from '../../../students-view.service';
+import Student from '../../../../models/student-model';
+import {MatTableDataSource} from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-present-students',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./present-students.component.css']
 })
 export class PresentStudentsComponent implements OnInit {
+  displayedColumns = ['firstName', 'lastName', 'edit' ];
+  allStudents: Student[];
+  dataSource: MatTableDataSource<Student>;
+  title: String;
 
-  constructor() { }
+  constructor(private service: StudentsViewService) { }
 
   ngOnInit() {
+  // this.service.getStudents();
+  this.title = 'In Class';
+  this.allStudents = this.service.getStudents();
+  this.dataSource = new MatTableDataSource(this.allStudents);
   }
-
 }

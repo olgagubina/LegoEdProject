@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import PointItem from '../models/point-model';
 import Student from '../models/student-model';
+import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId  : 2, description:'pushing', amount: 300}, { pointId: 2, catId : 2, description:'yelling', amount: 100}, { pointId: 3, catId : 3, description:'missing class', amount: 100}, { pointId: 4, catId : 1, description:'no homework', amount: 200}, { pointId: 5, catId : 3, description:'making fun of', amount: 200}]
@@ -203,4 +204,5 @@ export class StudentsViewService {
   generateId() {
     return this.students[this.students.length - 1].studentId + 1;
   }
+
 }
