@@ -1,8 +1,9 @@
+
 <form>
   <h1 mat-dialog-title>{{title}}</h1>
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput [(ngModel)]="data.name" [ngModelOptions]="{standalone: true}" autocomplete='name' placeholder="Name">
+      <input matInput [(ngModel)]="data.firstName" [ngModelOptions]="{standalone: true}" autocomplete='name' placeholder="Name">
     </mat-form-field><br>
     <mat-form-field>
       <input matInput [(ngModel)]="data.lastName" [ngModelOptions]="{standalone: true}" autocomplete='last name' placeholder="Surname">

@@ -7,11 +7,11 @@ import Student from '../../../models/student-model';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
-  students: any[];
+  // students: any[];
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.students = this.studentsViewService.getStudents();
+    // this.students = this.studentsViewService.getStudents();
     
   }
 

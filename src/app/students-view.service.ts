@@ -5,27 +5,23 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 
+
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId  : 2, description:'pushing', amount: 300}, { pointId: 2, catId : 2, description:'yelling', amount: 100}, { pointId: 3, catId : 3, description:'missing class', amount: 100}, { pointId: 4, catId : 1, description:'no homework', amount: 200}, { pointId: 5, catId : 3, description:'making fun of', amount: 200}]
-var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description:'helping student', amount: 300}, { pointId: 2, catId
-  : 2, description:'extra credit', amount: 100}, { pointId: 3, catId
-  : 3, description:'helping teacher', amount: 100}, { pointId: 4, catId
-  : 1, description:'help clean', amount: 200}, { pointId: 5, catId
-  : 3, description:'exceptional work', amount: 200}]
+var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300}, { pointId: 2, catId
+  : 2, description: 'extra credit', amount: 100}, { pointId: 3, catId
+  : 3, description: 'helping teacher', amount: 100}, { pointId: 4, catId
+  : 1, description: 'help clean', amount: 200}, { pointId: 5, catId
+  : 3, description: 'exceptional work', amount: 200}]
 var PRIZES: Array<PointItem> = [{ pointId: 1, catId
-  : 3, description:'movie for 2', amount: 200}, { pointId: 2, catId
-  : 2, description:'you choose next topic', amount: 300}, { pointId: 3, catId
-  : 1, description:'lead the next activity', amount: 200}, { pointId: 4, catId
-  : 3, description:'Choose your own project', amount: 100}, { pointId: 5, catId
-  : 3, description:'be teacher for a day', amount: 500}];
+  : 3, description: 'movie for 2', amount: 200}, { pointId: 2, catId
+  : 2, description: 'you choose next topic', amount: 300}, { pointId: 3, catId
+  : 1, description: 'lead the next activity', amount: 200}, { pointId: 4, catId
+  : 3, description: 'Choose your own project', amount: 100}, { pointId: 5, catId
+  : 3, description: 'be teacher for a day', amount: 500}];
 var STUDENTS: Array<Student> = [{
-  "studentId": 1,
-  "firstName": "Eugen",
-  "lastName": "Whitton",
-  "rating": 67,
-  "balance": 26,
-  "present": false
+  'studentId': 1, 'firstName': 'Eugen', 'lastName': 'Whitton', 'rating': 67, 'balance': 26, 'present': false
 }, {
-  "studentId": 2,
+  'studentId': 2,
   "firstName": "Saul",
   "lastName": "Garza",
   "rating": 99,
@@ -95,7 +91,7 @@ var STUDENTS: Array<Student> = [{
   "balance": 13,
   "present": true
 }, {
-  "studentId": 12,
+  'studentId': 12,
   "firstName": "Borg",
   "lastName": "Bestwerthick",
   "rating": 66,
@@ -158,7 +154,7 @@ var STUDENTS: Array<Student> = [{
   "balance": 5,
   "present": false
 },  {
-  "studentId": 16,
+  "studentId": 21,
   "firstName": "Dore",
   "lastName": "Bertelet",
   "rating": 100,
@@ -168,44 +164,50 @@ var STUDENTS: Array<Student> = [{
 
 @Injectable()
 export class StudentsViewService {
+  studentsData$: Subject<Student[]> = new Subject;
   students: Student[] = STUDENTS;
   prizes: PointItem[] = PRIZES;
   penalties: PointItem[] = PENALTIES;
   rewards: PointItem[] = REWARDS;
   pointsData$: Subject<PointItem[]> = new Subject;
 
-    constructor(private http: HttpClient) { }
 
-  //STUDENT VIEW FUNCS
+
+  constructor(private http: HttpClient) { }
+
+
+  // STUDENT VIEW FUNCS
   getPrizes() {
        this.pointsData$.next(this.prizes);
        return PRIZES;
   }
     
-  getStudents(){
-    return this.students;
+  getStudents():void {
+    // return this.students;
+    this.http.get<Student[]> ('api/students/all').subscribe(
+      data => this.studentsData$.next(data)
+    );
   }
 
-  getPenalties(){
-     return PENALTIES;
-  }
 
-  getRewards(){
-    return REWARDS;
+  getPenalties() {
+    return PENALTIES;
   }
 
   //ADD STUDENT
-
-  addStudent(newStudent:Student)  {
-    newStudent.studentId = this.generateId();
-    newStudent.rating = 0;
-    newStudent.balance = 0;
-    newStudent.present = false;
-    this.students.push(newStudent);
+  addStudent(newStudent:Student): Observable <Student>  {
+    console.log(newStudent);
+    // newStudent.studentId = this.generateId();
+    // newStudent.rating = 0;
+    // newStudent.balance = 0;
+    // newStudent.present = false;
+    // this.students.push(newStudent);
+    // console.log(this.students);
+    return this.http.post<Student>('api/students/add', newStudent);
   }
-
-  generateId() {
-    return this.students[this.students.length - 1].studentId + 1;
+  
+  getRewards() {
+    return this.rewards;
   }
 
   //ADD Point items

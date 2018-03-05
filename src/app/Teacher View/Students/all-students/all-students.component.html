@@ -1,7 +1,31 @@
 <h3>{{title}}</h3>
+
+
+<button 
+type="button" 
+mat-button (click)="openDialog()" 
+class="btn">Create Customer</button>
+
+
+
+
 <div class="example-container mat-elevation-z8">
 
   <mat-table #table [dataSource]="dataSource">
+
+
+    <ng-container matColumnDef="present">
+      <mat-header-cell *matHeaderCellDef> Mark Present </mat-header-cell>
+      <mat-cell *matCellDef="let reward">
+          <mat-slide-toggle
+          class="example-margin"
+          [color]="color"
+          [checked]="checked"
+          [disabled]="disabled">
+      </mat-slide-toggle>
+        <!-- <button class='delete btn btn-info'>Present</button> -->
+      </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
@@ -14,10 +38,21 @@
     </ng-container>
 
     <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
-        <mat-cell *matCellDef="let reward">
-          <button class='delete btn btn-info'>Edit</button>
-        </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+      <mat-cell *matCellDef="let reward">
+        <button class='delete btn btn-info'>
+          <i class="fa fa-pencil"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+      <mat-cell *matCellDef="let reward">
+        <button class='delete btn btn-info'>
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -5,12 +5,13 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root', // < MySQL username >
-    password: 'easyPass', // < MySQL password >
+    // password: 'easyPass', // < MySQL password >
+    password: '147258', // < MySQL password >
     database: 'lego' // <your database name>
 });
 
 // GET ALL students
-router.get('/students', (req, res) => {
+router.get('/all', (req, res) => {
     try {
         connection.query(
             `SELECT 
@@ -35,7 +36,7 @@ router.get('/students', (req, res) => {
 });
 
 // GET PRESENT students
-router.get('/students', (req, res) => {
+router.get('/getpresent', (req, res) => {
     try {
         connection.query(
             `SELECT 
@@ -61,39 +62,66 @@ router.get('/students', (req, res) => {
 });
 
 // ADD student
-
-
-// UPDATE student - present to true
-// router.put('/students/present/:id', (req, res) => {
-//     let custId = req.params.id;
-//     let updCust = req.body;
-//     connection.query(
-//         `UPDATE customers SET ? WHERE ?`,
-//         [updCust, { cust_id: custId }],
-//         function (err, rows, fields) {
-//             if (!err) res.send(rows);
-//             else console.log('update customer', err);
-//         });
-// });
+router.post('/add', (req, res) => {
+    let newSt = req.body;
+    console.log('body: ' + newSt);
+    connection.query(
+        `INSERT INTO students SET ?`,
+        {firstname: newSt.firstName, lastname: newSt.lastName},
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('insert student', err);
+        });
+});
 
 // UPDATE student - change details
-// router.put('/students/present/:id', (req, res) => {
-//     let custId = req.params.id;
-//     let updCust = req.body;
+router.put('/update/:id', (req, res) => {
+    let studentId = req.params.id;
+    let updSt = req.body;
+    connection.query(
+        `UPDATE students SET ? WHERE ?`,
+        [ updSt, { st_id: studentId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('student to present', err);
+        });
+});
+
+// UPDATE student - toggle present
+router.put('/toggle/:id', (req, res) => {
+    let studentId = req.params.id;
+    let updPresent = !req.body.present;
+    connection.query(
+        `UPDATE students SET ? WHERE ?`,
+        [{ present: updPresent }, { st_id: studentId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('student present toggle', err);
+        });
+});
+
+// UPDATE students - all students to absent
+router.put('/finishlesson', (req, res) => {
+    connection.query(
+        `UPDATE students SET ? WHERE ?`,
+        [{ present: false }, { present: true }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('student to present', err);
+        });
+});
+
+// DELETE  student - first delete transactions - ask Anat how to remove in one query
+// router.delete('/delete/:id', (req, res) => {
+//     let studentId = req.params.id;
 //     connection.query(
-//         `UPDATE customers SET ? WHERE ?`,
-//         [updCust, { cust_id: custId }],
+//         `DELETE from students where cust_id = ${studentId}`,
 //         function (err, rows, fields) {
 //             if (!err) res.send(rows);
-//             else console.log('update customer', err);
+//             else console.log('delete customer', err);
 //         });
 // });
 
-  
-/* ADD student */
 
-/* UPDATE  student */
-
-/* DELETE  student */
 
 module.exports = router;

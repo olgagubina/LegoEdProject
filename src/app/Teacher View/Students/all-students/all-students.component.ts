@@ -4,9 +4,11 @@ import Student from '../../../../models/student-model';
 import {MatTableDataSource} from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
+
 
 @Component({
   selector: 'app-all-students',
@@ -15,19 +17,25 @@ import { StudentFormDialogComponent } from '../student-form-dialog/student-form-
 })
 
 export class AllStudentsComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'edit' ];
+  displayedColumns = [ 'present', 'firstName', 'lastName', 'edit', 'delete' ];
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
-  student: Student = new Student;
+  student: Student = new Student();
 
-  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
+  constructor(
+    private service: StudentsViewService, 
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-  // this.service.getStudents();
   this.title = 'Master List';
-  this.allStudents = this.service.getStudents();
-  this.dataSource = new MatTableDataSource(this.allStudents);
+  // this.allStudents = this.service.students;
+  this.service.studentsData$.subscribe(data => {
+    this.dataSource = new MatTableDataSource(data);
+  }, error => {
+    console.error(error);
+  });
+  this.service.getStudents();
   }
 
   //ADD CUSTOMER
@@ -36,7 +44,7 @@ export class AllStudentsComponent implements OnInit {
       width: '290px',
       data: {
         firstName: this.student.firstName,
-        lastName: this.student.lastName,
+        lastName: this.student.lastName
       }
     });
 
@@ -46,10 +54,17 @@ export class AllStudentsComponent implements OnInit {
       console.log(newStudent);
 
       //Add to data array on service
-      this.service.addStudent(newStudent);
+      if(result) {
+        this.service.addStudent(newStudent).subscribe(
+          data => this.service.getStudents()
+        );
+      }
+     
 
       //Clean the input
       this.student = new Student;
     });
   }
+
 }
+
