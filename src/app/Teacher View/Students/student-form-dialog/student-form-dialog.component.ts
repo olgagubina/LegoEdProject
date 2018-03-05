@@ -11,18 +11,13 @@ import Student  from '../../../../models/student-model';
 })
 export class StudentFormDialogComponent implements OnInit {
   
-  constructor(public dialogRef: MatDialogRef<StudentFormDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any)
-               { }
+   constructor(public dialogRef: MatDialogRef<StudentFormDialogComponent>,
+     @Inject(MAT_DIALOG_DATA) public data: Student) { }
+   ngOnInit() {
 
-  ngOnInit() {
   }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  //For parent comp html
-  //Add button - mat-raised-button (click)="openDialog()
-
-}
+ }

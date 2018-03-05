@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../../students-view.service';
-import { MatTableDataSource } from '@angular/material';
+import Student from '../../../../models/student-model';
+import {MatTableDataSource} from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
-import Student from '../../../../models/student-model';
+
 
 @Component({
   selector: 'app-all-students',
@@ -12,11 +15,10 @@ import Student from '../../../../models/student-model';
 })
 
 export class AllStudentsComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'edit' ];
+  displayedColumns = [ 'present', 'firstName', 'lastName', 'edit', 'delete' ];
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
-  student: Student = new Student;
 
   constructor(
     private service: StudentsViewService, 
@@ -60,4 +62,6 @@ export class AllStudentsComponent implements OnInit {
       this.student = new Student;
     });
   }
+
 }
+
