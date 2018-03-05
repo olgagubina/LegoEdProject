@@ -5,7 +5,8 @@ var mysql = require('mysql');
 var connection; 
 
 var localConnection = {
-   user: 'root', // < MySQL username >
+    host: 'localhost',
+    user: 'root', // < MySQL username >
     // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
     password: '147258', // < MySQL password OLGA>
@@ -16,14 +17,22 @@ var clearDBConnection = {
     user: 'bbbb8310aa5c1c',
     password: 'f64edb0b',
     database: 'heroku_365eb437c5f937e'
- }
+}
 
- if(process.env.PORT === 3000) {
-    connection = mysql.createConnection(localConnection);
- }
- else {
-    connection = mysql.createConnection(clearDBConnection);
- }
+// connection = mysql.createConnection(clearDBConnection);
+connection = mysql.createConnection(localConnection);
+
+// FANCY FUNC TO MAKE CONNECTION (local OR heroku)
+//  if(process.env.PORT == 3000) {
+//     connection = mysql.createConnection(localConnection);
+//     console.log('local connection!');
+//  }
+//  else {
+//     connection = mysql.createConnection(clearDBConnection);
+//     console.log('remote connection!');
+//  }
+
+// OLD CONNECTION
 // connection = mysql.createConnection({
 //     // host: 'localhost',
 //     host: 'us-cdbr-iron-east-05.cleardb.net',
