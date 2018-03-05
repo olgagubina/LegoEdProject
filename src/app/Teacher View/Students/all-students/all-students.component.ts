@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../../students-view.service';
-import Student from '../../../../models/student-model';
-import {MatTableDataSource} from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
-import { FormsModule } from '@angular/forms';
-import { StudentsViewService } from '../../../students-view.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import { MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
+import Student from '../../../../models/student-model';
 
 @Component({
   selector: 'app-all-students',
@@ -22,10 +18,11 @@ export class AllStudentsComponent implements OnInit {
   title: String;
   student: Student = new Student;
 
-  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
+  constructor(
+    private service: StudentsViewService, 
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-  // this.service.getStudents();
   this.title = 'Master List';
   this.allStudents = this.service.getStudents();
   this.dataSource = new MatTableDataSource(this.allStudents);
@@ -37,7 +34,7 @@ export class AllStudentsComponent implements OnInit {
       width: '290px',
       data: {
         firstName: this.student.firstName,
-        lastName: this.student.lastName,
+        lastName: this.student.lastName
       }
     });
 
