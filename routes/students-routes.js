@@ -5,8 +5,9 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root', // < MySQL username >
+    password: '1234', // < MySQL password >
     // password: 'easyPass', // < MySQL password >
-    password: '147258', // < MySQL password >
+    // password: '147258', // < MySQL password >
     database: 'lego' // <your database name>
 });
 
@@ -14,10 +15,10 @@ var connection = mysql.createConnection({
 router.get('/all', (req, res) => {
     try {
         connection.query(
-            `SELECT 
-            students.st_id as studentId, 
-            firstname as firstName, 
-            lastname as lastName, 
+            `SELECT
+            students.st_id as studentId,
+            firstname as firstName,
+            lastname as lastName,
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present
@@ -39,10 +40,10 @@ router.get('/all', (req, res) => {
 router.get('/getpresent', (req, res) => {
     try {
         connection.query(
-            `SELECT 
-            students.st_id as studentId, 
-            firstname as firstName, 
-            lastname as lastName, 
+            `SELECT
+            students.st_id as studentId,
+            firstname as firstName,
+            lastname as lastName,
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present

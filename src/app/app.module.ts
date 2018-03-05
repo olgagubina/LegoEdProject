@@ -30,7 +30,7 @@ import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
 import { RewardsComponent } from './Teacher View/Points/rewards/rewards.component';
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
 import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
-// import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
@@ -64,10 +64,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MaterialImportsModule,
     MatSlideToggleModule,
     MatDialogModule,
-    MatInputModule, 
+    MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    AppRoutingModule 
+    AppRoutingModule
   ],
   entryComponents: [PointsFormDialogComponent, StudentFormDialogComponent],
   providers: [StudentsViewService],

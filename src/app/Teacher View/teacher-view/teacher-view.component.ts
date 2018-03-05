@@ -8,10 +8,12 @@ import {MatTabsModule} from '@angular/material/tabs';
   styleUrls: ['./teacher-view.component.css']
 })
 export class TeacherViewComponent implements OnInit {
+title: String;
 
   constructor() { }
 
   ngOnInit() {
+    this.title = 'Editor';
   }
 
 }
