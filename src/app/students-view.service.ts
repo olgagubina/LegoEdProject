@@ -165,23 +165,16 @@ var STUDENTS: Array<Student> = [{
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
+  presentStudentsData$: Subject<Student[]> = new Subject;
   students: Student[] = STUDENTS;
   prizes: PointItem[] = PRIZES;
   penalties: PointItem[] = PENALTIES;
   rewards: PointItem[] = REWARDS;
   pointsData$: Subject<PointItem[]> = new Subject;
 
-
-
   constructor(private http: HttpClient) { }
 
-
-  // STUDENT VIEW FUNCS
-  getPrizes() {
-       this.pointsData$.next(this.prizes);
-       return PRIZES;
-  }
-    
+  //GET ALL STUDENTS
   getStudents():void {
     // return this.students;
     this.http.get<Student[]> ('api/students/all').subscribe(
@@ -189,9 +182,9 @@ export class StudentsViewService {
     );
   }
 
-
-  getPenalties() {
-    return PENALTIES;
+  //GET PRESENT STUDENTS
+  getPresentStudents() : Observable<Student[]> {
+    return this.http.get<Student[]> ('api/students/getpresent');
   }
 
   //ADD STUDENT
@@ -206,17 +199,24 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
   
+  getPrizes() {
+       this.pointsData$.next(this.prizes);
+       return PRIZES;
+  }
+
+  getPenalties() {
+    return PENALTIES;
+  }
+  
   getRewards() {
     return this.rewards;
   }
 
   //ADD Point items
-
   addPointItems(newItem: PointItem){
    this.prizes.push(newItem);
    console.log(newItem);
    console.log(this.prizes);
-  //  return this.prizes;
   }
 
 }
