@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root', // < MySQL username >
     // password: 'easyPass', // < MySQL password >
-    password: '147258', // < MySQL password >
+    // password: '147258', // < MySQL password >
+    password: '1234',
     database: 'lego' // <your database name>
 });
 

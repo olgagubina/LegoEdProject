@@ -12,7 +12,7 @@ prizes: any[];
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.prizes = this.studentsViewService.getPrizes();
+    // this.prizes = this.studentsViewService.getPrizes();
   }
 
 }

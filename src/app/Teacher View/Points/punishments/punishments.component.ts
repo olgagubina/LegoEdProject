@@ -13,14 +13,18 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 export class PunishmentsComponent implements OnInit {
 
   displayedColumns = ['Toggle', 'Penalty', 'Cost', 'Edit', 'Delete'];
-  penalties: any[];
+  penalties: PointItem[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }
 
+
   ngOnInit() {
-    this.penalties = this.studentsViewService.getPenalties();
-    this.dataSource = new MatTableDataSource(this.penalties);
-    console.log(this.penalties);
+    this.studentsViewService.pointsData$.subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+  }, error => {
+    console.error(error);
+  });
+    this.studentsViewService.getPenalties();
   }
 
 }
