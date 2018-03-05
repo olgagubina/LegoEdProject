@@ -1,8 +1,18 @@
 
 .reward {
+    display: flex;  
     background-color: #8E9F8E;
     padding:30px;
     margin: 5px;
     width: 125px;
     height: 125px;
+    border-radius: 10px;
+    
+}
+
+.reward p {
+    color: black;
+    margin: auto;
+    font-size: 20px;
+    text-transform: uppercase;
 }

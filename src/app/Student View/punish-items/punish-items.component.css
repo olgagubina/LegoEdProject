@@ -6,5 +6,15 @@
  margin: 5px;
  width: 125px;
  height: 125px;
+ border-radius: 10px;
+
+}
+
+.penalty p {
+    color: black;
+    margin: auto;
+    font-size: 20px;
+    text-transform: uppercase;
+    
 }
 
