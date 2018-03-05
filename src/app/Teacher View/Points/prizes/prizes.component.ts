@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../../students-view.service';
 import PointItem from '../../../../models/point-model';
 import { MatTableDataSource } from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-prizes',
@@ -10,7 +9,7 @@ import {MatTableModule} from '@angular/material/table';
   styleUrls: ['./prizes.component.css']
 })
 export class PrizesComponent implements OnInit {
-  displayedColumns = ['Prize', 'Cost', 'Edit', 'Delete'];
+  displayedColumns = ['Toggle', 'Prize', 'Cost', 'Edit', 'Delete'];
   prizes: any[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }

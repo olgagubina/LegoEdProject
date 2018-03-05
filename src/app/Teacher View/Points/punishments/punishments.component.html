@@ -1,7 +1,16 @@
+<h2>Penalties</h2>
 <div class="example-container mat-elevation-z8">
     
       <mat-table #table [dataSource]="dataSource">
     
+        
+          <ng-container matColumnDef="Toggle">
+              <mat-header-cell *matHeaderCellDef> toggle </mat-header-cell>
+              <mat-cell *matCellDef="let penalty">
+                  <mat-slide-toggle color="primary"></mat-slide-toggle>
+              </mat-cell>
+          </ng-container>
+
         <ng-container matColumnDef="Penalty">
           <mat-header-cell *matHeaderCellDef> Penalty </mat-header-cell>
           <mat-cell *matCellDef="let penalty"> {{penalty.description}} </mat-cell>
@@ -15,15 +24,15 @@
         <ng-container matColumnDef="Edit">
             <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
             <mat-cell *matCellDef="let penalty">
-              <button class='edit btn btn-info' (click)='editFunc(penalty)'>Edit</button>
-            </mat-cell>
+                <button > <i class="material-icons">mode_edit</i></button>
+              </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Delete">
             <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
             <mat-cell *matCellDef="let penalty">
-              <button class='delete btn btn-info' (click)='deleteFunc(penalty)'>Delete</button>
-            </mat-cell>
+                <button> <i class="material-icons">delete</i></button>
+              </mat-cell>
         </ng-container>
     
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

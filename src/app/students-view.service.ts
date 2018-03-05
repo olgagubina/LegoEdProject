@@ -3,7 +3,8 @@ import PointItem from '../models/point-model';
 import Student from '../models/student-model';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import {Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
+
 
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId  : 2, description:'pushing', amount: 300}, { pointId: 2, catId : 2, description:'yelling', amount: 100}, { pointId: 3, catId : 3, description:'missing class', amount: 100}, { pointId: 4, catId : 1, description:'no homework', amount: 200}, { pointId: 5, catId : 3, description:'making fun of', amount: 200}]
 var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300}, { pointId: 2, catId
@@ -168,13 +169,17 @@ export class StudentsViewService {
   prizes: PointItem[] = PRIZES;
   penalties: PointItem[] = PENALTIES;
   rewards: PointItem[] = REWARDS;
+  pointsData$: Subject<PointItem[]> = new Subject;
+
 
 
   constructor(private http: HttpClient) { }
 
+
   // STUDENT VIEW FUNCS
   getPrizes() {
-      return this.prizes;
+       this.pointsData$.next(this.prizes);
+       return PRIZES;
   }
     
   getStudents():void {
@@ -184,10 +189,10 @@ export class StudentsViewService {
     );
   }
 
+
   getPenalties() {
     return PENALTIES;
   }
-
 
   //ADD STUDENT
   addStudent(newStudent:Student): Observable <Student>  {
@@ -203,6 +208,15 @@ export class StudentsViewService {
   
   getRewards() {
     return this.rewards;
+  }
+
+  //ADD Point items
+
+  addPointItems(newItem: PointItem){
+   this.prizes.push(newItem);
+   console.log(newItem);
+   console.log(this.prizes);
+  //  return this.prizes;
   }
 
 }

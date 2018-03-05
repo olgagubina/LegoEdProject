@@ -31,7 +31,8 @@ import { RewardsComponent } from './Teacher View/Points/rewards/rewards.componen
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
 import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
 // import {MatButtonToggleModule} from '@angular/material/button-toggle';
-// import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.compo
     HttpClientModule,
     MatTableModule,
     MaterialImportsModule,
+    MatSlideToggleModule,
     MatDialogModule,
     MatInputModule, 
     MatFormFieldModule,

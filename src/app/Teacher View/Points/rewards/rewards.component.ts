@@ -3,6 +3,7 @@ import { StudentsViewService } from '../../../students-view.service';
 import PointItem from '../../../../models/point-model';
 import { MatTableDataSource } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-rewards',
@@ -10,7 +11,7 @@ import {MatTableModule} from '@angular/material/table';
   styleUrls: ['./rewards.component.css']
 })
 export class RewardsComponent implements OnInit {
-  displayedColumns = ['Reward', 'Cost', 'Edit', 'Delete'];
+  displayedColumns = ['Toggle', 'Reward', 'Cost', 'Edit', 'Delete'];
   rewards: any[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }
@@ -21,5 +22,8 @@ export class RewardsComponent implements OnInit {
     console.log(this.rewards);
   }
 
+  ngOnChanges(){
+    this.rewards = this.studentsViewService.getRewards();
+  }
 }
 

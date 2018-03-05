@@ -3,8 +3,10 @@ import { StudentsViewService } from '../../../students-view.service';
 import Student from '../../../../models/student-model';
 import {MatTableDataSource} from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
 
 

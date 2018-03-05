@@ -4,8 +4,7 @@
       flex-wrap: wrap;
       flex-direction: column;
       min-width: 300px;
-      border: 1px solid black;
-    }
+   }
     
     .example-header {
       min-height: 64px;
@@ -20,4 +19,8 @@
     .mat-table {
       overflow: auto;
       max-height: 500px;
+    }
+
+    h2 {
+      text-align: center;
     }

@@ -1,3 +1,18 @@
-<p>
-  points-form-dialog works!
-</p>
+<div class="example-container">
+    <mat-form-field color="primary">
+      <input matInput [(ngModel)]="newItem.name" placeholder="description">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="newItem.amount" placeholder="no. of points"></textarea>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-select placeholder="Select">
+        <mat-option value="prize">Prize</mat-option>
+        <mat-option value="reward">Reward</mat-option>
+        <mat-option value="penalty">Penalty</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button md-raised-button type="button" (click)="addPointItems(newItem)">Add Item</button>
+  </div>
