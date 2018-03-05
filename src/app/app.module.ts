@@ -1,11 +1,13 @@
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { RouterModule, Routes } from '@angular/router';
-import {MatTableModule} from '@angular/material/table';
-import {MatDialogModule, MatInputModule, MatFormFieldModule} from '@angular/material';
+import { MatTableModule, MatTableDataSource } from '@angular/material';
+import { MatInputModule, MatFormFieldModule} from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StudentsViewService } from "./students-view.service";
@@ -25,33 +27,11 @@ import { StudentFormDialogComponent } from './Teacher View/Students/student-form
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
 import { MaterialImportsModule } from '../material-imports.module';
 import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
-import {MatTableModule} from '@angular/material/table';
-import { MatTableDataSource } from '@angular/material';
 import { RewardsComponent } from './Teacher View/Points/rewards/rewards.component';
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
 // import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-
-
-const appRoutes: Routes = [
-  {path: 'teacher/students',
-    component: TvStudentsComponent,
-    data: {title: "Students"}
-  },
-  {path: 'teacher/points',
-    component: TvPointsComponent,
-    data: {title: "Achievments"}
-  },
-  {path: 'students',
-    component: StudentViewComponent,
-    data: {}
-  },
-  { path: '',
-    redirectTo: '/teacher/students',
-    pathMatch: 'prefix'
-  }
-];
 
 @NgModule({
   declarations: [
@@ -79,14 +59,12 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatTableModule,
     MaterialImportsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging 
-    ),
-    MatDialogModule, 
+    MatDialogModule,
     MatInputModule, 
     MatFormFieldModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    AppRoutingModule ,
+    
   ],
   entryComponents:[StudentFormDialogComponent, PointsFormDialogComponent],
   providers: [StudentsViewService],
