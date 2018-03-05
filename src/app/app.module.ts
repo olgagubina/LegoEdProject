@@ -1,11 +1,13 @@
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
-import {MatTableModule} from '@angular/material/table';
-import {MatDialogModule, MatInputModule, MatFormFieldModule} from '@angular/material';
+import { MatTableModule, MatTableDataSource } from '@angular/material';
+import { MatInputModule, MatFormFieldModule} from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StudentsViewService } from './students-view.service';
@@ -32,25 +34,6 @@ import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.compo
 // import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-
-const appRoutes: Routes = [
-  {path: 'teacher/students',
-    component: TvStudentsComponent,
-    data: {title: 'Students'}
-  },
-  {path: 'teacher/points',
-    component: TvPointsComponent,
-    data: {title: 'Achievments'}
-  },
-  {path: 'students',
-    component: StudentViewComponent,
-    data: {}
-  },
-  { path: '',
-    redirectTo: '/teacher/students',
-    pathMatch: 'prefix'
-  }
-];
 
 @NgModule({
   declarations: [
@@ -79,14 +62,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatTableModule,
     MaterialImportsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging
-    ),
     MatDialogModule,
-    MatInputModule,
+    MatInputModule, 
     MatFormFieldModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule 
   ],
   entryComponents: [PointsFormDialogComponent],
   providers: [StudentsViewService],

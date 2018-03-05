@@ -1,4 +1,14 @@
 <h3>{{title}}</h3>
+
+
+<button 
+type="button" 
+mat-button (click)="openDialog()" 
+class="btn">Create Customer</button>
+
+
+
+
 <div class="example-container mat-elevation-z8">
 
   <mat-table #table [dataSource]="dataSource">
@@ -35,7 +45,6 @@
         </button>
       </mat-cell>
     </ng-container>
-
 
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
