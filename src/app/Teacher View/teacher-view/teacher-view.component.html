@@ -1,3 +1,10 @@
-<!-- <app-shop-items></app-shop-items> -->
-<app-tv-points></app-tv-points>
-<app-tv-students></app-tv-students>
+<h1>{{title}}</h1>
+
+<mat-tab-group>
+  <mat-tab label="Students">
+    <app-tv-students></app-tv-students>
+  </mat-tab>
+  <mat-tab label="Rewards">
+    <app-tv-points></app-tv-points>
+  </mat-tab>
+</mat-tab-group>

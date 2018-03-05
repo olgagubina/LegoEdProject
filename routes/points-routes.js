@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
 router.get('/all', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
