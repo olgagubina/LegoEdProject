@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, Routes } from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule, MatInputModule, MatFormFieldModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { StudentsViewService } from "./students-view.service";
+import { StudentsViewService } from './students-view.service';
 
 import { AppComponent } from './app.component';
 import { TeacherViewComponent } from './Teacher View/teacher-view/teacher-view.component';
@@ -21,27 +21,26 @@ import { RewardItemsComponent } from './Student View/reward-items/reward-items.c
 import { PunishItemsComponent } from './Student View/punish-items/punish-items.component';
 import { AllStudentsComponent } from './Teacher View/Students/all-students/all-students.component';
 import { PresentStudentsComponent } from './Teacher View/Students/present-students/present-students.component';
-import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
+// import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
 import { MaterialImportsModule } from '../material-imports.module';
 import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
-import {MatTableModule} from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material';
 import { RewardsComponent } from './Teacher View/Points/rewards/rewards.component';
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
+import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
 // import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
 
 
 const appRoutes: Routes = [
   {path: 'teacher/students',
     component: TvStudentsComponent,
-    data: {title: "Students"}
+    data: {title: 'Students'}
   },
   {path: 'teacher/points',
     component: TvPointsComponent,
-    data: {title: "Achievments"}
+    data: {title: 'Achievments'}
   },
   {path: 'students',
     component: StudentViewComponent,
@@ -66,11 +65,12 @@ const appRoutes: Routes = [
     PunishItemsComponent,
     AllStudentsComponent,
     PresentStudentsComponent,
-    StudentFormDialogComponent,
+    // StudentFormDialogComponent,
     PointsFormDialogComponent,
     PrizesComponent,
     RewardsComponent,
-    PunishmentsComponent
+    PunishmentsComponent,
+    DropdownPrizesComponent
   ],
   imports: [
     BrowserModule,
@@ -81,14 +81,14 @@ const appRoutes: Routes = [
     MaterialImportsModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging 
+      { enableTracing: true } // <-- debugging
     ),
-    MatDialogModule, 
-    MatInputModule, 
+    MatDialogModule,
+    MatInputModule,
     MatFormFieldModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule
   ],
-  entryComponents:[StudentFormDialogComponent, PointsFormDialogComponent],
+  entryComponents: [PointsFormDialogComponent],
   providers: [StudentsViewService],
   bootstrap: [AppComponent]
 })

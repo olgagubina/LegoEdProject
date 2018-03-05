@@ -13,11 +13,18 @@
       <mat-cell *matCellDef="let student"> {{student.lastName}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="dropdown">
+      <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>
+      <mat-cell *matCellDef="let student">
+      <app-dropdown-prizes></app-dropdown-prizes>
+    </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
-        <mat-cell *matCellDef="let reward">
-          <button class='delete btn btn-info'>Edit</button>
-        </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Submit </mat-header-cell>
+      <mat-cell *matCellDef="let reward">
+        <button class='delete btn btn-info'>Submit</button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
