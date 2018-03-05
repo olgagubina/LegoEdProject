@@ -1,6 +1,7 @@
 /* Structure */
 .example-container {
-    display: flex;
+  display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     min-width: 300px;
     border: 1px solid black;

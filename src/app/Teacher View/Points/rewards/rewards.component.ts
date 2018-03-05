@@ -5,23 +5,21 @@ import { MatTableDataSource } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
 
 @Component({
-  selector: 'app-prizes',
-  templateUrl: './prizes.component.html',
-  styleUrls: ['./prizes.component.css']
+  selector: 'app-rewards',
+  templateUrl: './rewards.component.html',
+  styleUrls: ['./rewards.component.css']
 })
-export class PrizesComponent implements OnInit {
-  displayedColumns = ['Prize', 'Cost', 'Edit', 'Delete'];
-  prizes: any[];
+export class RewardsComponent implements OnInit {
+  displayedColumns = ['Reward', 'Cost', 'Edit', 'Delete'];
+  rewards: any[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.prizes = this.studentsViewService.getPrizes();
-    this.dataSource = new MatTableDataSource(this.prizes);
-    console.log(this.prizes);
-      }
-    
-  
+    this.rewards = this.studentsViewService.getRewards();
+    this.dataSource = new MatTableDataSource(this.rewards);
+    console.log(this.rewards);
+  }
 
 }
 
