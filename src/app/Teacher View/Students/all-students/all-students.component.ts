@@ -4,7 +4,6 @@ import Student from '../../../../models/student-model';
 import {MatTableDataSource} from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
-import { StudentsViewService } from '../../../students-view.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';

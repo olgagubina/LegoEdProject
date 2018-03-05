@@ -3,6 +3,7 @@ import { StudentsViewService } from '../../../students-view.service';
 import PointItem from '../../../../models/point-model';
 import { MatTableDataSource } from '@angular/material';
 import {MatTableModule} from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-punishments',
@@ -11,7 +12,7 @@ import {MatTableModule} from '@angular/material/table';
 })
 export class PunishmentsComponent implements OnInit {
 
-  displayedColumns = ['Penalty', 'Cost', 'Edit', 'Delete'];
+  displayedColumns = ['Toggle', 'Penalty', 'Cost', 'Edit', 'Delete'];
   penalties: any[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }

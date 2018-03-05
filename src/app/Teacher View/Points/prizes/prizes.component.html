@@ -1,33 +1,42 @@
+<h2>Prizes</h2>
 <div class="example-container mat-elevation-z8">
-    
-      <mat-table #table [dataSource]="dataSource">
-    
-        <ng-container matColumnDef="Prize">
-          <mat-header-cell *matHeaderCellDef> Prize </mat-header-cell>
-          <mat-cell *matCellDef="let prize"> {{prize.description}} </mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="Cost">
-          <mat-header-cell *matHeaderCellDef>Cost</mat-header-cell>
-          <mat-cell *matCellDef="let prize"> {{prize.amount}} </mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="Edit">
-            <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
-            <mat-cell *matCellDef="let prize">
-              <button class='edit btn btn-info' (click)='editFunc(prize)'>Edit</button>
-            </mat-cell>
-        </ng-container>
 
-        <ng-container matColumnDef="Delete">
-            <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
-            <mat-cell *matCellDef="let prize">
-              <button class='delete btn btn-info' (click)='deleteFunc(prize)'>Delete</button>
-            </mat-cell>
-        </ng-container>
-    
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
-    
-      </mat-table>
-    </div>
+  <mat-table #table [dataSource]="dataSource">
+
+
+    <ng-container matColumnDef="Toggle">
+      <mat-header-cell *matHeaderCellDef> toggle </mat-header-cell>
+      <mat-cell *matCellDef="let prize">
+        <mat-slide-toggle color="primary"></mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Prize">
+      <mat-header-cell *matHeaderCellDef> Prize </mat-header-cell>
+      <mat-cell *matCellDef="let prize"> {{prize.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Cost">
+      <mat-header-cell *matHeaderCellDef>Cost</mat-header-cell>
+      <mat-cell *matCellDef="let prize"> {{prize.amount}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Edit">
+      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+      <mat-cell *matCellDef="let prize">
+          <button > <i class="material-icons">mode_edit</i></button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Delete">
+      <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+      <mat-cell *matCellDef="let prize">
+         <button> <i class="material-icons">delete</i></button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
+
+  </mat-table>
+</div>

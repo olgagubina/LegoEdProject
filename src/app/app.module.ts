@@ -25,12 +25,12 @@ import { StudentFormDialogComponent } from './Teacher View/Students/student-form
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
 import { MaterialImportsModule } from '../material-imports.module';
 import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
-import {MatTableModule} from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material';
 import { RewardsComponent } from './Teacher View/Points/rewards/rewards.component';
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
 // import {MatButtonToggleModule} from '@angular/material/button-toggle';
-// import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 
@@ -79,6 +79,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatTableModule,
     MaterialImportsModule,
+    MatSlideToggleModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging 
