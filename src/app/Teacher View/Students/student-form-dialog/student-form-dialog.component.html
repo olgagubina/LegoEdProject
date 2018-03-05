@@ -1,8 +1,8 @@
 <form>
-  <h1 >{{title}}</h1>
+  <h1 mat-dialog-title>{{title}}</h1>
   <mat-dialog-content>
     <mat-form-field>
-      <input matInput [(ngModel)]="data.name" [ngModelOptions]="{standalone: true}" autocomplete='name' placeholder="Name">
+      <input matInput [(ngModel)]="data.firstName" [ngModelOptions]="{standalone: true}" autocomplete='name' placeholder="Name">
     </mat-form-field><br>
     <mat-form-field>
       <input matInput [(ngModel)]="data.lastName" [ngModelOptions]="{standalone: true}" autocomplete='last name' placeholder="Surname">
@@ -10,6 +10,6 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button  cdkFocusInitial>{{btn-text}}</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>{{btn-text}}</button>
   </mat-dialog-actions>
 </form>

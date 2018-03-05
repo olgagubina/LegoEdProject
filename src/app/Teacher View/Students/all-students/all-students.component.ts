@@ -24,8 +24,13 @@ export class AllStudentsComponent implements OnInit {
 
   ngOnInit() {
   this.title = 'Master List';
-  this.allStudents = this.service.getStudents();
-  this.dataSource = new MatTableDataSource(this.allStudents);
+  // this.allStudents = this.service.students;
+  this.service.studentsData$.subscribe(data => {
+    this.dataSource = new MatTableDataSource(data);
+  }, error => {
+    console.error(error);
+  });
+  this.service.getStudents();
   }
 
   //ADD CUSTOMER
@@ -44,7 +49,12 @@ export class AllStudentsComponent implements OnInit {
       console.log(newStudent);
 
       //Add to data array on service
-      this.service.addStudent(newStudent);
+      if(result) {
+        this.service.addStudent(newStudent).subscribe(
+          data => this.service.getStudents()
+        );
+      }
+     
 
       //Clean the input
       this.student = new Student;

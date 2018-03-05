@@ -19,8 +19,8 @@ export class PresentStudentsComponent implements OnInit {
 
   ngOnInit() {
   // this.service.getStudents();
-  this.title = 'In Class';
-  this.allStudents = this.service.getStudents();
-  this.dataSource = new MatTableDataSource(this.allStudents);
+  // this.title = 'In Class';
+  // this.allStudents = this.service.getStudents();
+  // this.dataSource = new MatTableDataSource(this.allStudents);
   }
 }

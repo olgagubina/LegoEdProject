@@ -3,6 +3,7 @@ import PointItem from '../models/point-model';
 import Student from '../models/student-model';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import {Subject} from 'rxjs/Subject';
 
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId  : 2, description:'pushing', amount: 300}, { pointId: 2, catId : 2, description:'yelling', amount: 100}, { pointId: 3, catId : 3, description:'missing class', amount: 100}, { pointId: 4, catId : 1, description:'no homework', amount: 200}, { pointId: 5, catId : 3, description:'making fun of', amount: 200}]
 var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description:'helping student', amount: 300}, { pointId: 2, catId
@@ -157,7 +158,7 @@ var STUDENTS: Array<Student> = [{
   "balance": 5,
   "present": false
 },  {
-  "studentId": 16,
+  "studentId": 21,
   "firstName": "Dore",
   "lastName": "Bertelet",
   "rating": 100,
@@ -167,6 +168,7 @@ var STUDENTS: Array<Student> = [{
 
 @Injectable()
 export class StudentsViewService {
+  studentsData$: Subject<Student[]> = new Subject;
   students: Student[] = STUDENTS;
   prizes: PointItem[] = PRIZES;
   penalties: PointItem[] = PENALTIES;
@@ -179,8 +181,11 @@ export class StudentsViewService {
       return this.prizes;
   }
     
-  getStudents(){
-    return this.students;
+  getStudents():void {
+    // return this.students;
+    this.http.get<Student[]> ('api/students/all').subscribe(
+      data => this.studentsData$.next(data)
+    );
   }
 
   getPenalties(){
@@ -193,12 +198,15 @@ export class StudentsViewService {
 
   //ADD STUDENT
 
-  addStudent(newStudent:Student)  {
-    newStudent.studentId = this.generateId();
-    newStudent.rating = 0;
-    newStudent.balance = 0;
-    newStudent.present = false;
-    this.students.push(newStudent);
+  addStudent(newStudent:Student): Observable <Student>  {
+    console.log(newStudent);
+    // newStudent.studentId = this.generateId();
+    // newStudent.rating = 0;
+    // newStudent.balance = 0;
+    // newStudent.present = false;
+    // this.students.push(newStudent);
+    // console.log(this.students);
+    return this.http.post<Student>('api/students/add', newStudent);
   }
 
   generateId() {
