@@ -19,6 +19,7 @@ export class AllStudentsComponent implements OnInit {
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
+  student: Student = new Student();
 
   constructor(
     private service: StudentsViewService, 

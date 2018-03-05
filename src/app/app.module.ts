@@ -23,7 +23,7 @@ import { RewardItemsComponent } from './Student View/reward-items/reward-items.c
 import { PunishItemsComponent } from './Student View/punish-items/punish-items.component';
 import { AllStudentsComponent } from './Teacher View/Students/all-students/all-students.component';
 import { PresentStudentsComponent } from './Teacher View/Students/present-students/present-students.component';
-// import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
+import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
 import { MaterialImportsModule } from '../material-imports.module';
 import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
@@ -47,7 +47,7 @@ import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.compo
     PunishItemsComponent,
     AllStudentsComponent,
     PresentStudentsComponent,
-    // StudentFormDialogComponent,
+    StudentFormDialogComponent,
     PointsFormDialogComponent,
     PrizesComponent,
     RewardsComponent,
@@ -67,7 +67,7 @@ import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.compo
     BrowserAnimationsModule,
     AppRoutingModule 
   ],
-  entryComponents: [PointsFormDialogComponent],
+  entryComponents: [PointsFormDialogComponent, StudentFormDialogComponent],
   providers: [StudentsViewService],
   bootstrap: [AppComponent]
 })
