@@ -19,8 +19,8 @@ var clearDBConnection = {
     database: 'heroku_365eb437c5f937e'
 }
 
-// connection = mysql.createConnection(clearDBConnection);
-connection = mysql.createConnection(localConnection);
+connection = mysql.createConnection(clearDBConnection);
+// connection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
