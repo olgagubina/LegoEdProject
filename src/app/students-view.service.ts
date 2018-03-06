@@ -5,13 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 
-
-
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
   presentStudentsData$: Subject<Student[]> = new Subject;
-
   students: Student[];
   prizes: PointItem[];
   penalties: PointItem[];
@@ -25,7 +22,6 @@ export class StudentsViewService {
 
   // GET ALL STUDENTS
   getStudents(): void {
-    // return this.students;
     this.http.get<Student[]>('api/students/all').subscribe(
       data => this.studentsData$.next(data)
     );
@@ -47,12 +43,6 @@ export class StudentsViewService {
   // ADD STUDENT
   addStudent(newStudent: Student): Observable<Student> {
     console.log(newStudent);
-    // newStudent.studentId = this.generateId();
-    // newStudent.rating = 0;
-    // newStudent.balance = 0;
-    // newStudent.present = false;
-    // this.students.push(newStudent);
-    // console.log(this.students);
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
@@ -61,7 +51,6 @@ export class StudentsViewService {
     this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
       data => this.prizesData$.next(data)
     );
-
   }
 
   getPenalties(): void {
