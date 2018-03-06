@@ -177,9 +177,24 @@ export class StudentsViewService {
 
 
   // STUDENT VIEW FUNCS
-  getPrizes() {
-       this.pointsData$.next(this.prizes);
-       return PRIZES;
+  getPrizes(): void {
+    this.http.get<PointItem[]> ('api/points/all/prizes').subscribe(
+      data => this.pointsData$.next(data)
+    );
+
+  }
+
+  getPenalties(): void{
+    this.http.get<PointItem[]> ('api/points/all/penalties').subscribe(
+      data => this.pointsData$.next(data)
+    );
+  }
+
+
+  getRewards(): void {
+    this.http.get<PointItem[]> ('api/points/all/rewards').subscribe(
+      data => this.pointsData$.next(data)
+    );
   }
     
   getStudents():void {
@@ -190,9 +205,7 @@ export class StudentsViewService {
   }
 
 
-  getPenalties() {
-    return PENALTIES;
-  }
+
 
   //ADD STUDENT
   addStudent(newStudent:Student): Observable <Student>  {
@@ -206,17 +219,12 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
   
-  getRewards() {
-    return this.rewards;
-  }
 
   //ADD Point items
 
-  addPointItems(newItem: PointItem){
-   this.prizes.push(newItem);
-   console.log(newItem);
-   console.log(this.prizes);
-  //  return this.prizes;
+  addPointItems(newItem: PointItem): Observable<PointItem>{
+    console.log(newItem);
+    return this.http.post<PointItem>('api/points/add', newItem);
   }
 
 }

@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
     password: '1234', // < MySQL password >
     // password: 'easyPass', // < MySQL password >
     // password: '147258', // < MySQL password >
+
     database: 'lego' // <your database name>
 });
 
