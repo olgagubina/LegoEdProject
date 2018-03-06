@@ -7,10 +7,10 @@ import { Subject } from 'rxjs/Subject';
 
 
 
-
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
+  presentStudentsData$: Subject<Student[]> = new Subject;
 
   students: Student[];
   prizes: PointItem[];
@@ -23,8 +23,7 @@ export class StudentsViewService {
   constructor(private http: HttpClient) { }
 
 
-  //GET ALL STUDENTS
-
+  // GET ALL STUDENTS
   getStudents(): void {
     // return this.students;
     this.http.get<Student[]>('api/students/all').subscribe(
@@ -32,9 +31,17 @@ export class StudentsViewService {
     );
   }
 
-  //GET PRESENT STUDENTS
-  getPresentStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>('api/students/present');
+  // GET PRESENT STUDENTS
+  getPresentStudents(): void {
+    this.http.get<Student[]>('api/students/present').subscribe(
+      data => this.presentStudentsData$.next(data)
+    );
+  }
+
+  // MARK STUDENT PRESENT
+  studentPresent(stud): Observable<Student[]> {
+    console.log(stud.firstName, stud.present);
+    return this.http.put<Student[]>('api/students/toggle/' + stud.studentId, stud);
   }
 
   // ADD STUDENT
@@ -49,7 +56,7 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
-  //GET POINTS
+  // GET POINTS
   getPrizes(): void {
     this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
       data => this.prizesData$.next(data)
@@ -70,27 +77,24 @@ export class StudentsViewService {
     );
   }
 
-  //ADD Point items
-  addPointItems(newItem: PointItem): Observable<PointItem>{
-    console.log(newItem);
-    return this.http.post<PointItem>('api/points/add', newItem);
+  // ADD Point items
+
+  addPrize(newItem: PointItem): Observable<PointItem> {
+    console.log(newItem)
+    return this.http.post<PointItem>('api/points/add/prizes', newItem);
   }
 
+  addPenalty(newItem: PointItem): Observable<PointItem> {
+    console.log(newItem)
+    return this.http.post<PointItem>('api/points/add/penalties', newItem);
+  }
 
-
-  // addPrize(newItem: PointItem): Observable<PointItem> {
-  //   console.log(newItem)
+  addReward(newItem: PointItem): Observable<PointItem> {
+    console.log(newItem)
+    return this.http.post<PointItem>('api/points/add/rewards', newItem);
+  }
+  // addPointItems(newItem: PointItem): Observable<PointItem>{
+  //   console.log(newItem);
   //   return this.http.post<PointItem>('api/points/add', newItem);
   // }
-  // addPenalty(newItem: PointItem): Observable<PointItem> {
-  //   console.log(newItem)
-  //   return this.http.post<PointItem>('api/points/add/penalties', newItem);
-  // }
-
-  // addReward(newItem: PointItem): Observable<PointItem> {
-  //   console.log(newItem);
-  //   return this.http.post<PointItem>('api/points/add/rewards', newItem);
-  // }
-
-
 }

@@ -16,15 +16,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   styleUrls: ["./all-students.component.css"]
 })
 export class AllStudentsComponent implements OnInit {
-  displayedColumns = ["present", "firstName", "lastName", "edit"];
+  displayedColumns = ['present', 'firstName', 'lastName', 'edit'];
   color = 'accent';
-  checked = false;
   disabled = false;
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
-  student: Student = new Student();
-  selection = new SelectionModel<Student>(false, []);
+  changedStudent: Student = new Student();
+  // selection = new SelectionModel<Student>(false, []);
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) {}
 
@@ -43,16 +42,18 @@ export class AllStudentsComponent implements OnInit {
   }
 
   // Mark student present
+
   markPresent(student) {
-    console.log('Checked');
-    console.log(student);
-    console.log(student.present);
-    if (student.present === 0) {
-        student.present = 1;
-        this.checked = false;
-    } else {
-      student.present = 0;
-}
+  //   if (student.present === 0) {
+  //       student.present = 1;
+        // this.checked = false;
+  //   } else {
+  //     student.present = 0;
+  // }
+    this.service.studentPresent(student).subscribe(data => {
+      this.service.getPresentStudents();
+      this.service.getStudents();
+    });
   }
 
   // ADD CUSTOMER
@@ -60,8 +61,8 @@ export class AllStudentsComponent implements OnInit {
     let dialogRef = this.dialog.open(StudentFormDialogComponent, {
       width: "290px",
       data: {
-        firstName: this.student.firstName,
-        lastName: this.student.lastName
+        firstName: this.changedStudent.firstName,
+        lastName: this.changedStudent.lastName
       }
     });
 
@@ -78,7 +79,7 @@ export class AllStudentsComponent implements OnInit {
       }
 
       // Clean the input
-      this.student = new Student();
+      this.changedStudent = new Student();
     });
   }
 
