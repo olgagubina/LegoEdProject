@@ -36,7 +36,9 @@ var connection = mysql.createConnection({
 router.get('/all/prizes', (req, res) => {
     try {
         connection.query(
+
             `SELECT * FROM lego.points where cat_id = 3;`,
+
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get prizes', err);
