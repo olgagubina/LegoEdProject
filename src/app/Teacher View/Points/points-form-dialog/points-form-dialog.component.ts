@@ -12,16 +12,26 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class PointsFormDialogComponent implements OnInit {
 prizes: any[];
-newItem: PointItem = new PointItem();
+newItem: any;
 constructor(public dialogRef: MatDialogRef<PointsFormDialogComponent>, private studentsViewService: StudentsViewService,
-  @Inject(MAT_DIALOG_DATA) public data: PointItem) { }
+  @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
   ngOnInit() {
+    this.newItem = Object.assign({}, {
+      cat_id: this.data.cat_id || null,
+      description: this.data.description,
+      amount: this.data.amount
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+    this.newItem = Object.assign({}, {
+      cat_id: this.data.cat_id || null,
+      description: this.data.description,
+      amount: this.data.amount
+    });
   }
 
 

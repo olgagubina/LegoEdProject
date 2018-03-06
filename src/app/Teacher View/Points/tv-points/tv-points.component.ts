@@ -29,6 +29,11 @@ export class TvPointsComponent implements OnInit {
     let dialogRef = this.dialog.open(PointsFormDialogComponent, {
       width: '290px',
       data: {
+        categ: [
+          {cat_id: 1, category: 'Reward'},
+          {cat_id: 2, category: 'Penalty'},
+          {cat_id: 3, category: 'Prize'}
+        ],
         description: this.pointItem.description,
         amount: this.pointItem.amount
       }

@@ -49,28 +49,21 @@ connection = mysql.createConnection(localConnection);
 //     // database: 'lego' // <your database name>
 // });
 
-/* GET point items */
-//get prizes from table
-router.get('/all/prizes', (req, res) => {
-    try {
-        connection.query(
-
-            `SELECT * FROM lego.points where cat_id = 3;`,
-
-            function (err, rows, fields) {
-                if (!err) res.send(rows);
-                else console.log('get prizes', err);
-            });
-    } catch (err) {
-        console.log(err);
-    }
-});
-
-//get rewards
+//get rewards (cat_id = 1)
 router.get('/all/rewards', (req, res) => {
     try {
         connection.query(
-            `SELECT * FROM lego.points where cat_id = 1;`,
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.cat_id = 1 AND points.deleted = false
+            order by pointId`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get rewards', err);
@@ -80,11 +73,45 @@ router.get('/all/rewards', (req, res) => {
     }
 });
 
-//get penalty items from table
+//get DISPLAYED rewards (cat_id = 1)
+router.get('/all/rewards', (req, res) => {
+    try {
+        connection.query(
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.cat_id = 1 AND points.deleted = false AND points.display = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get rewards', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//get penalties (cat_id = 2)
 router.get('/all/penalties', (req, res) => {
     try {
         connection.query(
-            `SELECT * FROM lego.points where cat_id = 2;`,
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.cat_id = 2 AND points.deleted = false
+            order by pointId`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get penalties', err);
@@ -94,36 +121,164 @@ router.get('/all/penalties', (req, res) => {
     }
 });
 
+//get DISPLAYED penalties (cat_id = 2)
+router.get('/all/penalties', (req, res) => {
+    try {
+        connection.query(
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.cat_id = 2 AND points.deleted = false AND points.display = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get penalties', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//get prizes (cat_id = 3)
+router.get('/all/prizes', (req, res) => {
+    try {
+        connection.query(
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.cat_id = 3 AND points.deleted = false
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get prizes', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//get DISPLAYED prizes (cat_id = 3)
+router.get('/all/prizes', (req, res) => {
+    try {
+        connection.query(
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.cat_id = 3 AND points.deleted = false AND points.display = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get prizes', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 
-/* ADD point item */
-
-// router.post('/add', (req, res) => {
-//     let newPoint = req.body;
-//     console.log('body: ' + newPoint);
-//     connection.query(
-//         `INSERT INTO points SET ?`,
-//         {description: newPoint.description, amount: newPoint.amount},
-//         function (err, rows, fields) {
-//             if (!err) res.send(rows);
-//             else console.log('insert point item', err);
-//         });
-// });
-
-router.post('/add/prizes', (req, res) => {
+// ADD point item
+router.post('/add', (req, res) => {
     let newPoint = req.body;
     connection.query(
-        `INSERT INTO points SET ?;`,
-        {description: newPoint.description, amount: newPoint.amount},
-                 function (err, rows, fields) {
-                    if (!err) res.send(rows);
-                    else console.log('insert prize item', err);
-                });
+        `INSERT INTO points SET ?`,
+        { cat_id: newPoint.cat_id, description: newPoint.description, amount: newPoint.amount },
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('insert point item', err);
         });
     
 
-/* UPDATE point item */
+// UPDATE point item - change details
+router.put('/update/:id', (req, res) => {
+    let pointId = req.params.id;
+    let updPoint = req.body;
+    connection.query(
+        `UPDATE points SET ? WHERE ?`,
+        [{ cat_id: updPoint.cat_id, description: updPoint.description, amount: updPoint.amount }, { point_id: pointId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('point update', err);
+        });
+});
 
-/* DELETE point item */
+// UPDATE point item - toggle display
+router.put('/toggle/:id', (req, res) => {
+    let pointId = req.params.id;
+    let updDisplay = !req.body.display;
+    connection.query(
+        `UPDATE points SET ? WHERE ?`,
+        [{ display: updDisplay }, { point_id: pointId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('point display toggle', err);
+        });
+});
+
+
+// DELETE point item - actually just archiving them ('deleted' flag to true)
+router.put('/delete/:id', (req, res) => {
+    let pointId = req.params.id;
+    connection.query(
+        `UPDATE points SET ? WHERE ?`,
+        [{ deleted: true }, { point_id: pointId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('point delete (archive)', err);
+        });
+});
+
+// GET DELETED points
+router.get('/archive', (req, res) => {
+    try {
+        connection.query(
+            `SELECT 
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.deleted = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get archive points', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+// RESTORE point item
+router.put('/restore/:id', (req, res) => {
+    let pointId = req.params.id;
+    connection.query(
+        `UPDATE points SET ? WHERE ?`,
+        [{ deleted: false }, { point_id: pointId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('point restore', err);
+        });
+});
 
 module.exports = router;
