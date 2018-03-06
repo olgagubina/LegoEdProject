@@ -214,7 +214,8 @@ router.get('/archive', (req, res) => {
             description,
             amount,
             points.cat_id as catId,
-            categories.name as category
+            categories.name as category,
+            display
             FROM points
             left join categories on points.cat_id = categories.cat_id
             WHERE points.deleted = true
