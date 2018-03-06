@@ -6,9 +6,9 @@ var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    // password: '1234', // < MySQL password COOKIE and MC >
+    password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
-    password: '147258', // < MySQL password OLGA>
+    //password: '147258', // < MySQL password OLGA>
   
     database: 'lego' // <your database name>
 }
@@ -199,7 +199,7 @@ router.post('/add', (req, res) => {
     let newPoint = req.body;
     connection.query(
         `INSERT INTO points SET ?`,
-        { cat_id: newPoint.cat_id, description: newPoint.description, amount: newPoint.amount },
+        { cat_id: Number(newPoint.cat_id), description: newPoint.description, amount: Number(newPoint.amount) },
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('insert point item', err);
