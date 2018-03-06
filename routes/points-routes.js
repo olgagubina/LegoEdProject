@@ -9,7 +9,6 @@ var localConnection = {
     password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
     // password: '147258', // < MySQL password OLGA>
-
     database: 'lego' // <your database name>
 }
 
@@ -74,7 +73,7 @@ router.get('/all/rewards', (req, res) => {
 });
 
 //get DISPLAYED rewards (cat_id = 1)
-router.get('/all/rewards', (req, res) => {
+router.get('/displayed/rewards', (req, res) => {
     try {
         connection.query(
             `SELECT
@@ -122,7 +121,7 @@ router.get('/all/penalties', (req, res) => {
 });
 
 //get DISPLAYED penalties (cat_id = 2)
-router.get('/all/penalties', (req, res) => {
+router.get('/displayed/penalties', (req, res) => {
     try {
         connection.query(
             `SELECT
@@ -170,7 +169,7 @@ router.get('/all/prizes', (req, res) => {
 });
 
 //get DISPLAYED prizes (cat_id = 3)
-router.get('/all/prizes', (req, res) => {
+router.get('/displayed/prizes', (req, res) => {
     try {
         connection.query(
             `SELECT
@@ -199,12 +198,12 @@ router.post('/add', (req, res) => {
     let newPoint = req.body;
     connection.query(
         `INSERT INTO points SET ?`,
-        { cat_id: newPoint.cat_id, description: newPoint.description, amount: newPoint.amount },
+        { cat_id: Number(newPoint.cat_id), description: newPoint.description, amount: Number(newPoint.amount) },
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('insert point item', err);
         });
-
+  });   
 
 // UPDATE point item - change details
 router.put('/update/:id', (req, res) => {
@@ -280,5 +279,6 @@ router.put('/restore/:id', (req, res) => {
             else console.log('point restore', err);
         });
 });
+
 
 module.exports = router;

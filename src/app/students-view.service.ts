@@ -45,7 +45,6 @@ export class StudentsViewService {
   constructor(private http: HttpClient) { }
 
 
-
   // STUDENT VIEW FUNCS
   getPrizes() {
        this.pointsData$.next(this.prizes);
@@ -53,7 +52,6 @@ export class StudentsViewService {
   }
 
   // GET ALL STUDENTS
-
   getStudents(): void {
     // return this.students;
     this.http.get<Student[]>('api/students/all').subscribe(
@@ -91,23 +89,28 @@ export class StudentsViewService {
     );
   }
 
+
   // ADD Point items
-  addPrize(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/prizes', newItem);
+  addPointItems(newItem: PointItem): Observable<PointItem>{
+    console.log(newItem);
+    return this.http.post<PointItem>('api/points/add', newItem);
   }
 
-  addPenalty(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/penalties', newItem);
-  }
 
-  addReward(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/rewards', newItem);
-  }
-  // addPointItems(newItem: PointItem): Observable<PointItem>{
-  //   console.log(newItem);
+
+  // addPrize(newItem: PointItem): Observable<PointItem> {
+  //   console.log(newItem)
   //   return this.http.post<PointItem>('api/points/add', newItem);
   // }
+  // addPenalty(newItem: PointItem): Observable<PointItem> {
+  //   console.log(newItem)
+  //   return this.http.post<PointItem>('api/points/add/penalties', newItem);
+  // }
+
+  // addReward(newItem: PointItem): Observable<PointItem> {
+  //   console.log(newItem);
+  //   return this.http.post<PointItem>('api/points/add/rewards', newItem);
+  // }
+
+
 }
