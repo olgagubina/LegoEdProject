@@ -11,8 +11,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   styleUrls: ['./rewards.component.css']
 })
 export class RewardsComponent implements OnInit {
-  displayedColumns = ['Toggle', 'Reward', 'Cost', 'Edit', 'Delete'];
+  displayedColumns = ['Toggle', 'Reward', 'Cost', 'Edit'];
   rewards: PointItem[];
+
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }
 

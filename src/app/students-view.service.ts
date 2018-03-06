@@ -7,18 +7,10 @@ import { Subject } from 'rxjs/Subject';
 
 
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'pushing', amount: 300 }, { pointId: 2, catId: 2, description: 'yelling', amount: 100 }, { pointId: 3, catId: 3, description: 'missing class', amount: 100 }, { pointId: 4, catId: 1, description: 'no homework', amount: 200 }, { pointId: 5, catId: 3, description: 'making fun of', amount: 200 }]
-var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300 }, {
-  pointId: 2, catId
-    : 2, description: 'extra credit', amount: 100
-}, {
-  pointId: 3, catId
-    : 3, description: 'helping teacher', amount: 100
-}, {
-  pointId: 4, catId
-    : 1, description: 'help clean', amount: 200
-}, {
-  pointId: 5, catId
-    : 3, description: 'exceptional work', amount: 200
+var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300 }, 
+  {pointId: 2, catId: 2, description: 'extra credit', amount: 100}, 
+  {pointId: 4, catId: 1, description: 'help clean', amount: 200}, 
+  {pointId: 5, catId: 3, description: 'exceptional work', amount: 200
 }]
 var PRIZES: Array<PointItem> = [{
   pointId: 1, catId
@@ -54,7 +46,14 @@ export class StudentsViewService {
 
 
 
+  // STUDENT VIEW FUNCS
+  getPrizes() {
+       this.pointsData$.next(this.prizes);
+       return PRIZES;
+  }
+
   //GET ALL STUDENTS
+
   getStudents(): void {
     // return this.students;
     this.http.get<Student[]>('api/students/all').subscribe(
@@ -67,7 +66,7 @@ export class StudentsViewService {
     return this.http.get<Student[]>('api/students/getpresent');
   }
 
-  //ADD STUDENT
+  // ADD STUDENT
   addStudent(newStudent: Student): Observable<Student> {
     console.log(newStudent);
     // newStudent.studentId = this.generateId();
@@ -78,7 +77,6 @@ export class StudentsViewService {
     // console.log(this.students);
     return this.http.post<Student>('api/students/add', newStudent);
   }
-
 
   //GET POINTS
   getPrizes(): void {

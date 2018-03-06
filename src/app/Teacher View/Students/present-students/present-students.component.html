@@ -1,7 +1,7 @@
 <h3>{{title}}</h3>
 <div class="example-container mat-elevation-z8">
 
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource" *ngIf="">
 
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
@@ -13,11 +13,15 @@
       <mat-cell *matCellDef="let student"> {{student.lastName}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="dropdown">
+    <ng-container matColumnDef="dropdown-type">
       <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>
       <mat-cell *matCellDef="let student">
-      <app-dropdown-prizes></app-dropdown-prizes>
-    </mat-cell>
+        <mat-select placeholder="Select">
+          <mat-option value="prize">Prize</mat-option>
+          <mat-option value="reward">Reward</mat-option>
+          <mat-option value="penalty">Penalty</mat-option>
+        </mat-select>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="edit">
