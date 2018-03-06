@@ -11,8 +11,6 @@ var localConnection = {
     password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
     // password: '147258', // < MySQL password OLGA>
-
-
     database: 'lego' // <your database name>
 }
 
@@ -133,6 +131,7 @@ router.put('/update/:id', (req, res) => {
 router.put('/toggle/:id', (req, res) => {
     let studentId = req.params.id;
     let updPresent = !req.body.present;
+    console.log(updPresent);
     connection.query(
         `UPDATE students SET ? WHERE ?`,
         [{ present: updPresent }, { st_id: studentId }],
