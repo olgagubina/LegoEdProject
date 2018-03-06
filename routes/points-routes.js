@@ -74,7 +74,7 @@ router.get('/all/rewards', (req, res) => {
 });
 
 //get DISPLAYED rewards (cat_id = 1)
-router.get('/all/rewards', (req, res) => {
+router.get('/displayed/rewards', (req, res) => {
     try {
         connection.query(
             `SELECT 
@@ -122,7 +122,7 @@ router.get('/all/penalties', (req, res) => {
 });
 
 //get DISPLAYED penalties (cat_id = 2)
-router.get('/all/penalties', (req, res) => {
+router.get('/displayed/penalties', (req, res) => {
     try {
         connection.query(
             `SELECT 
@@ -170,7 +170,7 @@ router.get('/all/prizes', (req, res) => {
 });
 
 //get DISPLAYED prizes (cat_id = 3)
-router.get('/all/prizes', (req, res) => {
+router.get('/displayed/prizes', (req, res) => {
     try {
         connection.query(
             `SELECT 
@@ -204,8 +204,8 @@ router.post('/add', (req, res) => {
             if (!err) res.send(rows);
             else console.log('insert point item', err);
         });
+});    
     
-
 // UPDATE point item - change details
 router.put('/update/:id', (req, res) => {
     let pointId = req.params.id;
@@ -280,5 +280,6 @@ router.put('/restore/:id', (req, res) => {
             else console.log('point restore', err);
         });
 });
+
 
 module.exports = router;
