@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 
-
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'pushing', amount: 300 },
 { pointId: 2, catId: 2, description: 'yelling', amount: 100 }, { pointId: 3, catId: 3, description: 'missing class', amount: 100 },
 { pointId: 4, catId: 1, description: 'no homework', amount: 200 }, { pointId: 5, catId: 3, description: 'making fun of', amount: 200
@@ -24,16 +23,14 @@ var PRIZES: Array<PointItem> = [{pointId: 1, catId: 3, description: 'movie for 2
 }, {pointId: 5, catId: 3, description: 'be teacher for a day', amount: 500
 }];
 
-
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
   presentStudentsData$: Subject<Student[]> = new Subject;
-
   students: Student[];
-  prizes: PointItem[] = PRIZES;
-  penalties: PointItem[] = PENALTIES;
-  rewards: PointItem[] = REWARDS;
+  prizes: PointItem[];
+  penalties: PointItem[];
+  rewards: PointItem[];
   prizesData$: Subject<PointItem[]> = new Subject;
   rewardsData$: Subject<PointItem[]> = new Subject;
   penaltiesData$: Subject<PointItem[]> = new Subject;
@@ -43,7 +40,6 @@ export class StudentsViewService {
 
   // GET ALL STUDENTS
   getStudents(): void {
-    // return this.students;
     this.http.get<Student[]>('api/students/all').subscribe(
       data => this.studentsData$.next(data)
     );
@@ -65,12 +61,6 @@ export class StudentsViewService {
   // ADD STUDENT
   addStudent(newStudent: Student): Observable<Student> {
     console.log(newStudent);
-    // newStudent.studentId = this.generateId();
-    // newStudent.rating = 0;
-    // newStudent.balance = 0;
-    // newStudent.present = false;
-    // this.students.push(newStudent);
-    // console.log(this.students);
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
@@ -79,7 +69,6 @@ export class StudentsViewService {
     this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
       data => this.prizesData$.next(data)
     );
-
   }
 
   getPenalties(): void {
