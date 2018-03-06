@@ -66,7 +66,7 @@ export class TvPointsComponent implements OnInit {
           )
         }
 
-        //Clean the input
+        // Clean the input
         this.pointItem = new PointItem;
       };
     })
