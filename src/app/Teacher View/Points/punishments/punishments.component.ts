@@ -19,7 +19,7 @@ export class PunishmentsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.studentsViewService.pointsData$.subscribe(data => {
+    this.studentsViewService.penaltiesData$.subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
   }, error => {
     console.error(error);

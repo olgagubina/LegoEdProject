@@ -153,10 +153,10 @@ router.get('/all/prizes', (req, res) => {
     }
 });
 
+
 // ADD point item
 router.post('/add', (req, res) => {
     let newPoint = req.body;
-    console.log('body: ' + newPoint);
     connection.query(
         `INSERT INTO points SET ?`,
         { cat_id: newPoint.cat_id, description: newPoint.description, amount: newPoint.amount },
@@ -164,7 +164,7 @@ router.post('/add', (req, res) => {
             if (!err) res.send(rows);
             else console.log('insert point item', err);
         });
-});
+    
 
 // UPDATE point item - change details
 router.put('/update/:id', (req, res) => {
