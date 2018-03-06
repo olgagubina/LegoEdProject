@@ -25,14 +25,8 @@
       <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
       <mat-cell *matCellDef="let prize">
           <button > <i class="material-icons">mode_edit</i></button>
+          <button> <i class="material-icons">delete</i></button>
         </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Delete">
-      <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
-      <mat-cell *matCellDef="let prize">
-         <button> <i class="material-icons">delete</i></button>
-      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

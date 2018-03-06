@@ -6,25 +6,33 @@ import { MatTableModule } from '@angular/material/table';
 import {FormControl} from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-present-students',
   templateUrl: './present-students.component.html',
   styleUrls: ['./present-students.component.css']
 })
 export class PresentStudentsComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'dropdown', 'edit' ];
+  displayedColumns = ['firstName', 'lastName', 'dropdown-type', 'edit' ];
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
-
-
 
   constructor(private service: StudentsViewService) { }
 
   ngOnInit() {
     this.title = 'In Class';
-  // this.service.getStudents();
+    this.service.studentsData$.subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource(data);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+    this.service.getStudents();
   // this.allStudents = this.service.getStudents();
   // this.dataSource = new MatTableDataSource(this.allStudents);
   }
+
 }

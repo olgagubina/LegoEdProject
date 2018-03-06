@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./prizes.component.css']
 })
 export class PrizesComponent implements OnInit {
-  displayedColumns = ['Toggle', 'Prize', 'Cost', 'Edit', 'Delete'];
+  displayedColumns = ['Toggle', 'Prize', 'Cost', 'Edit' ];
   prizes: any[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }
@@ -19,8 +19,8 @@ export class PrizesComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.prizes);
     console.log(this.prizes);
       }
-    
-  
+
+
 
 }
 

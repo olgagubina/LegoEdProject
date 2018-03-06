@@ -12,7 +12,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 })
 export class PunishmentsComponent implements OnInit {
 
-  displayedColumns = ['Toggle', 'Penalty', 'Cost', 'Edit', 'Delete'];
+  displayedColumns = ['Toggle', 'Penalty', 'Cost', 'Edit'];
   penalties: any[];
   dataSource: MatTableDataSource<PointItem>;
   constructor(private studentsViewService: StudentsViewService) { }

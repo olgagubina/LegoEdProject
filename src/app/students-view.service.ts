@@ -21,12 +21,7 @@ var PRIZES: Array<PointItem> = [{ pointId: 1, catId
 var STUDENTS: Array<Student> = [{
   'studentId': 1, 'firstName': 'Eugen', 'lastName': 'Whitton', 'rating': 67, 'balance': 26, 'present': false
 }, {
-  'studentId': 2,
-  "firstName": "Saul",
-  "lastName": "Garza",
-  "rating": 99,
-  "balance": 9,
-  "present": true
+  'studentId': 2, "firstName": "Saul", "lastName": "Garza", "rating": 99, "balance": 9, "present": true
 }, {
   "studentId": 3,
   "firstName": "Lilias",
@@ -181,8 +176,8 @@ export class StudentsViewService {
        this.pointsData$.next(this.prizes);
        return PRIZES;
   }
-    
-  getStudents():void {
+
+  getStudents(): void {
     // return this.students;
     this.http.get<Student[]> ('api/students/all').subscribe(
       data => this.studentsData$.next(data)
@@ -194,8 +189,8 @@ export class StudentsViewService {
     return PENALTIES;
   }
 
-  //ADD STUDENT
-  addStudent(newStudent:Student): Observable <Student>  {
+  // ADD STUDENT
+  addStudent(newStudent: Student): Observable <Student>  {
     console.log(newStudent);
     // newStudent.studentId = this.generateId();
     // newStudent.rating = 0;
@@ -205,12 +200,12 @@ export class StudentsViewService {
     // console.log(this.students);
     return this.http.post<Student>('api/students/add', newStudent);
   }
-  
+
   getRewards() {
     return this.rewards;
   }
 
-  //ADD Point items
+  // ADD Point items
 
   addPointItems(newItem: PointItem){
    this.prizes.push(newItem);
