@@ -45,13 +45,6 @@ export class StudentsViewService {
   constructor(private http: HttpClient) { }
 
 
-
-  // STUDENT VIEW FUNCS
-  getPrizes() {
-       this.pointsData$.next(this.prizes);
-       return PRIZES;
-  }
-
   //GET ALL STUDENTS
 
   getStudents(): void {
