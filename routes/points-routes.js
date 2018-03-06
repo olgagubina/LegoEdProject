@@ -73,8 +73,11 @@ router.get('/all/penalties', (req, res) => {
 router.post('/add/prizes', (req, res) => {
     let newPoint = req.body;
     connection.query(
-        `INSERT INTO points SET ?;`,
-        {description: newPoint.description, amount: newPoint.amount},
+        `INSERT INTO points (description, amount)
+         VALUES
+        (newPoint.description),
+        (amount: newPoint.amount);`,
+        // {description: newPoint.description, amount: newPoint.amount},
                  function (err, rows, fields) {
                     if (!err) res.send(rows);
                     else console.log('insert prize item', err);
