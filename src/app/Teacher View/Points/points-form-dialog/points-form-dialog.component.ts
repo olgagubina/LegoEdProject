@@ -18,10 +18,6 @@ constructor(public dialogRef: MatDialogRef<PointsFormDialogComponent>, private s
 
 
   ngOnInit() {
-    this.studentsViewService.getPrizes();
-    this.studentsViewService.pointsData$.subscribe(
-    data => this.prizes = data);
-    console.log(this.prizes)
   }
 
   onNoClick(): void {

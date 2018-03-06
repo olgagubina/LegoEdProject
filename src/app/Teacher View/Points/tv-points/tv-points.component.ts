@@ -16,12 +16,12 @@ export class TvPointsComponent implements OnInit {
   constructor(private studentsViewService: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-      this.studentsViewService.pointsData$.subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-      }, error => {
-        console.error(error);
-      });
-      this.studentsViewService.getPrizes();
+      // this.studentsViewService.pointsData$.subscribe(data => {
+      //   this.dataSource = new MatTableDataSource(data);
+      // }, error => {
+      //   console.error(error);
+      // });
+      // this.studentsViewService.getPrizes();
 
   }
 
@@ -42,16 +42,22 @@ export class TvPointsComponent implements OnInit {
       //Add to data array on service
       if(result) {
         if(newItem.category == 'Reward')
-        this.studentsViewService.addPointItems(newItem).subscribe(
-          data => this.studentsViewService.getPrizes()
-        );
-      }
+        this.studentsViewService.addReward(newItem).subscribe(
+          data => this.studentsViewService.getRewards()
+        ) }
+        
+        else if (newItem.category == 'Prize'){
+          this.studentsViewService.addPrize(newItem).subscribe(
+            data => this.studentsViewService.getPrizes()
+          )} 
+          
+          else if (newItem.category == 'Penalty'){
+          this.studentsViewService.addPenalty(newItem).subscribe(
+            data => this.studentsViewService.getPenalties()
+           ) }
      
-
-      //Clean the input
+    //Clean the input
       this.pointItem = new PointItem;
     });
   }
-
-
 }

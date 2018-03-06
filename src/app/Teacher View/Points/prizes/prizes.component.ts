@@ -15,7 +15,7 @@ export class PrizesComponent implements OnInit {
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.studentsViewService.pointsData$.subscribe(data => {
+    this.studentsViewService.prizesData$.subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
   }, error => {
     console.error(error);
