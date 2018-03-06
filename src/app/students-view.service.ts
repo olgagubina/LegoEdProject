@@ -93,22 +93,26 @@ export class StudentsViewService {
   }
 
   //ADD Point items
-  addPrize(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/prizes', newItem);
+  addPointItems(newItem: PointItem): Observable<PointItem>{
+    console.log(newItem);
+    return this.http.post<PointItem>('api/points/add', newItem);
   }
 
-  addPenalty(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/penalties', newItem);
-  }
 
-  addReward(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/rewards', newItem);
-  }
-  // addPointItems(newItem: PointItem): Observable<PointItem>{
-  //   console.log(newItem);
+
+  // addPrize(newItem: PointItem): Observable<PointItem> {
+  //   console.log(newItem)
   //   return this.http.post<PointItem>('api/points/add', newItem);
   // }
+  // addPenalty(newItem: PointItem): Observable<PointItem> {
+  //   console.log(newItem)
+  //   return this.http.post<PointItem>('api/points/add/penalties', newItem);
+  // }
+
+  // addReward(newItem: PointItem): Observable<PointItem> {
+  //   console.log(newItem);
+  //   return this.http.post<PointItem>('api/points/add/rewards', newItem);
+  // }
+
+
 }

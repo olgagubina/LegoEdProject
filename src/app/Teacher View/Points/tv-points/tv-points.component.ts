@@ -9,19 +9,20 @@ import { MatTableDataSource } from "@angular/material/table";
   templateUrl: './tv-points.component.html',
   styleUrls: ['./tv-points.component.css']
 })
+
 export class TvPointsComponent implements OnInit {
   pointItem: PointItem = new PointItem();
   dataSource: MatTableDataSource<PointItem>;
-  
+
   constructor(private studentsViewService: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-      // this.studentsViewService.pointsData$.subscribe(data => {
-      //   this.dataSource = new MatTableDataSource(data);
-      // }, error => {
-      //   console.error(error);
-      // });
-      // this.studentsViewService.getPrizes();
+    // this.studentsViewService.pointsData$.subscribe(data => {
+    //   this.dataSource = new MatTableDataSource(data);
+    // }, error => {
+    //   console.error(error);
+    // });
+    // this.studentsViewService.getPrizes();
 
   }
 
@@ -30,9 +31,9 @@ export class TvPointsComponent implements OnInit {
       width: '290px',
       data: {
         categ: [
-          {cat_id: 1, category: 'Reward'},
-          {cat_id: 2, category: 'Penalty'},
-          {cat_id: 3, category: 'Prize'}
+          { cat_id: 1, category: 'Reward' },
+          { cat_id: 2, category: 'Penalty' },
+          { cat_id: 3, category: 'Prize' }
         ],
         description: this.pointItem.description,
         amount: this.pointItem.amount
@@ -42,27 +43,33 @@ export class TvPointsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       var newItem = Object.assign({}, result);
-      console.log(newItem);
+      console.log(result);
 
       //Add to data array on service
-      if(result) {
-        if(newItem.category == 'Reward')
-        this.studentsViewService.addReward(newItem).subscribe(
-          data => this.studentsViewService.getRewards()
-        ) }
-        
-        else if (newItem.category == 'Prize'){
-          this.studentsViewService.addPrize(newItem).subscribe(
-            data => this.studentsViewService.getPrizes()
-          )} 
-          
-          else if (newItem.category == 'Penalty'){
-          this.studentsViewService.addPenalty(newItem).subscribe(
+      if (result) {
+        if (result.cat_id == 1) {
+          console.log('at tv-points for Reward', result);
+          this.studentsViewService.addPointItems(result).subscribe(
+            data => this.studentsViewService.getRewards()
+          )
+        }
+
+        else if (result.cat_id == 2) {
+          this.studentsViewService.addPointItems(result).subscribe(
             data => this.studentsViewService.getPenalties()
-           ) }
-     
-    //Clean the input
-      this.pointItem = new PointItem;
-    });
+          )
+        }
+
+        else if (result.cat_id == 3) {
+          this.studentsViewService.addPointItems(result).subscribe(
+            data => this.studentsViewService.getPrizes()
+          )
+        }
+
+        //Clean the input
+        this.pointItem = new PointItem;
+      };
+    })
   }
+
 }
