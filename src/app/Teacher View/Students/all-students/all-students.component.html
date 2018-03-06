@@ -10,11 +10,7 @@
     <ng-container matColumnDef="present">
       <mat-header-cell *matHeaderCellDef> Mark Present </mat-header-cell>
       <mat-cell *matCellDef="let student">
-        <mat-slide-toggle (click)="markPresent(student)"
-        class="example-margin"
-        [color]="color"
-        [checked]="checked"
-        [disabled]="disabled">
+        <mat-slide-toggle [ngModel]="student.present" (click)="markPresent(student)">
         </mat-slide-toggle>
         <!-- <button class='delete btn btn-info'>Present</button> -->
       </mat-cell>
