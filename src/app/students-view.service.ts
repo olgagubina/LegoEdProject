@@ -85,7 +85,6 @@ export class StudentsViewService {
     );
   }
 
-
   getRewards(): void {
     this.http.get<PointItem[]>('api/points/all/rewards').subscribe(
       data => this.rewardsData$.next(data)
@@ -107,8 +106,4 @@ export class StudentsViewService {
     console.log(newItem)
     return this.http.post<PointItem>('api/points/add/rewards', newItem);
   }
-  // addPointItems(newItem: PointItem): Observable<PointItem>{
-  //   console.log(newItem);
-  //   return this.http.post<PointItem>('api/points/add', newItem);
-  // }
 }

@@ -7,12 +7,9 @@ var connection;
 var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
-
     // password: '1234', // < MySQL password COOKIE and MC >
-    password: 'easyPass', // < MySQL password ANNA>
-    // password: '147258', // < MySQL password OLGA>
-
-
+    // password: 'easyPass', // < MySQL password ANNA>
+    password: '147258', // < MySQL password OLGA>
     database: 'lego' // <your database name>
 }
 
@@ -24,8 +21,8 @@ var clearDBConnection = {
 }
 
 //DB SWITCHER
-// connection = mysql.createConnection(clearDBConnection);
-connection = mysql.createConnection(localConnection);
+connection = mysql.createConnection(clearDBConnection);
+// connection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {

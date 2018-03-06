@@ -13,7 +13,6 @@ var localConnection = {
     database: 'lego' // <your database name>
 }
 
-
 var clearDBConnection = {
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'bbbb8310aa5c1c',
@@ -22,8 +21,8 @@ var clearDBConnection = {
 }
 
 //DB SWITCHER
-// connection = mysql.createConnection(clearDBConnection);
-connection = mysql.createConnection(localConnection);
+connection = mysql.createConnection(clearDBConnection);
+// connection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
@@ -145,7 +144,7 @@ router.get('/displayed/penalties', (req, res) => {
     }
 });
 
-//get prizes (cat_id = 3)
+//GET prizes (cat_id = 3)
 router.get('/all/prizes', (req, res) => {
     try {
         connection.query(
@@ -169,7 +168,7 @@ router.get('/all/prizes', (req, res) => {
     }
 });
 
-//get DISPLAYED prizes (cat_id = 3)
+//GET DISPLAYED prizes (cat_id = 3)
 router.get('/displayed/prizes', (req, res) => {
     try {
         connection.query(
@@ -192,7 +191,6 @@ router.get('/displayed/prizes', (req, res) => {
         console.log(err);
     }
 });
-
 
 // ADD point item
 router.post('/add', (req, res) => {
