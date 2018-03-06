@@ -22,7 +22,7 @@ export class PresentStudentsComponent implements OnInit {
 
   ngOnInit() {
     this.title = 'In Class';
-    this.service.studentsData$.subscribe(
+    this.service.presentStudentsData$.subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
       },
@@ -30,9 +30,6 @@ export class PresentStudentsComponent implements OnInit {
         console.error(error);
       }
     );
-    this.service.getStudents();
-  // this.allStudents = this.service.getStudents();
-  // this.dataSource = new MatTableDataSource(this.allStudents);
+    this.service.getPresentStudents();
   }
-
 }
