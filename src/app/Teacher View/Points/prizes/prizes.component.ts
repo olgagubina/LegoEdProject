@@ -15,12 +15,11 @@ export class PrizesComponent implements OnInit {
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.prizes = this.studentsViewService.getPrizes();
-    this.dataSource = new MatTableDataSource(this.prizes);
-    console.log(this.prizes);
-      }
-
-
-
+    this.studentsViewService.prizesData$.subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+  }, error => {
+    console.error(error);
+  });
+    this.studentsViewService.getPrizes();
+  }
 }
-

@@ -2,23 +2,63 @@ var express = require('express');
 var router = express.Router();
 
 var mysql = require('mysql');
-var connection = mysql.createConnection({
+var connection;
+
+var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
-    password: '1234', // < MySQL password >
-    // password: 'easyPass', // < MySQL password >
-    // password: '147258', // < MySQL password >
+
+    // password: '1234', // < MySQL password COOKIE and MC >
+    password: 'easyPass', // < MySQL password ANNA>
+    // password: '147258', // < MySQL password OLGA>
+
+
     database: 'lego' // <your database name>
-});
+}
+
+var clearDBConnection = {
+    host: 'us-cdbr-iron-east-05.cleardb.net',
+    user: 'bbbb8310aa5c1c',
+    password: 'f64edb0b',
+    database: 'heroku_365eb437c5f937e'
+}
+
+//DB SWITCHER
+// connection = mysql.createConnection(clearDBConnection);
+connection = mysql.createConnection(localConnection);
+
+// FANCY FUNC TO MAKE CONNECTION (local OR heroku)
+//  if(process.env.PORT == 3000) {
+//     connection = mysql.createConnection(localConnection);
+//     console.log('local connection!');
+//  }
+//  else {
+//     connection = mysql.createConnection(clearDBConnection);
+//     console.log('remote connection!');
+//  }
+
+// OLD CONNECTION
+// connection = mysql.createConnection({
+//     // host: 'localhost',
+//     host: 'us-cdbr-iron-east-05.cleardb.net',
+//     user: 'bbbb8310aa5c1c',
+//     password: 'f64edb0b',
+//     database: 'heroku_365eb437c5f937e'
+//     // user: 'root', // < MySQL username >
+//     // password: '1234', // < MySQL password >
+//     // password: 'easyPass', // < MySQL password >
+//     // password: '147258', // < MySQL password >
+//     // database: 'lego' // <your database name>
+// });
 
 // GET ALL students
 router.get('/all', (req, res) => {
     try {
         connection.query(
-            `SELECT
-            students.st_id as studentId,
-            firstname as firstName,
-            lastname as lastName,
+            `SELECT 
+            students.st_id as studentId, 
+            firstname as firstName, 
+            lastname as lastName, 
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present
@@ -26,6 +66,7 @@ router.get('/all', (req, res) => {
             left join transactions on students.st_id = transactions.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
+            WHERE students.deleted = false
             GROUP BY students.st_id, firstname, lastname, present`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
@@ -37,13 +78,13 @@ router.get('/all', (req, res) => {
 });
 
 // GET PRESENT students
-router.get('/getpresent', (req, res) => {
+router.get('/present', (req, res) => {
     try {
         connection.query(
-            `SELECT
-            students.st_id as studentId,
-            firstname as firstName,
-            lastname as lastName,
+            `SELECT 
+            students.st_id as studentId, 
+            firstname as firstName, 
+            lastname as lastName, 
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present
@@ -51,11 +92,11 @@ router.get('/getpresent', (req, res) => {
             left join transactions on students.st_id = transactions.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
-            WHERE students.present = true
+            WHERE students.present = true AND students.deleted = false
             GROUP BY students.st_id, firstname, lastname, present`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
-                else console.log('get students', err);
+                else console.log('get present students', err);
             });
     } catch (err) {
         console.log(err);
@@ -68,7 +109,7 @@ router.post('/add', (req, res) => {
     console.log('body: ' + newSt);
     connection.query(
         `INSERT INTO students SET ?`,
-        {firstname: newSt.firstName, lastname: newSt.lastName},
+        { firstname: newSt.firstName, lastname: newSt.lastName },
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('insert student', err);
@@ -81,10 +122,10 @@ router.put('/update/:id', (req, res) => {
     let updSt = req.body;
     connection.query(
         `UPDATE students SET ? WHERE ?`,
-        [ updSt, { st_id: studentId }],
+        [{ firstname: updSt.firstName, lastname: updSt.lastName }, { st_id: studentId }],
         function (err, rows, fields) {
             if (!err) res.send(rows);
-            else console.log('student to present', err);
+            else console.log('student update', err);
         });
 });
 
@@ -112,17 +153,54 @@ router.put('/finishlesson', (req, res) => {
         });
 });
 
-// DELETE  student - first delete transactions - ask Anat how to remove in one query
-// router.delete('/delete/:id', (req, res) => {
-//     let studentId = req.params.id;
-//     connection.query(
-//         `DELETE from students where cust_id = ${studentId}`,
-//         function (err, rows, fields) {
-//             if (!err) res.send(rows);
-//             else console.log('delete customer', err);
-//         });
-// });
+// DELETE student - actually just archiving them ('deleted' flag to true)
+router.put('/delete/:id', (req, res) => {
+    let studentId = req.params.id;
+    connection.query(
+        `UPDATE students SET ? WHERE ?`,
+        [{ deleted: true }, { st_id: studentId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('student delete (archive)', err);
+        });
+});
 
+// GET DELETED students
+router.get('/archive', (req, res) => {
+    try {
+        connection.query(
+            `SELECT 
+            students.st_id as studentId, 
+            firstname as firstName, 
+            lastname as lastName, 
+            sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
+            sum(case when points.amount != 0 then points.amount else 0 end) as balance,
+            present
+            FROM students
+            left join transactions on students.st_id = transactions.st_id
+            left join points on transactions.point_id = points.point_id
+            left join categories on points.cat_id = categories.cat_id
+            WHERE students.deleted = true
+            GROUP BY students.st_id, firstname, lastname`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get archive students', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
 
+// RESTORE student
+router.put('/restore/:id', (req, res) => {
+    let studentId = req.params.id;
+    connection.query(
+        `UPDATE students SET ? WHERE ?`,
+        [{ deleted: false }, { st_id: studentId }],
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('student delete (archive)', err);
+        });
+});
 
 module.exports = router;

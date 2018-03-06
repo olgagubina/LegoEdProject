@@ -8,12 +8,16 @@ import PointItem from '../../../models/point-model';
   styleUrls: ['./punish-items.component.css']
 })
 export class PunishItemsComponent implements OnInit {
-penalties: any[];
+  penalties: PointItem[];
 
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.penalties = this.studentsViewService.getPenalties();
+    this.studentsViewService.penaltiesData$.subscribe(data => {
+      this.penalties = data;
+    }, error => {
+      console.error(error);
+    });
+    this.studentsViewService.getPenalties();
   }
-
 }

@@ -8,11 +8,15 @@ import PointItem from '../../../models/point-model';
   styleUrls: ['./reward-items.component.css']
 })
 export class RewardItemsComponent implements OnInit {
-rewards: any[];
+rewards: PointItem[];
   constructor(private studentsViewService: StudentsViewService) { }
 
-  ngOnInit() {
-    this.rewards = this.studentsViewService.getRewards();
+  ngOnInit() { 
+    this.studentsViewService.rewardsData$.subscribe(data => {
+      this.rewards = data;
+  }, error => {
+    console.error(error);
+  });
+    this.studentsViewService.getRewards();
   }
-
 }

@@ -8,11 +8,15 @@ import PointItem from '../../../models/point-model';
   styleUrls: ['./shop-items.component.css']
 })
 export class ShopItemsComponent implements OnInit {
-prizes: any[];
+prizes: any;
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.prizes = this.studentsViewService.getPrizes();
+    this.studentsViewService.prizesData$.subscribe(data => {
+      this.prizes = data;
+  }, error => {
+    console.error(error);
+  });
+    this.studentsViewService.getPrizes();
   }
-
 }

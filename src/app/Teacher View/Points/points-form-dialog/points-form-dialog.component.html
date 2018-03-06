@@ -1,4 +1,4 @@
-<div class="example-container">
+<!-- <div class="example-container">
     <mat-form-field color="primary">
       <input matInput [(ngModel)]="newItem.name" placeholder="description">
     </mat-form-field>
@@ -15,4 +15,26 @@
       </mat-select>
     </mat-form-field>
     <button md-raised-button type="button" (click)="addPointItems(newItem)">Add Item</button>
-  </div>
+  </div> -->
+
+  <form>
+      <h1 mat-dialog-title>{{title}}</h1>
+      <mat-dialog-content>
+        <mat-form-field>
+          <input matInput [(ngModel)]="newItem.description" [ngModelOptions]="{standalone: true}" autocomplete='name' placeholder="Name">
+        </mat-form-field><br>
+        <mat-form-field>
+          <input matInput [(ngModel)]="newItem.amount" [ngModelOptions]="{standalone: true}" placeholder="amount">
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-select matInput  [(ngModel)]="newItem.cat_id" [ngModelOptions]="{standalone: true}" placeholder="Select">
+              <mat-option *ngFor="let comp of data.categ" [value]="comp.cat_id" required>{{ comp.category }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button [mat-dialog-close]="newItem" cdkFocusInitial>{{btn-text}}</button>
+      </mat-dialog-actions>
+    </form>
+    
