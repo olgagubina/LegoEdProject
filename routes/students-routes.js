@@ -12,6 +12,7 @@ var localConnection = {
     password: '147258', // < MySQL password OLGA>
     database: 'lego' // <your database name>
 }
+
 var clearDBConnection = {
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'bbbb8310aa5c1c',
@@ -19,8 +20,9 @@ var clearDBConnection = {
     database: 'heroku_365eb437c5f937e'
 }
 
-connection = mysql.createConnection(clearDBConnection);
-// connection = mysql.createConnection(localConnection);
+//DB SWITCHER
+// connection = mysql.createConnection(clearDBConnection);
+connection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
