@@ -165,18 +165,43 @@ var STUDENTS: Array<Student> = [{
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
+  presentStudentsData$: Subject<Student[]> = new Subject;
   students: Student[] = STUDENTS;
   prizes: PointItem[] = PRIZES;
   penalties: PointItem[] = PENALTIES;
   rewards: PointItem[] = REWARDS;
   pointsData$: Subject<PointItem[]> = new Subject;
 
-
-
   constructor(private http: HttpClient) { }
 
 
-  // STUDENT VIEW FUNCS
+  //GET ALL STUDENTS
+    getStudents():void {
+    // return this.students;
+    this.http.get<Student[]> ('api/students/all').subscribe(
+      data => this.studentsData$.next(data)
+    );
+  }
+  
+   //GET PRESENT STUDENTS
+  getPresentStudents() : Observable<Student[]> {
+    return this.http.get<Student[]> ('api/students/getpresent');
+  }
+  
+  //ADD STUDENT
+  addStudent(newStudent:Student): Observable <Student>  {
+    console.log(newStudent);
+    // newStudent.studentId = this.generateId();
+    // newStudent.rating = 0;
+    // newStudent.balance = 0;
+    // newStudent.present = false;
+    // this.students.push(newStudent);
+    // console.log(this.students);
+    return this.http.post<Student>('api/students/add', newStudent);
+  }
+
+
+ //GET POINTS
   getPrizes(): void {
     this.http.get<PointItem[]> ('api/points/all/prizes').subscribe(
       data => this.pointsData$.next(data)
@@ -196,32 +221,8 @@ export class StudentsViewService {
       data => this.pointsData$.next(data)
     );
   }
-    
-  getStudents():void {
-    // return this.students;
-    this.http.get<Student[]> ('api/students/all').subscribe(
-      data => this.studentsData$.next(data)
-    );
-  }
-
-
-
-
-  //ADD STUDENT
-  addStudent(newStudent:Student): Observable <Student>  {
-    console.log(newStudent);
-    // newStudent.studentId = this.generateId();
-    // newStudent.rating = 0;
-    // newStudent.balance = 0;
-    // newStudent.present = false;
-    // this.students.push(newStudent);
-    // console.log(this.students);
-    return this.http.post<Student>('api/students/add', newStudent);
-  }
   
-
-  //ADD Point items
-
+  //ADD POINT ITEM
   addPointItems(newItem: PointItem): Observable<PointItem>{
     console.log(newItem);
     return this.http.post<PointItem>('api/points/add', newItem);
