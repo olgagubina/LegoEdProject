@@ -7,9 +7,9 @@ import { Subject } from 'rxjs/Subject';
 
 
 var PENALTIES: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'pushing', amount: 300 }, { pointId: 2, catId: 2, description: 'yelling', amount: 100 }, { pointId: 3, catId: 3, description: 'missing class', amount: 100 }, { pointId: 4, catId: 1, description: 'no homework', amount: 200 }, { pointId: 5, catId: 3, description: 'making fun of', amount: 200 }]
-var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300 }, 
-  {pointId: 2, catId: 2, description: 'extra credit', amount: 100}, 
-  {pointId: 4, catId: 1, description: 'help clean', amount: 200}, 
+var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300 },
+  {pointId: 2, catId: 2, description: 'extra credit', amount: 100},
+  {pointId: 4, catId: 1, description: 'help clean', amount: 200},
   {pointId: 5, catId: 3, description: 'exceptional work', amount: 200
 }]
 var PRIZES: Array<PointItem> = [{
@@ -52,7 +52,7 @@ export class StudentsViewService {
        return PRIZES;
   }
 
-  //GET ALL STUDENTS
+  // GET ALL STUDENTS
 
   getStudents(): void {
     // return this.students;
@@ -61,7 +61,7 @@ export class StudentsViewService {
     );
   }
 
-  //GET PRESENT STUDENTS
+  // GET PRESENT STUDENTS
   getPresentStudents(): Observable<Student[]> {
     return this.http.get<Student[]>('api/students/getpresent');
   }
@@ -78,14 +78,6 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
-  //GET POINTS
-  getPrizes(): void {
-    this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
-      data => this.prizesData$.next(data)
-    );
-
-  }
-
   getPenalties(): void {
     this.http.get<PointItem[]>('api/points/all/penalties').subscribe(
       data => this.penaltiesData$.next(data)
@@ -99,7 +91,7 @@ export class StudentsViewService {
     );
   }
 
-  //ADD Point items
+  // ADD Point items
   addPrize(newItem: PointItem): Observable<PointItem> {
     console.log(newItem)
     return this.http.post<PointItem>('api/points/add/prizes', newItem);

@@ -6,10 +6,10 @@ var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    // password: '1234', // < MySQL password COOKIE and MC >
+    password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
-    password: '147258', // < MySQL password OLGA>
-  
+    // password: '147258', // < MySQL password OLGA>
+
     database: 'lego' // <your database name>
 }
 
@@ -53,7 +53,7 @@ connection = mysql.createConnection(localConnection);
 router.get('/all/rewards', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -77,7 +77,7 @@ router.get('/all/rewards', (req, res) => {
 router.get('/all/rewards', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -101,7 +101,7 @@ router.get('/all/rewards', (req, res) => {
 router.get('/all/penalties', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -125,7 +125,7 @@ router.get('/all/penalties', (req, res) => {
 router.get('/all/penalties', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -149,7 +149,7 @@ router.get('/all/penalties', (req, res) => {
 router.get('/all/prizes', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -173,7 +173,7 @@ router.get('/all/prizes', (req, res) => {
 router.get('/all/prizes', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -204,7 +204,7 @@ router.post('/add', (req, res) => {
             if (!err) res.send(rows);
             else console.log('insert point item', err);
         });
-    
+
 
 // UPDATE point item - change details
 router.put('/update/:id', (req, res) => {
@@ -249,7 +249,7 @@ router.put('/delete/:id', (req, res) => {
 router.get('/archive', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
