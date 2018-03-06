@@ -8,7 +8,7 @@ import PointItem from '../../../models/point-model';
   styleUrls: ['./shop-items.component.css']
 })
 export class ShopItemsComponent implements OnInit {
-  prizes: any;
+prizes: any;
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
