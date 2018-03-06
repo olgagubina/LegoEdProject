@@ -12,7 +12,11 @@ rewards: PointItem[];
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() { 
+    this.studentsViewService.rewardsData$.subscribe(data => {
+      this.rewards = data;
+  }, error => {
+    console.error(error);
+  });
     this.studentsViewService.getRewards();
   }
-
 }

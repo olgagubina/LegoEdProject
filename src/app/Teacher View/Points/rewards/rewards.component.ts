@@ -24,7 +24,5 @@ export class RewardsComponent implements OnInit {
   });
     this.studentsViewService.getRewards();
   }
-
- 
 }
 
