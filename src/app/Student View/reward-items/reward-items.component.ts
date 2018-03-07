@@ -14,9 +14,17 @@ rewards: PointItem[];
   ngOnInit() {
     this.studentsViewService.displayRewardsData$.subscribe(data => {
       this.rewards = data;
+      this.subscribeToData();
   }, error => {
     console.error(error);
   });
     this.studentsViewService.getDisplayedRewards();
+  }
+
+  private subscribeToData(): void {
+    var service = this.studentsViewService
+    setInterval(function(){
+      service.getDisplayedRewards(); 
+    }, 7000);
   }
 }
