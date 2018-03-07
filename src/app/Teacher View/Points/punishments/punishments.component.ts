@@ -29,6 +29,12 @@ export class PunishmentsComponent implements OnInit {
     this.studentsViewService.getPenalties();
   }
 
+  displayItem(penalty) {
+    this.studentsViewService.displayItem(penalty).subscribe(data => {
+      this.studentsViewService.getPenalties();
+    });
+  }
+
 }
 
 

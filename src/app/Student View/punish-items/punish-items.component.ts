@@ -13,11 +13,19 @@ export class PunishItemsComponent implements OnInit {
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.studentsViewService.penaltiesData$.subscribe(data => {
+    this.studentsViewService.displayPenaltiesData$.subscribe(data => {
       this.penalties = data;
+      this.subscribeToData();
     }, error => {
       console.error(error);
     });
-    this.studentsViewService.getPenalties();
+    this.studentsViewService.getDisplayedPenalties();
+  }
+
+  private subscribeToData(): void {
+    var service = this.studentsViewService
+    setInterval(function(){
+      service.getDisplayedPenalties(); 
+    }, 7000);
   }
 }

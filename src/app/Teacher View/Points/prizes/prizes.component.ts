@@ -22,4 +22,10 @@ export class PrizesComponent implements OnInit {
   });
     this.studentsViewService.getPrizes();
   }
+
+  displayItem(prize) {
+    this.studentsViewService.displayItem(prize).subscribe(data => {
+      this.studentsViewService.getPrizes();
+    });
+  }
 }

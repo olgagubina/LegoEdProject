@@ -9,7 +9,6 @@ var localConnection = {
     // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
     password: '147258', // < MySQL password OLGA>
-  
     database: 'lego' // <your database name>
 }
 
@@ -52,7 +51,7 @@ connection = mysql.createConnection(clearDBConnection);
 router.get('/all/rewards', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -76,7 +75,7 @@ router.get('/all/rewards', (req, res) => {
 router.get('/displayed/rewards', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -100,7 +99,7 @@ router.get('/displayed/rewards', (req, res) => {
 router.get('/all/penalties', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -124,7 +123,7 @@ router.get('/all/penalties', (req, res) => {
 router.get('/displayed/penalties', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -148,7 +147,7 @@ router.get('/displayed/penalties', (req, res) => {
 router.get('/all/prizes', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -172,7 +171,7 @@ router.get('/all/prizes', (req, res) => {
 router.get('/displayed/prizes', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,
@@ -192,18 +191,46 @@ router.get('/displayed/prizes', (req, res) => {
     }
 });
 
+<<<<<<< HEAD
+=======
+//get all DISPLAYED points
+router.get('/displayed/allpoints', (req, res) => {
+    try {
+        connection.query(
+            `SELECT
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.deleted = false AND points.display = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get all pooints for display', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+>>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 // ADD point item
 router.post('/add', (req, res) => {
     let newPoint = req.body;
     connection.query(
         `INSERT INTO points SET ?`,
-        { cat_id: newPoint.cat_id, description: newPoint.description, amount: newPoint.amount },
+        { cat_id: Number(newPoint.cat_id), description: newPoint.description, amount: Number(newPoint.amount) },
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('insert point item', err);
         });
-});    
-    
+  });   
+
 // UPDATE point item - change details
 router.put('/update/:id', (req, res) => {
     let pointId = req.params.id;
@@ -247,7 +274,7 @@ router.put('/delete/:id', (req, res) => {
 router.get('/archive', (req, res) => {
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             points.point_id as pointId,
             description,
             amount,

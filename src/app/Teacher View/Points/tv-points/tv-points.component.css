@@ -1,8 +1,65 @@
 
  .tables {
-    display: inline-block;
+    /* display: inline-block;
     flex-wrap: wrap;
-    width: 30%;
+    width: 30%; */
     /* height:300px; */
-    margin: 1%;
+    /* margin-left: 1%;
+    margin-right: 1%; */
+    display: inline-table;
+    position: relative;
+    padding-bottom: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 29%;
  }
+
+ .all-tables {
+     background-color: #212121;
+     text-align: center;
+     min-height: 1000px;
+     padding-top: 25px;
+     padding-right: 15px;
+     /* flex-wrap: wrap; */
+   
+ }
+ 
+ .tables:after {
+    position: relative;
+    display: table;
+    content: "";
+    clear: both;
+}
+   
+  @media (max-width: 767px) {
+     .tables{
+     width: 95%;
+     margin-right: 15px;
+
+      } 
+      .all-tables{
+        padding-right: 15px;
+        min-height: 1500px;
+      }
+
+      h3{
+        text-align: center;
+      }
+   
+    }   
+  
+    /* Portrait and Landscape */
+  @media (min-width: 768px) and (max-width: 1024px)
+{
+
+    .tables{
+        width: 44%;
+    
+   
+         } 
+    .all-tables {
+        padding-left: 15px;
+        padding-right: 15px;
+        /* width: 100%; */
+    }
+}

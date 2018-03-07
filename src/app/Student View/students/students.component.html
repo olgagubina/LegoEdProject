@@ -1,10 +1,17 @@
-<h1>Students</h1>
-
-<div fxLayout="row" class="students">
+<div fxLayout="row" fxLayoutAlign="space-evenly center" class="students">
 <div *ngFor="let student of students; let i = index"  class="student">
-  <p>{{student.firstName}}</p>
-  <p>{{student.lastName}}</p>
-  <p>{{student.balance}}</p>
-  <p>{{student.rating}}</p>
+  <span>
+    <p class="left">
+    {{student.rating}}
+    <img class="trophy" style="height:30px;" src="http://www.myiconfinder.com/uploads/iconsets/256-256-5d41edabc60f4fd2cf3c9f5d35d84045-trophy.png"/>
+  </p>
+  <p class="right">
+    {{student.balance}}
+    <img class="balance" style="width:30px;" src="http://www.myiconfinder.com/uploads/iconsets/256-256-ab68351d0be04b09e7ae9caaba9467c3-coins.png"/>
+  </p>
+  </span>
+    <img class="robot" src="https://marketplace.canva.com/MAB6v043Ud8/1/thumbnail/canva-robot-electric-avatar-icon-MAB6v043Ud8.png">
+  {{student.firstName}}
+  {{student.lastName}}
 </div>
 </div>

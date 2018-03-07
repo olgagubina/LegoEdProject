@@ -1,52 +1,32 @@
 import { Injectable } from '@angular/core';
-import PointItem from '../models/point-model';
-import Student from '../models/student-model';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
-
-
-var PENALTIES: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'pushing', amount: 300 }, { pointId: 2, catId: 2, description: 'yelling', amount: 100 }, { pointId: 3, catId: 3, description: 'missing class', amount: 100 }, { pointId: 4, catId: 1, description: 'no homework', amount: 200 }, { pointId: 5, catId: 3, description: 'making fun of', amount: 200 }]
-var REWARDS: Array<PointItem> = [{ pointId: 1, catId: 2, description: 'helping student', amount: 300 }, 
-  {pointId: 2, catId: 2, description: 'extra credit', amount: 100}, 
-  {pointId: 4, catId: 1, description: 'help clean', amount: 200}, 
-  {pointId: 5, catId: 3, description: 'exceptional work', amount: 200
-}]
-var PRIZES: Array<PointItem> = [{
-  pointId: 1, catId
-    : 3, description: 'movie for 2', amount: 200
-}, {
-  pointId: 2, catId
-    : 2, description: 'you choose next topic', amount: 300
-}, {
-  pointId: 3, catId
-    : 1, description: 'lead the next activity', amount: 200
-}, {
-  pointId: 4, catId
-    : 3, description: 'Choose your own project', amount: 100
-}, {
-  pointId: 5, catId
-    : 3, description: 'be teacher for a day', amount: 500
-}];
-
+import PointItem from '../models/point-model';
+import Student from '../models/student-model';
+import { Transaction } from '../models/transaction-model';
 
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
+  presentStudentsData$: Subject<Student[]> = new Subject;
+  prizesData$: Subject<PointItem[]> = new Subject;
+  displayPrizesData$: Subject<PointItem[]> = new Subject;
+  rewardsData$: Subject<PointItem[]> = new Subject;
+  displayRewardsData$: Subject<PointItem[]> = new Subject;
+  penaltiesData$: Subject<PointItem[]> = new Subject;
+  displayPenaltiesData$: Subject<PointItem[]> = new Subject;
+  displayPointsData$: Subject<PointItem[]> = new Subject; // for dynamic input
 
   students: Student[];
-  prizes: PointItem[] = PRIZES;
-  penalties: PointItem[] = PENALTIES;
-  rewards: PointItem[] = REWARDS;
-  prizesData$: Subject<PointItem[]> = new Subject;
-  rewardsData$: Subject<PointItem[]> = new Subject;
-  penaltiesData$: Subject<PointItem[]> = new Subject;
+  prizes: PointItem[];
+  penalties: PointItem[];
+  rewards: PointItem[];
 
   constructor(private http: HttpClient) { }
 
 
-  //GET ALL STUDENTS
-
+  // GET ALL STUDENTS
   getStudents(): void {
     // return this.students;
     this.http.get<Student[]>('api/students/all').subscribe(
@@ -54,9 +34,17 @@ export class StudentsViewService {
     );
   }
 
-  //GET PRESENT STUDENTS
-  getPresentStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>('api/students/getpresent');
+  // GET PRESENT STUDENTS
+  getPresentStudents(): void {
+    this.http.get<Student[]>('api/students/present').subscribe(
+      data => this.presentStudentsData$.next(data)
+    );
+  }
+
+  // MARK STUDENT PRESENT
+  studentPresent(stud): Observable<Student[]> {
+    console.log(stud.firstName, stud.present);
+    return this.http.put<Student[]>('api/students/toggle/' + stud.studentId, stud);
   }
 
   // ADD STUDENT
@@ -71,7 +59,19 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
-  //GET POINTS
+  // UPDATE STUDENT
+  updStudent(updStudent:Student): Observable<Student> {
+    console.log(updStudent);
+    return this.http.put<Student>('api/students/update/'+updStudent.studentId, updStudent);
+  }
+
+  //ARCHIEVE STUDENT
+  archieveStudent(delStudent: Student): Observable<Student> {
+    console.log(delStudent);
+    return this.http.put<Student>('api/students/delete/'+delStudent.studentId, delStudent);
+  }
+
+  // GET POINTS
   getPrizes(): void {
     this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
       data => this.prizesData$.next(data)
@@ -91,19 +91,54 @@ export class StudentsViewService {
     );
   }
 
-  //ADD Point items
-  addPrize(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/prizes', newItem);
+  // ADD Point items
+  addPointItems(newItem: PointItem): Observable<PointItem> {
+    console.log(newItem);
+    return this.http.post<PointItem>('api/points/add', newItem);
   }
 
-  addPenalty(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/penalties', newItem);
+  // MARK Point items to DISPLAY
+  displayItem(item): Observable<PointItem[]> {
+    console.log(item.description, item.display);
+    return this.http.put<PointItem[]>('api/points/toggle/' + item.pointId, item);
   }
 
-  addReward(newItem: PointItem): Observable<PointItem> {
-    console.log(newItem)
-    return this.http.post<PointItem>('api/points/add/rewards', newItem);
+  // DISPLAY Prizes
+  getDisplayedPrizes(): void {
+    this.http.get<PointItem[]>('api/points/displayed/prizes').subscribe(
+      data => this.displayPrizesData$.next(data)
+    );
   }
+
+  // DISPLAY Penalties
+  getDisplayedPenalties(): void {
+    this.http.get<PointItem[]>('api/points/displayed/penalties').subscribe(
+      data => this.displayPenaltiesData$.next(data)
+    );
+  }
+
+  // DISPLAY Rewards
+  getDisplayedRewards(): void {
+    this.http.get<PointItem[]>('api/points/displayed/rewards').subscribe(
+      data => this.displayRewardsData$.next(data)
+    );
+  }
+
+  // GET POINTS FOR DISPLAY
+  getDisplayedPoints(): void {
+    this.http.get<PointItem[]>('api/points/displayed/allpoints').subscribe(
+      data => {
+        this.displayPointsData$.next(data)
+      }
+    );
+  }
+
+  // SAVE TRANSACTIONS
+  saveTransaction(newTrans: any): Observable<Transaction> {
+    return this.http.post<Transaction>('api/students/transactions/add', newTrans);
+  }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 }

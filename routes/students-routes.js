@@ -1,19 +1,29 @@
 var express = require('express');
 var router = express.Router();
+var www = require('../bin/www');
+var io = www.io;
 
 var mysql = require('mysql');
-var connection;
+var sqlConnection;
 
-var localConnection = {
+var localConnection = mysql.createPool( {
+    connectionLimit:   100,
     host: 'localhost',
     user: 'root', // < MySQL username >
     // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
     password: '147258', // < MySQL password OLGA>
+<<<<<<< HEAD
     database: 'lego' // <your database name>
 }
+=======
+    database: 'lego', // <your database name>
+    debug:   false
+});
+>>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 
 var clearDBConnection = {
+    connectionLimit   :   100,
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'bbbb8310aa5c1c',
     password: 'f64edb0b',
@@ -21,8 +31,13 @@ var clearDBConnection = {
 }
 
 //DB SWITCHER
+<<<<<<< HEAD
 connection = mysql.createConnection(clearDBConnection);
 // connection = mysql.createConnection(localConnection);
+=======
+// sqlConnection = mysql.createConnection(clearDBConnection);
+sqlConnection = mysql.createConnection(localConnection);
+>>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
@@ -49,13 +64,13 @@ connection = mysql.createConnection(clearDBConnection);
 // });
 
 // GET ALL students
-router.get('/all', (req, res) => {
+var getAllStud = router.get('/all', (req, res) => {
     try {
         connection.query(
-            `SELECT 
-            students.st_id as studentId, 
-            firstname as firstName, 
-            lastname as lastName, 
+            `SELECT
+            students.st_id as studentId,
+            firstname as firstName,
+            lastname as lastName,
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present
@@ -64,7 +79,8 @@ router.get('/all', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get students', err);
@@ -78,10 +94,10 @@ router.get('/all', (req, res) => {
 router.get('/present', (req, res) => {
     try {
         connection.query(
-            `SELECT 
-            students.st_id as studentId, 
-            firstname as firstName, 
-            lastname as lastName, 
+            `SELECT
+            students.st_id as studentId,
+            firstname as firstName,
+            lastname as lastName,
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present
@@ -89,8 +105,9 @@ router.get('/present', (req, res) => {
             left join transactions on students.st_id = transactions.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
-            WHERE students.present = true AND students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            WHERE students.present = true
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get present students', err);
@@ -115,6 +132,7 @@ router.post('/add', (req, res) => {
 
 // UPDATE student - change details
 router.put('/update/:id', (req, res) => {
+    console.log(req.body);
     let studentId = req.params.id;
     let updSt = req.body;
     connection.query(
@@ -130,6 +148,7 @@ router.put('/update/:id', (req, res) => {
 router.put('/toggle/:id', (req, res) => {
     let studentId = req.params.id;
     let updPresent = !req.body.present;
+    console.log(updPresent);
     connection.query(
         `UPDATE students SET ? WHERE ?`,
         [{ present: updPresent }, { st_id: studentId }],
@@ -155,7 +174,7 @@ router.put('/delete/:id', (req, res) => {
     let studentId = req.params.id;
     connection.query(
         `UPDATE students SET ? WHERE ?`,
-        [{ deleted: true }, { st_id: studentId }],
+        [{ deleted: true, present:false}, { st_id: studentId }],
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('student delete (archive)', err);
@@ -166,10 +185,10 @@ router.put('/delete/:id', (req, res) => {
 router.get('/archive', (req, res) => {
     try {
         connection.query(
-            `SELECT 
-            students.st_id as studentId, 
-            firstname as firstName, 
-            lastname as lastName, 
+            `SELECT
+            students.st_id as studentId,
+            firstname as firstName,
+            lastname as lastName,
             sum(case when categories.cat_id != 3 then points.amount else 0 end) as rating,
             sum(case when points.amount != 0 then points.amount else 0 end) as balance,
             present
@@ -197,6 +216,51 @@ router.put('/restore/:id', (req, res) => {
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('student delete (archive)', err);
+        });
+});
+
+// GET transactions history
+router.get('/history/:startdate', (req, res) => {
+    let startDate = this.params.startdate;
+    try {
+        connection.query(
+            `SELECT 
+            trans_id as _id,
+            timestamp,
+            students.firstname as firstName,
+            students.lastname as lastName,
+            categories.cat_id as catId,
+            categories.name as category,
+            points.point_id as pointId,
+            points.description,
+            points.amount,
+            comment
+            FROM transactions 
+            left join students on transactions.st_id = students.st_id
+            left join points on transactions.point_id = points.point_id
+            left join categories on points.cat_id = categories.cat_id
+            WHERE timestamp >= ${startDate}
+            ORDER BY transactions.trans_id`, // 2018-03-05
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get present students', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+// ADD transaction
+router.post('/transactions/add', (req, res) => {
+    let newTrans = req.body;
+    console.log('body: ' + newTrans);
+    connection.query(
+        `INSERT INTO transactions SET ?`,
+        { st_id: newTrans.studentId, point_id: newTrans.pointId, comment: newTrans.comment },
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('insert transaction', err);
         });
 });
 

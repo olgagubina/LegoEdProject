@@ -12,11 +12,19 @@ prizes: any;
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
-    this.studentsViewService.prizesData$.subscribe(data => {
+    this.studentsViewService.displayPrizesData$.subscribe(data => {
       this.prizes = data;
+      this.subscribeToData();
   }, error => {
     console.error(error);
   });
-    this.studentsViewService.getPrizes();
+    this.studentsViewService.getDisplayedPrizes();
+  }
+
+  private subscribeToData(): void {
+    var service = this.studentsViewService
+    setInterval(function(){
+      service.getDisplayedPrizes(); 
+    }, 7000);
   }
 }

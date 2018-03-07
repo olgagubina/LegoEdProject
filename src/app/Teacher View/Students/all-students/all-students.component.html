@@ -1,20 +1,16 @@
+<span matTooltip="Add Student">
+<button mat-fab>
+  <mat-icon type="button" (click)="openDialog()" class="btn"> <i class="material-icons">add</i></mat-icon>
+</button> </span>
+
 <h3>{{title}}</h3>
 
-
-<button type="button" mat-button (click)="openDialog()" class="btn">Add Student</button>
-
 <div class="example-container mat-elevation-z8">
-
   <mat-table #table [dataSource]="dataSource">
-
     <ng-container matColumnDef="present">
       <mat-header-cell *matHeaderCellDef> Mark Present </mat-header-cell>
       <mat-cell *matCellDef="let student">
-        <mat-slide-toggle (click)="markPresent(student)"
-        class="example-margin"
-        [color]="color"
-        [checked]="checked"
-        [disabled]="disabled">
+        <mat-slide-toggle [ngModel]="student.present" (click)="markPresent(student)">
         </mat-slide-toggle>
         <!-- <button class='delete btn btn-info'>Present</button> -->
       </mat-cell>
@@ -31,13 +27,13 @@
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
-      <mat-cell *matCellDef="let reward">
-        <button>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let student">
+        <button class="button" (click)='openEditDialog(student)'>
           <i class="material-icons">mode_edit</i>
         </button>
-        <button>
-          <i class="material-icons">delete</i>
+        <button class="button">
+          <i class="material-icons" (click)='openArchieveDialog(student)'>delete</i>
         </button>
       </mat-cell>
     </ng-container>
