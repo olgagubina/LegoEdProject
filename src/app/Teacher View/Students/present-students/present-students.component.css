@@ -1,60 +1,113 @@
 /* Structure */
+
 .example-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
 }
 
 .example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
+    min-height: 64px;
+    padding: 8px 24px 0;
 }
 
 .mat-form-field {
-  font-size: 14px;
-  width: 100%;
+    font-size: 14px;
+    width: 100%;
 }
 
 .mat-table {
-  overflow: auto;
-  max-height: 500px;
+    overflow: auto;
+    max-height: 500px;
 }
 
+mat-row:nth-child(even) {
+    background-color: #e0e0e0;
+}
 
-mat-row:nth-child(even){
-  background-color:#e0e0e0;
-  }
+mat-row:nth-child(odd) {
+    background-color: #f5f5f5;
+}
 
-mat-row:nth-child(odd){
-  background-color:#f5f5f5;
-  }
+button {
+    border: none;
+    background: none;
+}
 
-
-  button {
-  border: none;
-  background: none;
-  }
-
-  .mat-header-row {
+.mat-header-row {
     background-color: #005662;
-   
 }
 
 mat-header-cell {
-  
-  color: white;
+    color: white;
 }
 
-.mat-table{
-margin: 25px;
-border-radius: 5px;
+.mat-table {
+    margin: 25px;
+    border-radius: 5px;
 }
 
 h3 {
-  color: white;
-  padding-left: 30px;
-  padding-top:20px;
-  text-align: center;
-  font-weight: 400;
-  font-size: 24px;
+    color: white;
+    padding-left: 30px;
+    padding-top: 20px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 24px;
 }
+
+form {
+    display: flex;
+}
+
+.mat-column-firstName {
+    flex: 0 0 15%;
+    padding-left: 15px;
+}
+
+.mat-column-lastName {
+    flex: 0 0 20%;
+}
+
+.mat-column-form {
+  
+    flex: 0 0 60%;
+}
+
+
+/* ::ng-deep .mat-select-value{
+  width:85%;
+  font-size: 10px;   
+} */
+
+i.star {
+    color: #D1D116;
+    padding-right: 10px;
+}
+
+i.gavel {
+    color: #940B0B;
+    padding-right: 10px;
+    
+}
+
+i.satisfied {
+    color: #247324;
+    padding-right: 10px;
+}
+
+i.coin {
+  color: gold;
+  padding-right: 10px;
+}
+
+i.circle {
+  color: #F2B70A;
+}
+
+.mat-option-text{
+border-bottom: solid lightgray;
+padding-left: 5px;
+padding-top: 5px;
+}
+
