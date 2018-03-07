@@ -3,7 +3,7 @@ import { StudentsViewService } from '../../../students-view.service';
 import Student from '../../../../models/student-model';
 import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import PointItem from '../../../../models/point-model';
 
 
@@ -15,14 +15,16 @@ import PointItem from '../../../../models/point-model';
 })
 
 export class PresentStudentsComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'selectCat', 'selectPoint', 'submit'];
+  displayedColumns = ['firstName', 'lastName', 'form'];
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
 
   // for dynamic transaction input
-  selectedCatId = new FormControl();
-  selectedPointId: number;
+  transactionForm = new FormGroup({
+    selectedCatId: new FormControl(),
+    selectedPointId: new FormControl()
+  });
   points: PointItem[];
 
   constructor(private service: StudentsViewService) { }
