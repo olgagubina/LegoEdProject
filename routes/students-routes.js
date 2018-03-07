@@ -1,20 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var www = require('../bin/www');
+var io = www.io;
 
 var mysql = require('mysql');
-var connection;
+var sqlConnection;
 
-var localConnection = {
+var localConnection = mysql.createPool( {
+    connectionLimit:   100,
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    password: '1234', // < MySQL password COOKIE and MC >
+    // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
-    // password: '147258', // < MySQL password OLGA>
-    database: 'lego' // <your database name>
-}
+    password: '147258', // < MySQL password OLGA>
+    database: 'lego', // <your database name>
+    debug:   false
+});
 
 var clearDBConnection = {
+    connectionLimit   :   100,
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'bbbb8310aa5c1c',
     password: 'f64edb0b',
@@ -22,8 +27,8 @@ var clearDBConnection = {
 }
 
 //DB SWITCHER
-// connection = mysql.createConnection(clearDBConnection);
-connection = mysql.createConnection(localConnection);
+// sqlConnection = mysql.createConnection(clearDBConnection);
+sqlConnection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
@@ -50,7 +55,7 @@ connection = mysql.createConnection(localConnection);
 // });
 
 // GET ALL students
-router.get('/all', (req, res) => {
+var getAllStud = router.get('/all', (req, res) => {
     try {
         connection.query(
             `SELECT
