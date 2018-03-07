@@ -21,13 +21,26 @@
 } */
 
 .all {
-
-  margin: auto;
-  text-align: center;
- 
+    margin: auto;
+    text-align: center;
 }
 
 .all-student-items {
-  background-color: #212121;
-  padding-top: 25px;
+    background-color: #212121;
+    padding-top: 25px;
 }
+
+
+/* 
+.all, .presents {
+
+  flex-grow: 3;
+} */
+
+
+/* @media (max-width: 767px) {
+  .all, .present {
+  width: 98%;
+  
+   } 
+  } */

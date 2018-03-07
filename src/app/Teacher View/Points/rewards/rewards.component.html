@@ -4,7 +4,7 @@
       <mat-table #table [dataSource]="dataSource">
 
           <ng-container matColumnDef="Toggle">
-              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-header-cell *matHeaderCellDef>Display</mat-header-cell>
               <mat-cell *matCellDef="let reward">
                 <mat-slide-toggle [ngModel]="reward.display" (click)="displayItem(reward)">
                 </mat-slide-toggle>

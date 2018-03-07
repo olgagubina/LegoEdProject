@@ -1,41 +1,36 @@
-
 .example-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
 }
 
 .example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
+    min-height: 64px;
+    padding: 8px 24px 0;
 }
 
 .mat-form-field {
-  font-size: 14px;
-  width: 100%;
+    font-size: 14px;
+    width: 100%;
 }
 
 .mat-table {
-  overflow: auto;
-  max-height: 500px;
+    overflow: auto;
+    max-height: 500px;
 }
 
 h3 {
-  font-family: 'Roboto', sans-serif;
-  color: white;
-  text-align: center;
-  font-size: 24px;
-  font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
 }
 
-  
-mat-row:nth-child(even){
-  background-color:#e0e0e0;
-  }
+mat-row:nth-child(even) {
+    background-color: #e0e0e0;
+}
 
-mat-row:nth-child(odd){
-  background-color:#f5f5f5;
-  }
 
   button {
     border: none;
@@ -44,12 +39,15 @@ mat-row:nth-child(odd){
     outline: none;
   }
 
-  .mat-header-row {
-    background-color: #005662;
-   
+mat-row:nth-child(odd) {
+    background-color: #f5f5f5;
 }
 
-mat-header-cell {
-  
-  color: white;
+.mat-header-row {
+    background-color: #005662;
+}
+
+.mat-header-cell {
+    color: white;
+    font-size: 14px;
 }
