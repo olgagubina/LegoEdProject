@@ -6,7 +6,8 @@
           <ng-container matColumnDef="Toggle">
               <mat-header-cell *matHeaderCellDef> toggle </mat-header-cell>
               <mat-cell *matCellDef="let reward">
-                  <mat-slide-toggle color="primary"></mat-slide-toggle>
+                <mat-slide-toggle [ngModel]="reward.display" (click)="displayItem(reward)">
+                </mat-slide-toggle>
               </mat-cell>
           </ng-container>
 
