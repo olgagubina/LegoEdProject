@@ -4,6 +4,7 @@ import Student from '../../../../models/student-model';
 import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import PointItem from '../../../../models/point-model';
 
 
 
@@ -14,13 +15,15 @@ import { FormControl } from '@angular/forms';
 })
 
 export class PresentStudentsComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'form'];
+  displayedColumns = ['firstName', 'lastName', 'selectCat', 'selectPoint', 'submit'];
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
 
   // for dynamic transaction input
   selectedCatId = new FormControl();
+  selectedPointId: number;
+  points: PointItem[];
 
   constructor(private service: StudentsViewService) { }
 
