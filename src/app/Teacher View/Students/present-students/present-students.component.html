@@ -13,22 +13,31 @@
       <mat-cell *matCellDef="let student"> {{student.lastName}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="dropdown-type">
-      <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>
-      <mat-cell *matCellDef="let student">
-        <mat-select placeholder="Select">
-          <mat-option value="prize">Prize</mat-option>
-          <mat-option value="reward">Reward</mat-option>
-          <mat-option value="penalty">Penalty</mat-option>
-        </mat-select>
-        </mat-cell>
-    </ng-container>
+    <!-- Form Column -->
+    <ng-container matColumnDef="form">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let student">
+          <form [formGroup]="transactionForm" novalidate>
 
-    <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef> Submit </mat-header-cell>
-      <mat-cell *matCellDef="let reward">
-        <button class='delete btn btn-info'>Submit</button>
-      </mat-cell>
+            <mat-select formControlName="selectedCatId" (change)="typeChanged()" placeholder="Type">
+              <mat-option value="1">Reward</mat-option>
+              <mat-option value="2">Penalty</mat-option>
+              <mat-option value="3">Prize</mat-option>
+            </mat-select>
+
+            <mat-select formControlName="selectedPointId" placeholder="Point">
+              <mat-option *ngFor="let point of pointsAfterChangeEvent" [value]="point.pointId">
+                {{ point.description }} ({{ point.amount }})
+              </mat-option>
+            </mat-select>
+
+            <input formControlName="comment">
+
+            <button class='btn btn-info' (click)="submitForm(student.studentId)">Submit</button>
+
+          </form>
+
+        </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
