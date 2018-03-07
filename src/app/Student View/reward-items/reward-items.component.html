@@ -1,5 +1,11 @@
 
 <div  *ngFor="let reward of rewards; let i = index" class="reward">
-  <p>{{reward.description}}<br>{{reward.amount}}</p>
+    <div class="lego">
+        <img style="width: 200px;" src="http://icon-park.com/imagefiles/lego_brick_green.png">
+      </div>
+    <!-- <img class="coin" style="height:60px;" src="https://vignette.wikia.nocookie.net/restaurant-story-2/images/6/6b/Coin-icon.png/revision/latest?cb=20150508155053"> -->
+    <div class="amount">{{reward.amount}}</div>
+    <p class="centered">{{reward.description}}</p>
+    <img class="star" style="height:60px;" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/star-icon.png"/>
 </div>
 
