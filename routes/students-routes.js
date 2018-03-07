@@ -70,7 +70,8 @@ var getAllStud = router.get('/all', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get students', err);
@@ -96,7 +97,8 @@ router.get('/present', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.present = true
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get present students', err);
@@ -205,6 +207,51 @@ router.put('/restore/:id', (req, res) => {
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('student delete (archive)', err);
+        });
+});
+
+// GET transactions history
+router.get('/history/:startdate', (req, res) => {
+    let startDate = this.params.startdate;
+    try {
+        connection.query(
+            `SELECT 
+            trans_id as _id,
+            timestamp,
+            students.firstname as firstName,
+            students.lastname as lastName,
+            categories.cat_id as catId,
+            categories.name as category,
+            points.point_id as pointId,
+            points.description,
+            points.amount,
+            comment
+            FROM transactions 
+            left join students on transactions.st_id = students.st_id
+            left join points on transactions.point_id = points.point_id
+            left join categories on points.cat_id = categories.cat_id
+            WHERE timestamp >= ${startDate}
+            ORDER BY transactions.trans_id`, // 2018-03-05
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get present students', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+// ADD transaction
+router.post('/transactions/add', (req, res) => {
+    let newTrans = req.body;
+    console.log('body: ' + newTrans);
+    connection.query(
+        `INSERT INTO transactions SET ?`,
+        { st_id: newTrans.studentId, point_id: newTrans.pointId, comment: newTrans.comment },
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('insert transaction', err);
         });
 });
 

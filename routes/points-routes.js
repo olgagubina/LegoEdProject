@@ -192,6 +192,30 @@ router.get('/displayed/prizes', (req, res) => {
     }
 });
 
+//get all DISPLAYED points
+router.get('/displayed/allpoints', (req, res) => {
+    try {
+        connection.query(
+            `SELECT
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.deleted = false AND points.display = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get all pooints for display', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 
 // ADD point item
 router.post('/add', (req, res) => {

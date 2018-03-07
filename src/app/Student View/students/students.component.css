@@ -3,22 +3,31 @@
     margin-left: 75px;
     margin-bottom: 30px;
 }
+
 .student {
     /* display: flex; */
-    width: 10%;
-    background-color: #7C5DAF;
-    padding:30px;
+    width: 18%;
+    padding: 30px;
     margin: 5px;
     text-align: center;
     text-transform: capitalize;
     font-size: 20px;
     /* width: 20%; */
 }
-h1{
+
+h1 {
     text-align: center;
 }
 
-p {
-    color: white;
-    font-size: 24px;
+/* .img {
+    height: 225px;
+    width: 225px;
+    /* background-image: url('https://www.shareicon.net/data/512x512/2015/08/29/92782_logo_512x512.png'); */
+    /* background-size: contain;
+    background-repeat: no-repeat; 
 }
+
+p {
+    margin: none;
+    padding-top: 25px;
+} */
