@@ -135,9 +135,15 @@ export class StudentsViewService {
   }
 
   //UPDATE POINT ITEM 
-  updPointItem(updPointItem:PointItem): Observable<Student> {
+  updPointItem(updPointItem:PointItem): Observable<PointItem> {
     console.log(updPointItem);
-    return this.http.put<Student>('api/points/update/'+updPointItem.pointId, updPointItem);
+    return this.http.put<PointItem>('api/points/update/'+updPointItem.pointId, updPointItem);
+  }
+
+  //ARCHIEVE POINT ITEM
+  archievePoint(delPoint: PointItem): Observable<PointItem> {
+    console.log(delPoint);
+    return this.http.put<PointItem>('api/points/delete/'+delPoint.pointId, delPoint);
   }
 
   // SAVE TRANSACTIONS

@@ -4,6 +4,7 @@ import PointItem from '../../../../models/point-model';
 import { MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PointsFormDialogComponent } from '../points-form-dialog/points-form-dialog.component';
+import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.component';
 
 @Component({
   selector: 'app-prizes',
@@ -32,7 +33,7 @@ export class PrizesComponent implements OnInit {
   }
 
 
-  // EDIT STUDENT
+  // EDIT POINT ITEM
   openEditDialog(point: PointItem): void {
     this.studentsViewService.show = false;
     let dialogRef = this.dialog.open(PointsFormDialogComponent, {
@@ -42,7 +43,7 @@ export class PrizesComponent implements OnInit {
         description: point.description,
         amount: point.amount,
         btnText: 'Edit',
-        title: 'Edit'+ point.category
+        title: 'Edit '+ point.category
       }
     });
 
@@ -64,27 +65,26 @@ export class PrizesComponent implements OnInit {
   }
 
 
-  //DELETE (archieve) STUDENT
-  // openArchieveDialog(student: Student): void {
-  //   let dialogRef = this.dialog.open(PointsFormDialogComponent, {
-  //     width: '310px',
-  //     data: {
-  //       text: 'Are you sure you want to remove ' + student.firstName + ' ' + student.lastName + ' from the student list?'
-  //     }
-  //   });
+  //DELETE (archieve) POINT ITEM
+  openArchieveDialog(point: PointItem): void {
+    let dialogRef = this.dialog.open(WarningDialogComponent, {
+      width: '310px',
+      data: {
+        text: 'Are you sure you want to remove point item "' + point.description + '" (' + point.amount + ') from the Prizes?'
+      }
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result){
-  //     this.service.
-  //       archieveStudent(student).subscribe(
-  //         data => {
-  //           this.service.getPresentStudents();
-  //           this.service.getStudents();
-  //         },
-  //         error => {
-  //           console.error(error)
-  //         });
-  //       }
-  //   });
-  // } 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+      this.studentsViewService.
+        archievePoint(point).subscribe(
+          data => {
+            this.studentsViewService.getPrizes();
+          },
+          error => {
+            console.error(error)
+          });
+        }
+    });
+  } 
 }
