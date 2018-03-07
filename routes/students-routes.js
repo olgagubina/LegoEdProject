@@ -204,4 +204,34 @@ router.put('/restore/:id', (req, res) => {
         });
 });
 
+// GET transactions history
+router.get('/history/:startdate', (req, res) => {
+    let startDate = this.params.startdate;
+    try {
+        connection.query(
+            `SELECT 
+            trans_id as _id,
+            timestamp,
+            students.firstname as firstName,
+            students.lastname as lastName,
+            categories.cat_id as catId,
+            categories.name as category,
+            points.description,
+            points.amount,
+            comment
+            FROM transactions 
+            left join students on transactions.st_id = students.st_id
+            left join points on transactions.point_id = points.point_id
+            left join categories on points.cat_id = categories.cat_id
+            WHERE timestamp >= ${startDate}`, // 2018-03-05
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get present students', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
 module.exports = router;

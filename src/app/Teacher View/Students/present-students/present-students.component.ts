@@ -21,8 +21,10 @@ export class PresentStudentsComponent implements OnInit {
   title: String;
 
   // for dynamic transaction input
-  points: PointItem[];
-  prizes: PointItem[];
+  // prizes: PointItem[];
+  points: any[] = [0, [null], [null], [null]];
+
+  
   transactionForm: FormGroup;
   
   constructor(
@@ -51,7 +53,7 @@ export class PresentStudentsComponent implements OnInit {
     this.service.getPresentStudents();
     // get list of prizes
     this.service.displayPrizesData$.subscribe(
-      data => this.prizes = data
+      data => this.points = data
     );
     this.service.getDisplayedPrizes();
   }

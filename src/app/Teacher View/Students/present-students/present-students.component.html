@@ -35,8 +35,9 @@
 
           </form>
 
-          <!-- <p>Form value: {{ transactionForm.value | json }}</p> -->
-          <p>Form status: {{ transactionForm.status | json }}</p>
+          <p>Form value: {{ transactionForm.value | json }}</p>
+          <p>CatId value: {{ transactionForm.get('selectedCatId').value }}</p>
+          <!-- <p>Form status: {{ transactionForm.status | json }}</p> -->
 
         </mat-cell>
     </ng-container>
