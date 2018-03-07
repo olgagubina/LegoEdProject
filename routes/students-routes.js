@@ -8,8 +8,8 @@ var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    password: '1234', // < MySQL password COOKIE and MC >
-    // password: 'easyPass', // < MySQL password ANNA>
+    // password: '1234', // < MySQL password COOKIE and MC >
+    password: 'easyPass', // < MySQL password ANNA>
     // password: '147258', // < MySQL password OLGA>
     database: 'lego' // <your database name>
 }
@@ -65,7 +65,8 @@ router.get('/all', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get students', err);
@@ -91,7 +92,8 @@ router.get('/present', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.present = true AND students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get present students', err);
