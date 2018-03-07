@@ -28,7 +28,7 @@ export class AllStudentsComponent implements OnInit {
   constructor(private service: StudentsViewService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.title = 'Master List';
+    this.title = 'All Students';
     // this.allStudents = this.service.students;
     this.service.studentsData$.subscribe(
       data => {
