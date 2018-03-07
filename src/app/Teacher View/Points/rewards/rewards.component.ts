@@ -25,5 +25,11 @@ export class RewardsComponent implements OnInit {
   });
     this.studentsViewService.getRewards();
   }
+
+  displayItem(reward) {
+    this.studentsViewService.displayItem(reward).subscribe(data => {
+      this.studentsViewService.getRewards();
+    });
+  }
 }
 
