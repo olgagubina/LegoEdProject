@@ -15,9 +15,17 @@ export class PunishItemsComponent implements OnInit {
   ngOnInit() {
     this.studentsViewService.displayPenaltiesData$.subscribe(data => {
       this.penalties = data;
+      this.subscribeToData();
     }, error => {
       console.error(error);
     });
     this.studentsViewService.getDisplayedPenalties();
+  }
+
+  private subscribeToData(): void {
+    var service = this.studentsViewService
+    setInterval(function(){
+      service.getDisplayedPenalties(); 
+    }, 7000);
   }
 }

@@ -1,14 +1,18 @@
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { RouterModule, Routes } from '@angular/router';
+import { MaterialImportsModule } from '../material-imports.module';
 import { MatTableModule, MatTableDataSource } from '@angular/material';
 import { MatInputModule, MatFormFieldModule} from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { StudentsViewService } from './students-view.service';
 
@@ -25,13 +29,10 @@ import { AllStudentsComponent } from './Teacher View/Students/all-students/all-s
 import { PresentStudentsComponent } from './Teacher View/Students/present-students/present-students.component';
 import { StudentFormDialogComponent } from './Teacher View/Students/student-form-dialog/student-form-dialog.component';
 import { PointsFormDialogComponent } from './Teacher View/Points/points-form-dialog/points-form-dialog.component';
-import { MaterialImportsModule } from '../material-imports.module';
 import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
 import { RewardsComponent } from './Teacher View/Points/rewards/rewards.component';
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
 import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -56,6 +57,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     DropdownPrizesComponent
   ],
   imports: [
+    AppRoutingModule,
+    BrowserAnimationsModule,
     BrowserModule,
     FlexLayoutModule,
     FormsModule,
@@ -66,8 +69,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    BrowserAnimationsModule,
-    AppRoutingModule
+    ReactiveFormsModule
   ],
   entryComponents: [PointsFormDialogComponent, StudentFormDialogComponent],
   providers: [StudentsViewService],

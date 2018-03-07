@@ -6,9 +6,9 @@ var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    password: '1234', // < MySQL password COOKIE and MC >
+    // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
-    // password: '147258', // < MySQL password OLGA>
+    password: '147258', // < MySQL password OLGA>
     database: 'lego' // <your database name>
 }
 
@@ -186,6 +186,30 @@ router.get('/displayed/prizes', (req, res) => {
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get prizes', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//get all DISPLAYED points
+router.get('/displayed/allpoints', (req, res) => {
+    try {
+        connection.query(
+            `SELECT
+            points.point_id as pointId,
+            description,
+            amount,
+            points.cat_id as catId,
+            categories.name as category,
+            display
+            FROM points
+            left join categories on points.cat_id = categories.cat_id
+            WHERE points.deleted = false AND points.display = true
+            order by pointId`,
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get all pooints for display', err);
             });
     } catch (err) {
         console.log(err);

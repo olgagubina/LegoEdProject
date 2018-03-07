@@ -1,20 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var www = require('../bin/www');
+var io = www.io;
 
 var mysql = require('mysql');
-var connection;
+var sqlConnection;
 
-var localConnection = {
+var localConnection = mysql.createPool( {
+    connectionLimit:   100,
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    password: '1234', // < MySQL password COOKIE and MC >
+    // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
-    // password: '147258', // < MySQL password OLGA>
-    database: 'lego' // <your database name>
-}
+    password: '147258', // < MySQL password OLGA>
+    database: 'lego', // <your database name>
+    debug:   false
+});
 
 var clearDBConnection = {
+    connectionLimit   :   100,
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'bbbb8310aa5c1c',
     password: 'f64edb0b',
@@ -22,8 +27,8 @@ var clearDBConnection = {
 }
 
 //DB SWITCHER
-// connection = mysql.createConnection(clearDBConnection);
-connection = mysql.createConnection(localConnection);
+// sqlConnection = mysql.createConnection(clearDBConnection);
+sqlConnection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
@@ -50,7 +55,7 @@ connection = mysql.createConnection(localConnection);
 // });
 
 // GET ALL students
-router.get('/all', (req, res) => {
+var getAllStud = router.get('/all', (req, res) => {
     try {
         connection.query(
             `SELECT
@@ -65,7 +70,8 @@ router.get('/all', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get students', err);
@@ -91,7 +97,8 @@ router.get('/present', (req, res) => {
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
             WHERE students.present = true AND students.deleted = false
-            GROUP BY students.st_id, firstname, lastname, present`,
+            GROUP BY students.st_id, firstname, lastname, present
+            ORDER BY students.lastname`,
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get present students', err);
@@ -199,6 +206,51 @@ router.put('/restore/:id', (req, res) => {
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('student delete (archive)', err);
+        });
+});
+
+// GET transactions history
+router.get('/history/:startdate', (req, res) => {
+    let startDate = this.params.startdate;
+    try {
+        connection.query(
+            `SELECT 
+            trans_id as _id,
+            timestamp,
+            students.firstname as firstName,
+            students.lastname as lastName,
+            categories.cat_id as catId,
+            categories.name as category,
+            points.point_id as pointId,
+            points.description,
+            points.amount,
+            comment
+            FROM transactions 
+            left join students on transactions.st_id = students.st_id
+            left join points on transactions.point_id = points.point_id
+            left join categories on points.cat_id = categories.cat_id
+            WHERE timestamp >= ${startDate}
+            ORDER BY transactions.trans_id`, // 2018-03-05
+            function (err, rows, fields) {
+                if (!err) res.send(rows);
+                else console.log('get present students', err);
+            });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+// ADD transaction
+router.post('/transactions/add', (req, res) => {
+    let newTrans = req.body;
+    console.log('body: ' + newTrans);
+    connection.query(
+        `INSERT INTO transactions SET ?`,
+        { st_id: newTrans.studentId, point_id: newTrans.pointId, comment: newTrans.comment },
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('insert transaction', err);
         });
 });
 
