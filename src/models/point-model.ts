@@ -1,5 +1,5 @@
 export default class PointItem {
-    pointId: number;
+    pointId : number;
     description: string;
     amount: number;
     catId: number;
