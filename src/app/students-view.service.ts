@@ -59,6 +59,18 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
+  // UPDATE STUDENT
+  updStudent(updStudent:Student): Observable<Student> {
+    console.log(updStudent);
+    return this.http.put<Student>('api/students/update/'+updStudent.studentId, updStudent);
+  }
+
+  //ARCHIEVE STUDENT
+  archieveStudent(delStudent: Student): Observable<Student> {
+    console.log(delStudent);
+    return this.http.put<Student>('api/students/delete/'+delStudent.studentId, delStudent);
+  }
+
   // GET POINTS
   getPrizes(): void {
     this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
