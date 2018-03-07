@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import PointItem from '../models/point-model';
-import Student from '../models/student-model';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
+import PointItem from '../models/point-model';
+import Student from '../models/student-model';
+import { Transaction } from '../models/transaction-model';
 
 @Injectable()
 export class StudentsViewService {
@@ -15,6 +16,7 @@ export class StudentsViewService {
   displayRewardsData$: Subject<PointItem[]> = new Subject;
   penaltiesData$: Subject<PointItem[]> = new Subject;
   displayPenaltiesData$: Subject<PointItem[]> = new Subject;
+  displayPointsData$: Subject<PointItem[]> = new Subject; // for dynamic input
 
   students: Student[];
   prizes: PointItem[];
@@ -57,6 +59,18 @@ export class StudentsViewService {
     return this.http.post<Student>('api/students/add', newStudent);
   }
 
+  // UPDATE STUDENT
+  updStudent(updStudent:Student): Observable<Student> {
+    console.log(updStudent);
+    return this.http.put<Student>('api/students/update/'+updStudent.studentId, updStudent);
+  }
+
+  //ARCHIEVE STUDENT
+  archieveStudent(delStudent: Student): Observable<Student> {
+    console.log(delStudent);
+    return this.http.put<Student>('api/students/delete/'+delStudent.studentId, delStudent);
+  }
+
   // GET POINTS
   getPrizes(): void {
     this.http.get<PointItem[]>('api/points/all/prizes').subscribe(
@@ -78,7 +92,7 @@ export class StudentsViewService {
   }
 
   // ADD Point items
-  addPointItems(newItem: PointItem): Observable<PointItem>{
+  addPointItems(newItem: PointItem): Observable<PointItem> {
     console.log(newItem);
     return this.http.post<PointItem>('api/points/add', newItem);
   }
@@ -89,8 +103,8 @@ export class StudentsViewService {
     return this.http.put<PointItem[]>('api/points/toggle/' + item.pointId, item);
   }
 
-   // DISPLAY Prizes
-   getDisplayedPrizes(): void {
+  // DISPLAY Prizes
+  getDisplayedPrizes(): void {
     this.http.get<PointItem[]>('api/points/displayed/prizes').subscribe(
       data => this.displayPrizesData$.next(data)
     );
@@ -103,11 +117,25 @@ export class StudentsViewService {
     );
   }
 
-    // DISPLAY Rewards
-    getDisplayedRewards(): void {
-      this.http.get<PointItem[]>('api/points/displayed/rewards').subscribe(
-        data => this.displayRewardsData$.next(data)
-      );
-    }
+  // DISPLAY Rewards
+  getDisplayedRewards(): void {
+    this.http.get<PointItem[]>('api/points/displayed/rewards').subscribe(
+      data => this.displayRewardsData$.next(data)
+    );
+  }
+
+  // GET POINTS FOR DISPLAY
+  getDisplayedPoints(): void {
+    this.http.get<PointItem[]>('api/points/displayed/allpoints').subscribe(
+      data => {
+        this.displayPointsData$.next(data)
+      }
+    );
+  }
+
+  // SAVE TRANSACTIONS
+  saveTransaction(newTrans: any): Observable<Transaction> {
+    return this.http.post<Transaction>('api/students/transactions/add', newTrans);
+  }
 
 }

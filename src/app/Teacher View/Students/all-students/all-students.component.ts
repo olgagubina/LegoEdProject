@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SelectionModel } from '@angular/cdk/collections';
 import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
+import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
@@ -25,7 +26,7 @@ export class AllStudentsComponent implements OnInit {
   changedStudent: Student = new Student();
   // selection = new SelectionModel<Student>(false, []);
 
-  constructor(private service: StudentsViewService, public dialog: MatDialog) {}
+  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.title = 'All Students';
@@ -41,29 +42,31 @@ export class AllStudentsComponent implements OnInit {
     this.service.getStudents();
   }
 
-  // Mark student present
+  // MARK STUDENT PRESENT
 
   markPresent(student) {
-  //   if (student.present === 0) {
-  //       student.present = 1;
-        // this.checked = false;
-  //   } else {
-  //     student.present = 0;
-  // }
+    //   if (student.present === 0) {
+    //       student.present = 1;
+    // this.checked = false;
+    //   } else {
+    //     student.present = 0;
+    // }
     this.service.studentPresent(student).subscribe(data => {
       this.service.getPresentStudents();
       this.service.getStudents();
     });
   }
 
-  // ADD CUSTOMER
+  // ADD STUDENT
   openDialog(): void {
     let dialogRef = this.dialog.open(StudentFormDialogComponent, {
       width: "290px",
       data: {
         firstName: this.changedStudent.firstName,
-        lastName: this.changedStudent.lastName
-      }
+        lastName: this.changedStudent.lastName,
+        btnText: 'Add',
+        title: 'Add new student'
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -83,4 +86,56 @@ export class AllStudentsComponent implements OnInit {
     });
   }
 
+  // EDIT STUDENT
+  openEditDialog(student: Student): void {
+    let dialogRef = this.dialog.open(StudentFormDialogComponent, {
+      width: '290px',
+      data: {
+        firstName: student.firstName,
+        lastName: student.lastName,
+        btnText: 'Edit',
+        title: 'Edit student'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      var updStudent = Object.assign({}, result);
+      updStudent.studentId = student.studentId;
+      console.log(updStudent);
+      if (result) {
+        this.service
+          .updStudent(updStudent)
+          .subscribe(data => {
+            this.service.getStudents();
+            this.service.getPresentStudents();
+          });
+      }
+    });
+  }
+
+
+  //DELETE (archieve) STUDENT
+  openArchieveDialog(student: Student): void {
+    let dialogRef = this.dialog.open(WarningDialogComponent, {
+      width: '310px',
+      data: {
+        text: 'Are you sure you want to remove ' + student.firstName + ' ' + student.lastName + ' from the student list?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+      this.service.
+        archieveStudent(student).subscribe(
+          data => {
+            this.service.getPresentStudents();
+            this.service.getStudents();
+          },
+          error => {
+            console.error(error)
+          });
+        }
+    });
+  } 
 }
