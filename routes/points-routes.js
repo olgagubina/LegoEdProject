@@ -19,8 +19,17 @@ var clearDBConnection = {
     database: 'heroku_365eb437c5f937e'
 }
 
+var amazonDBConnection = {
+    host: 'rds-legoproj-5dayhakathon.cflg4ssuo0rh.us-east-2.rds.amazonaws.com',
+    user: 'oagubina',
+    password: 'Ybyfhtubyf183',
+    database: 'lego'
+}
+
+
 //DB SWITCHER
-connection = mysql.createConnection(clearDBConnection);
+connection = mysql.createConnection(amazonDBConnection);
+// connection = mysql.createConnection(clearDBConnection);
 // connection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
@@ -191,8 +200,6 @@ router.get('/displayed/prizes', (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
 //get all DISPLAYED points
 router.get('/displayed/allpoints', (req, res) => {
     try {
@@ -218,7 +225,6 @@ router.get('/displayed/allpoints', (req, res) => {
 });
 
 
->>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 // ADD point item
 router.post('/add', (req, res) => {
     let newPoint = req.body;

@@ -13,14 +13,9 @@ var localConnection = mysql.createPool( {
     // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
     password: '147258', // < MySQL password OLGA>
-<<<<<<< HEAD
-    database: 'lego' // <your database name>
-}
-=======
     database: 'lego', // <your database name>
     debug:   false
 });
->>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 
 var clearDBConnection = {
     connectionLimit   :   100,
@@ -30,14 +25,18 @@ var clearDBConnection = {
     database: 'heroku_365eb437c5f937e'
 }
 
+var amazonDBConnection = {
+    host: 'rds-legoproj-5dayhakathon.cflg4ssuo0rh.us-east-2.rds.amazonaws.com',
+    user: 'oagubina',
+    password: 'Ybyfhtubyf183',
+    database: 'lego'
+}
+
+
 //DB SWITCHER
-<<<<<<< HEAD
-connection = mysql.createConnection(clearDBConnection);
-// connection = mysql.createConnection(localConnection);
-=======
+sqlConnection = mysql.createConnection(amazonDBConnection);
 // sqlConnection = mysql.createConnection(clearDBConnection);
-sqlConnection = mysql.createConnection(localConnection);
->>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
+// sqlConnection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
