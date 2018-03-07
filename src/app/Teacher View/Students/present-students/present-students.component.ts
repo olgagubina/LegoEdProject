@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import PointItem from '../../../../models/point-model';
+import { VALID } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-present-students',
@@ -42,13 +43,32 @@ export class PresentStudentsComponent implements OnInit {
   }
 
   submitForm(stId) {
+    console.log(this.transactionForm.status);
     let newTrans = {
       studentId: Number(stId),
       pointId: Number(this.transactionForm.value.selectedPointId),
       comment: this.transactionForm.value.comment
     };
-    this.service.saveTransaction(newTrans).subscribe(data => 
-      console.log('transaction saved', data));
+    this.service.saveTransaction(newTrans).subscribe(data => {
+      console.log('transaction saved');
+      this.transactionForm = this.fb.group({
+        selectedCatId: [null, Validators.required],
+        selectedPointId: [null, Validators.required],
+        comment: ''
+      })
+    },
+      error => {
+        console.error(error);
+        console.log('Oooops, thansaction NOT saved');
+      });
+  }
+
+  clearInput() {
+    this.transactionForm = this.fb.group({
+      selectedCatId: [null, Validators.required],
+      selectedPointId: [null, Validators.required],
+      comment: ''
+    })
   }
 
   ngOnInit() {
