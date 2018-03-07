@@ -1,12 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+.rewards {
+  flex-wrap: wrap;
+  /* margin-bottom: 30px; */
+}
 
 .reward {
-    display: flex;
-    /* background-color: #8E9F8E; */
-    /* background: linear-gradient(to bottom right, green, blue); */
+    /* display: flex; */
     padding:30px;
     margin: 5px;
     width: 125px;
     height: 125px;
+    /* width: 15%; */
     border-radius: 10px;
     align-content: center;
     text-align: center;
@@ -33,6 +40,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 110%;
 }
 
 .centered {

@@ -1,23 +1,55 @@
-.items {
-    display: flex;
-    max-width: 100vw;
-}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
 
-.point-items {
-    max-width: 100vw;
 }
 
 .background {
-    /* height: 100%; */
-    width: 100%;
-    background-color: black;
-    /* background-image: url(https://www.bidpal.com/wp-content/uploads/2015/11/lego-background.png); */
-    background-size: cover;
-    background-position: center;
-    /* display: flex; */
+  width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* margin: auto; */
+    /* flex-direction: column;
+    max-height: 100%;
+    overflow: hidden;
+    height: 100vh;
+    scroll-behavior: none; */
 }
 
-.prize {
-  align-content: center;
-  text-align: center;
+#element::-webkit-scrollbar {
+    display: none;
 }
+
+.shop {
+  height: 25%;
+  width: 100%;
+}
+
+.students {
+  height: 55%;
+  display: block; /* 1 */
+  flex-grow: 1;
+  flex-shrink: 1; /* 2 */
+}
+
+.point-items {
+  width: 100%;
+  height: 20%;
+}
+
+/* .items {
+    display: flex;
+    max-width: 100vw;
+} */
+
+/* .reward {
+    flex-direction: row;
+}
+
+.punish {
+    flex-direction: row;
+} */

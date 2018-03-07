@@ -17,7 +17,7 @@ export class StudentsComponent implements OnInit {
     this.service.presentStudentsData$.subscribe(
       data => {
         this.students = data;
-        this.subscribeToData();
+        // this.subscribeToData();
       },
       error => {
         console.error(error);
@@ -26,10 +26,10 @@ export class StudentsComponent implements OnInit {
     this.service.getPresentStudents();
   }
 
-  private subscribeToData(): void {
-    var service = this.service
-    setInterval(function(){
-      service.getPresentStudents(); 
-    }, 7000);
-  }
+  // private subscribeToData(): void {
+  //   var service = this.service
+  //   setInterval(function(){
+  //     service.getPresentStudents();
+  //   }, 7000);
+  // }
 }

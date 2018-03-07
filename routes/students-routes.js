@@ -215,7 +215,7 @@ router.get('/history/:startdate', (req, res) => {
     let startDate = this.params.startdate;
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             trans_id as _id,
             timestamp,
             students.firstname as firstName,
@@ -226,7 +226,7 @@ router.get('/history/:startdate', (req, res) => {
             points.description,
             points.amount,
             comment
-            FROM transactions 
+            FROM transactions
             left join students on transactions.st_id = students.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
