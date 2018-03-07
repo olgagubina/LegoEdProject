@@ -32,6 +32,7 @@ import { PunishmentsComponent } from './Teacher View/Points/punishments/punishme
 import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { WarningDialogComponent } from './Teacher View/warning-dialog/warning-dialog.component';
 
 
 
@@ -53,7 +54,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     PrizesComponent,
     RewardsComponent,
     PunishmentsComponent,
-    DropdownPrizesComponent
+    DropdownPrizesComponent,
+    WarningDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  entryComponents: [PointsFormDialogComponent, StudentFormDialogComponent],
+  entryComponents: [PointsFormDialogComponent, StudentFormDialogComponent, WarningDialogComponent],
   providers: [StudentsViewService],
   bootstrap: [AppComponent]
 })
