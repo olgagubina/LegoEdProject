@@ -13,6 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class PointsFormDialogComponent implements OnInit {
 prizes: any[];
 newItem: any;
+show: boolean = this.studentsViewService.show;
 constructor(public dialogRef: MatDialogRef<PointsFormDialogComponent>, private studentsViewService: StudentsViewService,
   @Inject(MAT_DIALOG_DATA) public data: any) { }
 
