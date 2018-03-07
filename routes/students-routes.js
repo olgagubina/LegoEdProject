@@ -224,7 +224,8 @@ router.get('/history/:startdate', (req, res) => {
             left join students on transactions.st_id = students.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
-            WHERE timestamp >= ${startDate}`, // 2018-03-05
+            WHERE timestamp >= ${startDate}
+            ORDER BY transactions.trans_id`, // 2018-03-05
             function (err, rows, fields) {
                 if (!err) res.send(rows);
                 else console.log('get present students', err);
@@ -234,5 +235,18 @@ router.get('/history/:startdate', (req, res) => {
     }
 });
 
+
+// ADD transaction
+router.post('/transactions/add', (req, res) => {
+    let newTrans = req.body;
+    console.log('body: ' + newTrans);
+    connection.query(
+        `INSERT INTO transactions SET ?`,
+        { st_id: newTrans.studentId, point_id: newTrans.pointId, comment: newTrans.comment },
+        function (err, rows, fields) {
+            if (!err) res.send(rows);
+            else console.log('insert transaction', err);
+        });
+});
 
 module.exports = router;

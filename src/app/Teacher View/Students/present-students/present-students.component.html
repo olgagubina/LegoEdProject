@@ -26,7 +26,9 @@
             </mat-select>
 
             <mat-select formControlName="selectedPointId" placeholder="Point">
-              <mat-option *ngFor="let point of pointsAfterChangeEvent" [value]="point.pointId">{{ point.description }}</mat-option>
+              <mat-option *ngFor="let point of pointsAfterChangeEvent" [value]="point.pointId">
+                {{ point.description }} ({{ point.amount }})
+              </mat-option>
             </mat-select>
 
             <input formControlName="comment">

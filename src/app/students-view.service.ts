@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import PointItem from '../models/point-model';
-import Student from '../models/student-model';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
+import PointItem from '../models/point-model';
+import Student from '../models/student-model';
+import { Transaction } from '../models/transaction-model';
 
 @Injectable()
 export class StudentsViewService {
@@ -118,6 +119,11 @@ export class StudentsViewService {
         this.displayPointsData$.next(data)
       }
     );
+  }
+
+  // SAVE TRANSACTIONS
+  saveTransaction(newTrans: any): Observable<Transaction> {
+    return this.http.post<Transaction>('api/students/transactions/add', newTrans);
   }
 
 }

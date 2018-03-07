@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import PointItem from '../../../../models/point-model';
-// import { Transaction } from '../../../../models/transaction-model';
 
 @Component({
   selector: 'app-present-students',
@@ -36,32 +35,30 @@ export class PresentStudentsComponent implements OnInit {
     });
   }
 
-  // Rebuild the product list every time the product type changes.
+  // Rebuild the point list every time the category changes.
   typeChanged() {
     const selCatId = this.transactionForm.get('selectedCatId').value;
     this.pointsAfterChangeEvent = this.allPoints.filter(p => p.catId == selCatId);
   }
 
   submitForm(stId) {
-    console.log('Data to send', {
-      studentId: stId,
-      pointId: this.transactionForm.value.selectedPointId,
+    let newTrans = {
+      studentId: Number(stId),
+      pointId: Number(this.transactionForm.value.selectedPointId),
       comment: this.transactionForm.value.comment
-    });
+    };
+    this.service.saveTransaction(newTrans).subscribe(data => 
+      console.log('transaction saved', data));
   }
 
   ngOnInit() {
     this.title = 'Present Students';
+    // get list of present students
     this.service.presentStudentsData$.subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource(data);
-      },
-      error => {
-        console.error(error);
-      }
-    );
+      data => { this.dataSource = new MatTableDataSource(data); },
+      error => { console.error(error); });
     this.service.getPresentStudents();
-    // get list points for display
+    // get list of all points for display
     this.service.displayPointsData$.subscribe(
       data => this.allPoints = data
     );
