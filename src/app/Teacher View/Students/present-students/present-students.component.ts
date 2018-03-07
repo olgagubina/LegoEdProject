@@ -3,7 +3,7 @@ import { StudentsViewService } from '../../../students-view.service';
 import Student from '../../../../models/student-model';
 import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import PointItem from '../../../../models/point-model';
 
 
@@ -21,13 +21,26 @@ export class PresentStudentsComponent implements OnInit {
   title: String;
 
   // for dynamic transaction input
-  transactionForm = new FormGroup({
-    selectedCatId: new FormControl(),
-    selectedPointId: new FormControl()
-  });
   points: PointItem[];
+  prizes: PointItem[];
+  transactionForm: FormGroup;
+  // transactionForm = new FormGroup({
+  //   selectedCatId: new FormControl(),
+  //   selectedPointId: new FormControl()
+  // });
+  
+  constructor(
+    private service: StudentsViewService,
+    private fb: FormBuilder
+  ) { this.createForm(); }
 
-  constructor(private service: StudentsViewService) { }
+  createForm() {
+    this.transactionForm = this.fb.group({
+      selectedCatId: null,
+      selectedPointId: null,
+      comment: ''
+    });
+  }
 
   ngOnInit() {
     this.title = 'Present Students';
@@ -40,5 +53,10 @@ export class PresentStudentsComponent implements OnInit {
       }
     );
     this.service.getPresentStudents();
+    // get list of prizes
+    this.service.displayPrizesData$.subscribe(
+      data => this.prizes = data
+    );
+    this.service.getDisplayedPrizes();
   }
 }

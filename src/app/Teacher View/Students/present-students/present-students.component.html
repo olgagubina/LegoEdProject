@@ -29,9 +29,14 @@
               <mat-option *ngFor="let point of points" [value]="point.pointId">{{ point.desctiption }}</mat-option>
             </mat-select>
 
+            <input formControlName="comment">
+
             <button class='btn btn-info'>Submit</button>
 
           </form>
+
+          <p>Form value: {{ transactionForm.value | json }}</p>
+
         </mat-cell>
     </ng-container>
 
