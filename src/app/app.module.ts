@@ -33,8 +33,6 @@ import { PrizesComponent } from './Teacher View/Points/prizes/prizes.component';
 import { RewardsComponent } from './Teacher View/Points/rewards/rewards.component';
 import { PunishmentsComponent } from './Teacher View/Points/punishments/punishments.component';
 import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { WarningDialogComponent } from './Teacher View/warning-dialog/warning-dialog.component';
 
 
