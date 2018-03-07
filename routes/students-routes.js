@@ -34,8 +34,8 @@ var amazonDBConnection = {
 
 
 //DB SWITCHER
-sqlConnection = mysql.createConnection(amazonDBConnection);
-// sqlConnection = mysql.createConnection(clearDBConnection);
+// sqlConnection = mysql.createConnection(amazonDBConnection);
+sqlConnection = mysql.createConnection(clearDBConnection);
 // sqlConnection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
