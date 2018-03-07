@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../../students-view.service';
 import Student from '../../../../models/student-model';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 
 
@@ -12,11 +12,15 @@ import {FormControl} from '@angular/forms';
   templateUrl: './present-students.component.html',
   styleUrls: ['./present-students.component.css']
 })
+
 export class PresentStudentsComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'dropdown-type', 'edit' ];
+  displayedColumns = ['firstName', 'lastName', 'form'];
   allStudents: Student[];
   dataSource: MatTableDataSource<Student>;
   title: String;
+
+  // for dynamic transaction input
+  selectedCatId = new FormControl();
 
   constructor(private service: StudentsViewService) { }
 

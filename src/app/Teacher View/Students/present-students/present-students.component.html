@@ -13,21 +13,19 @@
       <mat-cell *matCellDef="let student"> {{student.lastName}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="dropdown-type">
-      <mat-header-cell *matHeaderCellDef>Select</mat-header-cell>
+    <!-- Form Column -->
+    <ng-container matColumnDef="form">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let student">
-        <mat-select placeholder="Select">
-          <mat-option value="prize">Prize</mat-option>
-          <mat-option value="reward">Reward</mat-option>
-          <mat-option value="penalty">Penalty</mat-option>
-        </mat-select>
-        </mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef> Submit </mat-header-cell>
-      <mat-cell *matCellDef="let reward">
-        <button class='delete btn btn-info'>Submit</button>
+        <mat-select [(value)]="selectedCatId" placeholder="Type">
+          <mat-option value="1">Reward</mat-option>
+          <mat-option value="2">Penalty</mat-option>
+          <mat-option value="3">Prize</mat-option>
+        </mat-select>
+
+        <button class='btn btn-info'>Submit</button>
+
       </mat-cell>
     </ng-container>
 
