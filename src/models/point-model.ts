@@ -4,4 +4,5 @@ export default class PointItem {
     amount: number;
     catId: number;
     category: string;
+    display: boolean;
 }

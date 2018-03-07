@@ -1,12 +1,13 @@
 <h3>{{title}}</h3>
 
 
-<button type="button" mat-button (click)="openDialog()" class="btn">Add Student</button>
+<span matTooltip="Add Student">
+<button mat-fab>
+  <mat-icon type="button" (click)="openDialog()" class="btn"> <i class="material-icons">add</i></mat-icon>
+</button> </span>
 
 <div class="example-container mat-elevation-z8">
-
   <mat-table #table [dataSource]="dataSource">
-
     <ng-container matColumnDef="present">
       <mat-header-cell *matHeaderCellDef> Mark Present </mat-header-cell>
       <mat-cell *matCellDef="let student">
@@ -27,7 +28,7 @@
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let reward">
         <button>
           <i class="material-icons">mode_edit</i>

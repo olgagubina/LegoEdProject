@@ -4,9 +4,10 @@
       <mat-table #table [dataSource]="dataSource">
 
           <ng-container matColumnDef="Toggle">
-              <mat-header-cell *matHeaderCellDef> toggle </mat-header-cell>
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let reward">
-                  <mat-slide-toggle color="primary"></mat-slide-toggle>
+                <mat-slide-toggle [ngModel]="reward.display" (click)="displayItem(reward)">
+                </mat-slide-toggle>
               </mat-cell>
           </ng-container>
 
@@ -21,7 +22,7 @@
         </ng-container>
 
         <ng-container matColumnDef="Edit">
-            <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let reward">
                 <button > <i class="material-icons">mode_edit</i></button>
                 <button> <i class="material-icons">delete</i></button>

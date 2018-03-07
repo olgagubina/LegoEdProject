@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { StudentsViewService } from "../../../students-view.service";
-import Student from "../../../../models/student-model";
-import { MatTableDataSource } from "@angular/material";
-import { MatTableModule } from "@angular/material/table";
-import { FormsModule } from "@angular/forms";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { SelectionModel } from "@angular/cdk/collections";
-import { StudentFormDialogComponent } from "../student-form-dialog/student-form-dialog.component";
+import { Component, OnInit } from '@angular/core';
+import { StudentsViewService } from '../../../students-view.service';
+import Student from '../../../../models/student-model';
+import { MatTableDataSource } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SelectionModel } from '@angular/cdk/collections';
+import { StudentFormDialogComponent } from '../student-form-dialog/student-form-dialog.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @Component({
-  selector: "app-all-students",
-  templateUrl: "./all-students.component.html",
-  styleUrls: ["./all-students.component.css"]
+  selector: 'app-all-students',
+  templateUrl: './all-students.component.html',
+  styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements OnInit {
   displayedColumns = ['present', 'firstName', 'lastName', 'edit'];
@@ -28,7 +28,7 @@ export class AllStudentsComponent implements OnInit {
   constructor(private service: StudentsViewService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.title = 'Master List';
+    this.title = 'All Students';
     // this.allStudents = this.service.students;
     this.service.studentsData$.subscribe(
       data => {

@@ -5,19 +5,21 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 
-
 @Injectable()
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
   presentStudentsData$: Subject<Student[]> = new Subject;
+  prizesData$: Subject<PointItem[]> = new Subject;
+  displayPrizesData$: Subject<PointItem[]> = new Subject;
+  rewardsData$: Subject<PointItem[]> = new Subject;
+  displayRewardsData$: Subject<PointItem[]> = new Subject;
+  penaltiesData$: Subject<PointItem[]> = new Subject;
+  displayPenaltiesData$: Subject<PointItem[]> = new Subject;
 
   students: Student[];
-  prizes: PointItem[]; 
-  penalties: PointItem[]; 
+  prizes: PointItem[];
+  penalties: PointItem[];
   rewards: PointItem[];
-  prizesData$: Subject<PointItem[]> = new Subject;
-  rewardsData$: Subject<PointItem[]> = new Subject;
-  penaltiesData$: Subject<PointItem[]> = new Subject;
 
   constructor(private http: HttpClient) { }
 
@@ -69,7 +71,6 @@ export class StudentsViewService {
     );
   }
 
-
   getRewards(): void {
     this.http.get<PointItem[]>('api/points/all/rewards').subscribe(
       data => this.rewardsData$.next(data)
@@ -81,4 +82,32 @@ export class StudentsViewService {
     console.log(newItem);
     return this.http.post<PointItem>('api/points/add', newItem);
   }
+
+  // MARK Point items to DISPLAY
+  displayItem(item): Observable<PointItem[]> {
+    console.log(item.description, item.display);
+    return this.http.put<PointItem[]>('api/points/toggle/' + item.pointId, item);
+  }
+
+   // DISPLAY Prizes
+   getDisplayedPrizes(): void {
+    this.http.get<PointItem[]>('api/points/displayed/prizes').subscribe(
+      data => this.displayPrizesData$.next(data)
+    );
+  }
+
+  // DISPLAY Penalties
+  getDisplayedPenalties(): void {
+    this.http.get<PointItem[]>('api/points/displayed/penalties').subscribe(
+      data => this.displayPenaltiesData$.next(data)
+    );
+  }
+
+    // DISPLAY Rewards
+    getDisplayedRewards(): void {
+      this.http.get<PointItem[]>('api/points/displayed/rewards').subscribe(
+        data => this.displayRewardsData$.next(data)
+      );
+    }
+
 }

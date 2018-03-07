@@ -11,12 +11,12 @@ export class RewardItemsComponent implements OnInit {
 rewards: PointItem[];
   constructor(private studentsViewService: StudentsViewService) { }
 
-  ngOnInit() { 
-    this.studentsViewService.rewardsData$.subscribe(data => {
+  ngOnInit() {
+    this.studentsViewService.displayRewardsData$.subscribe(data => {
       this.rewards = data;
   }, error => {
     console.error(error);
   });
-    this.studentsViewService.getRewards();
+    this.studentsViewService.getDisplayedRewards();
   }
 }

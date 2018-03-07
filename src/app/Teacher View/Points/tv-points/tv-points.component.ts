@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PointsFormDialogComponent } from '../points-form-dialog/points-form-dialog.component';
-import PointItem from "../../../../models/point-model";
-import { StudentsViewService } from "../../../students-view.service";
-import { MatTableDataSource } from "@angular/material/table";
+import PointItem from '../../../../models/point-model';
+import { StudentsViewService } from '../../../students-view.service';
+import { MatTableDataSource } from '@angular/material/table';
+
 @Component({
   selector: 'app-tv-points',
   templateUrl: './tv-points.component.html',
@@ -45,31 +46,29 @@ export class TvPointsComponent implements OnInit {
       var newItem = Object.assign({}, result);
       console.log(result);
 
-      //Add to data array on service
+      // Add to data array on service
       if (result) {
         if (result.cat_id == 1) {
           console.log('at tv-points for Reward', result);
           this.studentsViewService.addPointItems(result).subscribe(
             data => this.studentsViewService.getRewards()
-          )
+          );
         }
 
         else if (result.cat_id == 2) {
           this.studentsViewService.addPointItems(result).subscribe(
             data => this.studentsViewService.getPenalties()
-          )
-        }
-
-        else if (result.cat_id == 3) {
+          );
+        } else if (result.cat_id == 3) {
           this.studentsViewService.addPointItems(result).subscribe(
             data => this.studentsViewService.getPrizes()
-          )
+          );
         }
 
         //Clean the input
         this.pointItem = new PointItem;
-      };
-    })
+      }
+    });
   }
 
 }
