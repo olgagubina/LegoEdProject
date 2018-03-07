@@ -1,10 +1,6 @@
-* {
-  box-sizing: border-box;
-}
-
 .penalties {
   flex-wrap: wrap;
-  /* margin-bottom: 30px; */
+  margin-bottom: 30px;
 }
 
 .penalty {

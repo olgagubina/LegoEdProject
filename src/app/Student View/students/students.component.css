@@ -4,14 +4,14 @@
 
 .students {
     flex-wrap: wrap;
-    /* margin-bottom: 30px; */
+    margin-bottom: 30px;
 }
 
 .student {
-    /* width: auto;
-    height: auto; */
-    width: 15%;
+    width: auto;
     height: auto;
+    /* width: 15%;
+    height: auto; */
     border-radius: 10px;
     background: linear-gradient(to bottom right, purple, #7C5DAF);
     padding: 30px;
