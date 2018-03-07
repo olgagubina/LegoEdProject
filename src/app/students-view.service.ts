@@ -15,6 +15,7 @@ export class StudentsViewService {
   displayRewardsData$: Subject<PointItem[]> = new Subject;
   penaltiesData$: Subject<PointItem[]> = new Subject;
   displayPenaltiesData$: Subject<PointItem[]> = new Subject;
+  displayPointsData$: Subject<PointItem[]> = new Subject; // for dynamic input
 
   students: Student[];
   prizes: PointItem[];
@@ -78,7 +79,7 @@ export class StudentsViewService {
   }
 
   // ADD Point items
-  addPointItems(newItem: PointItem): Observable<PointItem>{
+  addPointItems(newItem: PointItem): Observable<PointItem> {
     console.log(newItem);
     return this.http.post<PointItem>('api/points/add', newItem);
   }
@@ -89,8 +90,8 @@ export class StudentsViewService {
     return this.http.put<PointItem[]>('api/points/toggle/' + item.pointId, item);
   }
 
-   // DISPLAY Prizes
-   getDisplayedPrizes(): void {
+  // DISPLAY Prizes
+  getDisplayedPrizes(): void {
     this.http.get<PointItem[]>('api/points/displayed/prizes').subscribe(
       data => this.displayPrizesData$.next(data)
     );
@@ -103,11 +104,20 @@ export class StudentsViewService {
     );
   }
 
-    // DISPLAY Rewards
-    getDisplayedRewards(): void {
-      this.http.get<PointItem[]>('api/points/displayed/rewards').subscribe(
-        data => this.displayRewardsData$.next(data)
-      );
-    }
+  // DISPLAY Rewards
+  getDisplayedRewards(): void {
+    this.http.get<PointItem[]>('api/points/displayed/rewards').subscribe(
+      data => this.displayRewardsData$.next(data)
+    );
+  }
+
+  // GET POINTS FOR DISPLAY
+  getDisplayedPoints(): void {
+    this.http.get<PointItem[]>('api/points/displayed/allpoints').subscribe(
+      data => {
+        this.displayPointsData$.next(data)
+      }
+    );
+  }
 
 }

@@ -216,6 +216,7 @@ router.get('/history/:startdate', (req, res) => {
             students.lastname as lastName,
             categories.cat_id as catId,
             categories.name as category,
+            points.point_id as pointId,
             points.description,
             points.amount,
             comment

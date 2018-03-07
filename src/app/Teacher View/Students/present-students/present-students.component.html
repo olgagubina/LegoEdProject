@@ -19,30 +19,24 @@
         <mat-cell *matCellDef="let student">
           <form [formGroup]="transactionForm" novalidate>
 
-            <mat-select formControlName="selectedCatId" placeholder="Type">
+            <mat-select formControlName="selectedCatId" (change)="typeChanged()" placeholder="Type">
               <mat-option value="1">Reward</mat-option>
               <mat-option value="2">Penalty</mat-option>
               <mat-option value="3">Prize</mat-option>
             </mat-select>
 
             <mat-select formControlName="selectedPointId" placeholder="Point">
-              <mat-option *ngFor="let point of points" [value]="point.pointId">{{ point.desctiption }}</mat-option>
+              <mat-option *ngFor="let point of pointsAfterChangeEvent" [value]="point.pointId">{{ point.description }}</mat-option>
             </mat-select>
 
             <input formControlName="comment">
 
-            <button class='btn btn-info'>Submit</button>
+            <button class='btn btn-info' (click)="submitForm(student.studentId)">Submit</button>
 
           </form>
 
-          <p>Form value: {{ transactionForm.value | json }}</p>
-          <p>CatId value: {{ transactionForm.get('selectedCatId').value }}</p>
-          <!-- <p>Form status: {{ transactionForm.status | json }}</p> -->
-
         </mat-cell>
     </ng-container>
-
-
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>

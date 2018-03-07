@@ -5,6 +5,7 @@ export class Transaction {
     lastName: string;
     catId: number;
     category: string;
+    pointId: number;
     description: string;
     amount: number;
     comment: string;
