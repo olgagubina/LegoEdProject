@@ -1,4 +1,4 @@
-/* Structure */
+
 .example-container {
     display: flex;
     flex-direction: column;
@@ -20,9 +20,13 @@
     max-height: 500px;
   }
 
-  h2 {
+  h3 {
+    
+    font-family: 'Roboto', sans-serif;
     color: white;
     text-align: center;
+    font-size: 24px;
+    font-weight: 400;
   }
 
   
@@ -49,3 +53,7 @@ mat-row:nth-child(odd){
 
     color: white;
   }
+/* 
+  .material-icons {
+    display: inline;
+  } */

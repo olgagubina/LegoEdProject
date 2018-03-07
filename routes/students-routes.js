@@ -14,6 +14,7 @@ var localConnection = mysql.createPool( {
     // password: '1234', // < MySQL password COOKIE and MC >
     password: 'easyPass', // < MySQL password ANNA>
     // password: '147258', // < MySQL password OLGA>
+
     database: 'lego', // <your database name>
     debug:   false
 });
@@ -96,7 +97,7 @@ router.get('/present', (req, res) => {
             left join transactions on students.st_id = transactions.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id
-            WHERE students.present = true AND students.deleted = false
+            WHERE students.present = true
             GROUP BY students.st_id, firstname, lastname, present
             ORDER BY students.lastname`,
             function (err, rows, fields) {
@@ -123,6 +124,7 @@ router.post('/add', (req, res) => {
 
 // UPDATE student - change details
 router.put('/update/:id', (req, res) => {
+    console.log(req.body);
     let studentId = req.params.id;
     let updSt = req.body;
     connection.query(
@@ -164,7 +166,7 @@ router.put('/delete/:id', (req, res) => {
     let studentId = req.params.id;
     connection.query(
         `UPDATE students SET ? WHERE ?`,
-        [{ deleted: true }, { st_id: studentId }],
+        [{ deleted: true, present:false}, { st_id: studentId }],
         function (err, rows, fields) {
             if (!err) res.send(rows);
             else console.log('student delete (archive)', err);

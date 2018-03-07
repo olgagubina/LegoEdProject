@@ -1,13 +1,17 @@
 
 .reward {
-    display: flex;  
-    background-color: #8E9F8E;
+    display: flex;
+    /* background-color: #8E9F8E; */
+    /* background: linear-gradient(to bottom right, green, blue); */
     padding:30px;
     margin: 5px;
     width: 125px;
     height: 125px;
     border-radius: 10px;
-    
+    align-content: center;
+    text-align: center;
+    font-family: 'Luckiest Guy', cursive;
+    position: relative;
 }
 
 .reward p {
@@ -16,3 +20,32 @@
     font-size: 20px;
     text-transform: uppercase;
 }
+
+.amount {
+  position: absolute;
+  top: 138px;
+  right: 67px;
+  color: black;
+}
+
+.lego {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centered {
+  position: absolute;
+  top: 60%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.star {
+  position: absolute;
+  top: 39%;
+  left: 7%;
+  transform: translate(-50%, -50%);
+}
+
