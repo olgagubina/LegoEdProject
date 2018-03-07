@@ -3,7 +3,7 @@ import { StudentsViewService } from '../../../students-view.service';
 import Student from '../../../../models/student-model';
 import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import PointItem from '../../../../models/point-model';
 
 
@@ -24,10 +24,6 @@ export class PresentStudentsComponent implements OnInit {
   points: PointItem[];
   prizes: PointItem[];
   transactionForm: FormGroup;
-  // transactionForm = new FormGroup({
-  //   selectedCatId: new FormControl(),
-  //   selectedPointId: new FormControl()
-  // });
   
   constructor(
     private service: StudentsViewService,
@@ -36,8 +32,8 @@ export class PresentStudentsComponent implements OnInit {
 
   createForm() {
     this.transactionForm = this.fb.group({
-      selectedCatId: null,
-      selectedPointId: null,
+      selectedCatId: [null, Validators.required],
+      selectedPointId: [null, Validators.required],
       comment: ''
     });
   }
