@@ -1,10 +1,12 @@
 <h1>Students</h1>
 
 <div fxLayout="row" class="students">
-<div *ngFor="let student of students; let i = index"  class="student">
+<div *ngFor="let student of students; let i = index" class="student img">
+<div class="rbt-txt">
   <p>{{student.firstName}}</p>
   <p>{{student.lastName}}</p>
   <p>{{student.balance}}</p>
   <p>{{student.rating}}</p>
+</div>
 </div>
 </div>
