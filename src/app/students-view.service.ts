@@ -9,7 +9,6 @@ import { Subject } from 'rxjs/Subject';
 export class StudentsViewService {
   studentsData$: Subject<Student[]> = new Subject;
   presentStudentsData$: Subject<Student[]> = new Subject;
-
   prizesData$: Subject<PointItem[]> = new Subject;
   displayPrizesData$: Subject<PointItem[]> = new Subject;
   rewardsData$: Subject<PointItem[]> = new Subject;
@@ -18,8 +17,8 @@ export class StudentsViewService {
   displayPenaltiesData$: Subject<PointItem[]> = new Subject;
 
   students: Student[];
-  prizes: PointItem[]; 
-  penalties: PointItem[]; 
+  prizes: PointItem[];
+  penalties: PointItem[];
   rewards: PointItem[];
 
   constructor(private http: HttpClient) { }
@@ -110,4 +109,5 @@ export class StudentsViewService {
         data => this.displayRewardsData$.next(data)
       );
     }
+
 }
