@@ -5,7 +5,7 @@
 
 
     <ng-container matColumnDef="Toggle">
-      <mat-header-cell *matHeaderCellDef> toggle </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let prize">
         <mat-slide-toggle [ngModel]="prize.display" (click)="displayItem(prize)">
         </mat-slide-toggle>
@@ -23,7 +23,7 @@
     </ng-container>
 
     <ng-container matColumnDef="Edit">
-      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let prize">
           <button > <i class="material-icons">mode_edit</i></button>
           <button> <i class="material-icons">delete</i></button>

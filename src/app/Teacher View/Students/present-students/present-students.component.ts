@@ -21,7 +21,7 @@ export class PresentStudentsComponent implements OnInit {
   constructor(private service: StudentsViewService) { }
 
   ngOnInit() {
-    this.title = 'In Class';
+    this.title = 'Present Students';
     this.service.presentStudentsData$.subscribe(
       data => {
         this.dataSource = new MatTableDataSource(data);
