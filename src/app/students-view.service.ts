@@ -137,8 +137,4 @@ export class StudentsViewService {
   saveTransaction(newTrans: any): Observable<Transaction> {
     return this.http.post<Transaction>('api/students/transactions/add', newTrans);
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
 }

@@ -18,8 +18,6 @@ export class TvPointsComponent implements OnInit {
   constructor(private studentsViewService: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
     // this.studentsViewService.pointsData$.subscribe(data => {
     //   this.dataSource = new MatTableDataSource(data);
     // }, error => {
@@ -27,7 +25,6 @@ export class TvPointsComponent implements OnInit {
     // });
     // this.studentsViewService.getPrizes();
 
->>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
   }
 
   openDialog(): void {
@@ -49,30 +46,6 @@ export class TvPointsComponent implements OnInit {
       var newItem = Object.assign({}, result);
       console.log(result);
 
-<<<<<<< HEAD
-      //Add to data array on service
-      if (result) {
-        if (newItem.category == 'Reward')
-          this.studentsViewService.addReward(newItem).subscribe(
-            data => this.studentsViewService.getRewards()
-          )
-      }
-
-      else if (newItem.category == 'Prize') {
-        this.studentsViewService.addPrize(newItem).subscribe(
-          data => this.studentsViewService.getPrizes()
-        )
-      }
-
-      else if (newItem.category == 'Penalty') {
-        this.studentsViewService.addPenalty(newItem).subscribe(
-          data => this.studentsViewService.getPenalties()
-        )
-      }
-
-      //Clean the input
-      this.pointItem = new PointItem;
-=======
       // Add to data array on service
       if (result) {
         if (result.cat_id == 1) {
@@ -95,7 +68,6 @@ export class TvPointsComponent implements OnInit {
         //Clean the input
         this.pointItem = new PointItem;
       }
->>>>>>> f4007334752fa459687a48f46376b7247f26cc4a
     });
   }
 
