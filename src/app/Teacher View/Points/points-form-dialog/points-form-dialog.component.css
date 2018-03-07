@@ -1,13 +1,11 @@
 .example-container {
-  display: flex;
-  flex-direction: column;
- text-align: center;
-  
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
-.example-container > * {
-  width: 50%;
-  margin: auto;
-  margin-top: 30px;
+.example-container>* {
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
 }
-

@@ -1,5 +1,4 @@
-
- .tables {
+.tables {
     /* display: inline-block;
     flex-wrap: wrap;
     width: 30%; */
@@ -12,51 +11,45 @@
     margin-right: 20px;
     margin-left: 20px;
     width: 29%;
- }
+}
 
- .all-tables {
-     background-color: #212121;
-     text-align: center;
-     min-height: 1000px;
-     padding-top: 25px;
-     padding-right: 15px;
-     /* flex-wrap: wrap; */
-   
- }
- 
- .tables:after {
+.all-tables {
+    background-color: #212121;
+    text-align: center;
+    min-height: 1000px;
+    padding-top: 25px;
+    padding-right: 15px;
+    /* flex-wrap: wrap; */
+}
+
+.tables:after {
     position: relative;
     display: table;
     content: "";
     clear: both;
 }
-   
-  @media (max-width: 767px) {
-     .tables{
-     width: 95%;
-     margin-right: 15px;
 
-      } 
-      .all-tables{
+@media (max-width: 767px) {
+    .tables {
+        width: 95%;
+        margin-right: 15px;
+    }
+    .all-tables {
         padding-right: 15px;
         min-height: 1500px;
-      }
-
-      h3{
+    }
+    h3 {
         text-align: center;
-      }
-   
-    }   
-  
-    /* Portrait and Landscape */
-  @media (min-width: 768px) and (max-width: 1024px)
-{
+    }
+}
 
-    .tables{
+
+/* Portrait and Landscape */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .tables {
         width: 44%;
-    
-   
-         } 
+    }
     .all-tables {
         padding-left: 15px;
         padding-right: 15px;
