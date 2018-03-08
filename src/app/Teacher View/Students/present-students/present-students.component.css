@@ -16,11 +16,9 @@
     width: 100%;
 }
 
-/* .mat-table {
+.mat-table {
     overflow: auto;
-    max-height: 500px;
-} */
-
+}
 mat-row:nth-child(even) {
     background-color: #e0e0e0;
 }
@@ -65,10 +63,15 @@ form {
 }
 
 .mat-column-form {
-  
+
     flex: 0 0 60%;
 }
 
+
+/* ::ng-deep .mat-select-value{
+  width:85%;
+  font-size: 10px;
+} */
 
 .fa-star {
     color: #D1D116;
@@ -78,7 +81,7 @@ form {
 .fa-gavel {
     color: #940B0B;
     padding-right: 10px;
-    
+
 }
 
 .fa-gift{
