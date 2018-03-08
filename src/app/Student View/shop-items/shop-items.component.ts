@@ -9,22 +9,20 @@ import PointItem from '../../../models/point-model';
 })
 export class ShopItemsComponent implements OnInit {
 prizes: any;
+
   constructor(private studentsViewService: StudentsViewService) { }
 
   ngOnInit() {
     this.studentsViewService.displayPrizesData$.subscribe(data => {
       this.prizes = data;
-      // this.subscribeToData();
   }, error => {
     console.error(error);
   });
-    this.studentsViewService.getDisplayedPrizes();
+    var service = this.studentsViewService
+    service.getDisplayedPrizes();
+  
+    setInterval(function(){
+      service.getDisplayedPrizes(); 
+    }, 7000);
   }
-
-  // private subscribeToData(): void {
-  //   var service = this.studentsViewService
-  //   setInterval(function(){
-  //     service.getDisplayedPrizes(); 
-  //   }, 7000);
-  // }
 }

@@ -1,11 +1,12 @@
 <!-- <h1>CHOOSE YOUR PRIZE!</h1> -->
-<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-evenly center">
+<div fxLayout="row" fxLayoutAlign="space-evenly center" class="prizes">
   <div *ngFor="let prize of prizes; let i = index" class="prize">
       {{prize.description}}
-      <img class="chest" style="height:100px;" src="https://www.shareicon.net/data/256x256/2016/06/30/625014_chest_256x256.png"/>
-    <div class="coin-line">
+      <br/>
+      <img class="chest" style="height:120px;" src="https://www.shareicon.net/data/256x256/2016/06/30/625014_chest_256x256.png"/>
+    <span class="coin-line">
       {{prize.amount}} points
-    </div>
-      <img class="coin" style="height:60px;" src="https://vignette.wikia.nocookie.net/restaurant-story-2/images/6/6b/Coin-icon.png/revision/latest?cb=20150508155053">
+    </span>
+      <img class="coin" style="height:60px;" src="https://vignette.wikia.nocookie.net/restaurant-story-2/images/6/6b/Coin-icon.png/revision/latest?cb=20150508155053"/>
   </div>
 </div>
