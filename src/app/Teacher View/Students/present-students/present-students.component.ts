@@ -59,7 +59,11 @@ export class PresentStudentsComponent implements OnInit {
   }
 
   submitForm(stId) {
-    console.log(this.transactionForm.status);
+    if (this.transactionForm.status == 'INVALID') {
+      console.log('transactionForm.status ', this.transactionForm.status);
+      this.openFeedbackDialog(`Oooops, thansaction NOT saved. Input wasn't filled correctly.`);
+      return
+    };
     let newTrans = {
       studentId: Number(stId),
       pointId: Number(this.transactionForm.value.selectedPointId),
@@ -67,11 +71,11 @@ export class PresentStudentsComponent implements OnInit {
     };
     this.service.saveTransaction(newTrans).subscribe(data => {
       console.log('transaction saved');
-      this.openArchieveDialog();
+      this.openFeedbackDialog('Transaction saved');
     },
       error => {
         console.error(error);
-        console.log('Oooops, thansaction NOT saved');
+        this.openFeedbackDialog('Oooops, thansaction NOT saved. Something went wrong :(');
       });
   }
 
@@ -83,16 +87,12 @@ export class PresentStudentsComponent implements OnInit {
     })
   }
 
-
-
-
-
   // POP-UP as feedback on submit transaction
-  openArchieveDialog(): void {
+  openFeedbackDialog(text): void {
     let dialogRef = this.dialog.open(TransactionPopupComponent, {
       width: '310px',
       data: {
-        text: 'Transaction saved'
+        text: text
       }
     });
 
