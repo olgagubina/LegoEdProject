@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StudentsViewService } from '../../../students-view.service';
-import Student from '../../../../models/student-model';
 import { MatTableDataSource } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { VALID } from '@angular/forms/src/model';
+import { StudentsViewService } from '../../../students-view.service';
+import { TransactionPopupComponent } from '../../transaction-popup/transaction-popup.component';
+import Student from '../../../../models/student-model';
 import PointItem from '../../../../models/point-model';
 
 @Component({
@@ -24,7 +26,8 @@ export class PresentStudentsComponent implements OnInit {
 
   constructor(
     private service: StudentsViewService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
   ) { this.createForm(); }
 
   createForm() {
@@ -42,13 +45,33 @@ export class PresentStudentsComponent implements OnInit {
   }
 
   submitForm(stId) {
+    console.log(this.transactionForm.status);
     let newTrans = {
       studentId: Number(stId),
       pointId: Number(this.transactionForm.value.selectedPointId),
       comment: this.transactionForm.value.comment
     };
-    this.service.saveTransaction(newTrans).subscribe(data => 
-      console.log('transaction saved', data));
+    this.service.saveTransaction(newTrans).subscribe(data => {
+      console.log('transaction saved');
+      this.openArchieveDialog();
+      // this.transactionForm = this.fb.group({
+      //   selectedCatId: [null, Validators.required],
+      //   selectedPointId: [null, Validators.required],
+      //   comment: ''
+      // })
+    },
+      error => {
+        console.error(error);
+        console.log('Oooops, thansaction NOT saved');
+      });
+  }
+
+  clearInput() {
+    this.transactionForm = this.fb.group({
+      selectedCatId: [null, Validators.required],
+      selectedPointId: [null, Validators.required],
+      comment: ''
+    })
   }
 
   ngOnInit() {
@@ -64,5 +87,26 @@ export class PresentStudentsComponent implements OnInit {
     );
     this.service.getDisplayedPoints();
   }
+
+
+
+  // POP-UP as feedback on submit transaction
+  openArchieveDialog(): void {
+    let dialogRef = this.dialog.open(TransactionPopupComponent, {
+      width: '310px',
+      data: {
+        text: 'Transaction saved'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => { 
+      this.transactionForm = this.fb.group({
+        selectedCatId: [null, Validators.required],
+        selectedPointId: [null, Validators.required],
+        comment: ''
+      })
+    });
+  }
+
 
 }
