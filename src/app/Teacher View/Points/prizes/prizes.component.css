@@ -44,7 +44,7 @@ button {
     background-color: #005662;
 }
 
-mat-header-cell {
+.mat-header-cell {
     color: white;
 }
 
