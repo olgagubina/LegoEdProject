@@ -44,12 +44,6 @@ export class AllStudentsComponent implements OnInit {
 
   // MARK STUDENT PRESENT
   markPresent(student) {
-    //   if (student.present === 0) {
-    //       student.present = 1;
-    // this.checked = false;
-    //   } else {
-    //     student.present = 0;
-    // }
     this.service.studentPresent(student).subscribe(data => {
       this.service.getPresentStudents();
       this.service.getStudents();
@@ -112,7 +106,6 @@ export class AllStudentsComponent implements OnInit {
       }
     });
   }
-
 
   //DELETE (archieve) STUDENT
   openArchieveDialog(student: Student): void {

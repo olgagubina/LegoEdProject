@@ -35,6 +35,7 @@ export class PunishmentsComponent implements OnInit {
   displayItem(penalty) {
     this.service.displayItem(penalty).subscribe(data => {
       this.service.getPenalties();
+      this.service.getDisplayedPoints();
     });
   }
 

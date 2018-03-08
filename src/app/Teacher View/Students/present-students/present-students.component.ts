@@ -30,6 +30,20 @@ export class PresentStudentsComponent implements OnInit {
     public dialog: MatDialog
   ) { this.createForm(); }
 
+  ngOnInit() {
+    this.title = 'Present Students';
+    // get list of present students
+    this.service.presentStudentsData$.subscribe(
+      data => { this.dataSource = new MatTableDataSource(data); },
+      error => { console.error(error); });
+    this.service.getPresentStudents();
+    // get list of all points for display
+    this.service.displayPointsData$.subscribe(
+      data => this.allPoints = data
+    );
+    this.service.getDisplayedPoints();
+  }
+
   createForm() {
     this.transactionForm = this.fb.group({
       selectedCatId: [null, Validators.required],
@@ -54,11 +68,6 @@ export class PresentStudentsComponent implements OnInit {
     this.service.saveTransaction(newTrans).subscribe(data => {
       console.log('transaction saved');
       this.openArchieveDialog();
-      // this.transactionForm = this.fb.group({
-      //   selectedCatId: [null, Validators.required],
-      //   selectedPointId: [null, Validators.required],
-      //   comment: ''
-      // })
     },
       error => {
         console.error(error);
@@ -74,19 +83,7 @@ export class PresentStudentsComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.title = 'Present Students';
-    // get list of present students
-    this.service.presentStudentsData$.subscribe(
-      data => { this.dataSource = new MatTableDataSource(data); },
-      error => { console.error(error); });
-    this.service.getPresentStudents();
-    // get list of all points for display
-    this.service.displayPointsData$.subscribe(
-      data => this.allPoints = data
-    );
-    this.service.getDisplayedPoints();
-  }
+
 
 
 
@@ -99,7 +96,7 @@ export class PresentStudentsComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => { 
+    dialogRef.afterClosed().subscribe(result => {
       this.transactionForm = this.fb.group({
         selectedCatId: [null, Validators.required],
         selectedPointId: [null, Validators.required],

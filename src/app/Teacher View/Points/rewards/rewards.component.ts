@@ -35,6 +35,7 @@ export class RewardsComponent implements OnInit {
   displayItem(reward) {
     this.service.displayItem(reward).subscribe(data => {
       this.service.getRewards();
+      this.service.getDisplayedPoints();
     });
   }
 

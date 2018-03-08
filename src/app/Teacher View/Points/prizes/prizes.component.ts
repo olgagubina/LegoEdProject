@@ -34,6 +34,7 @@ export class PrizesComponent implements OnInit {
   displayItem(prize) {
     this.service.displayItem(prize).subscribe(data => {
       this.service.getPrizes();
+      this.service.getDisplayedPoints();
     });
   }
 
