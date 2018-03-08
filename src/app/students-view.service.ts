@@ -24,6 +24,8 @@ export class StudentsViewService {
   rewards: PointItem[];
   show: boolean = true;
 
+
+
   constructor(private http: HttpClient) { }
 
 
@@ -150,5 +152,4 @@ export class StudentsViewService {
   saveTransaction(newTrans: any): Observable<Transaction> {
     return this.http.post<Transaction>('api/students/transactions/add', newTrans);
   }
-
 }

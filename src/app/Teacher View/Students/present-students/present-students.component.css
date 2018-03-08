@@ -80,18 +80,18 @@ form {
   font-size: 10px;   
 } */
 
-i.star {
+.fa-star {
     color: #D1D116;
     padding-right: 10px;
 }
 
-i.gavel {
+.fa-gavel {
     color: #940B0B;
     padding-right: 10px;
     
 }
 
-i.satisfied {
+.fa-gift{
     color: #247324;
     padding-right: 10px;
 }
