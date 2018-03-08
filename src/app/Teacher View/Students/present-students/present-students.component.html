@@ -17,6 +17,7 @@
     <!-- Form Column -->
     <ng-container matColumnDef="form">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
+
         <mat-cell *matCellDef="let student">
           <form [formGroup]="transactionForm" novalidate>
 
@@ -32,11 +33,16 @@
               </mat-option>
             </mat-select>
 
-            <input placeformControlName="comment" placeholder="leave comment">
-            <button class='btn btn-info' (click)="submitForm(student.studentId)"><i class="material-icons circle">add_circle</i></button> 
-          </form>
+   
+          <input placeformControlName="comment" placeholder="leave comment">
+          <button class='btn btn-info' (click)="submitForm(student.studentId)">
+            <i class="material-icons circle">add_circle</i>
+          </button>
+          <button class='btn btn-info' (click)="clearInput()">Clear</button>
+        </form>
 
-        </mat-cell>
+      </mat-cell>
+
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

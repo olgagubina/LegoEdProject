@@ -31,13 +31,16 @@ mat-row:nth-child(even) {
     background-color: #e0e0e0;
 }
 
-mat-row:nth-child(odd) {
-    background-color: #f5f5f5;
-}
 
-button {
+  button {
     border: none;
     background: none;
+    cursor: pointer;
+    outline: none;
+  }
+
+mat-row:nth-child(odd) {
+    background-color: #f5f5f5;
 }
 
 .mat-header-row {

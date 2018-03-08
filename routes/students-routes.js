@@ -10,10 +10,10 @@ var localConnection = mysql.createPool( {
     connectionLimit:   100,
     host: 'localhost',
     user: 'root', // < MySQL username >
-
-    password: '1234', // < MySQL password COOKIE and MC >
+    // password: '1234', // < MySQL password COOKIE and MC >
     // password: 'easyPass', // < MySQL password ANNA>
-    //password: '147258', // < MySQL password OLGA>
+    // password: '147258', // < MySQL password OLGA>
+
     database: 'lego', // <your database name>
     debug:   false
 });
@@ -26,9 +26,18 @@ var clearDBConnection = {
     database: 'heroku_365eb437c5f937e'
 }
 
+var amazonDBConnection = {
+    host: 'rds-legoproj-5dayhakathon.cflg4ssuo0rh.us-east-2.rds.amazonaws.com',
+    user: 'oagubina',
+    password: 'Ybyfhtubyf183',
+    database: 'lego'
+}
+
+
 //DB SWITCHER
-// sqlConnection = mysql.createConnection(clearDBConnection);
-sqlConnection = mysql.createConnection(localConnection);
+// sqlConnection = mysql.createConnection(amazonDBConnection);
+sqlConnection = mysql.createConnection(clearDBConnection);
+// sqlConnection = mysql.createConnection(localConnection);
 
 // FANCY FUNC TO MAKE CONNECTION (local OR heroku)
 //  if(process.env.PORT == 3000) {
@@ -215,7 +224,7 @@ router.get('/history/:startdate', (req, res) => {
     let startDate = this.params.startdate;
     try {
         connection.query(
-            `SELECT 
+            `SELECT
             trans_id as _id,
             timestamp,
             students.firstname as firstName,
@@ -226,7 +235,7 @@ router.get('/history/:startdate', (req, res) => {
             points.description,
             points.amount,
             comment
-            FROM transactions 
+            FROM transactions
             left join students on transactions.st_id = students.st_id
             left join points on transactions.point_id = points.point_id
             left join categories on points.cat_id = categories.cat_id

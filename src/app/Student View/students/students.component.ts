@@ -24,12 +24,11 @@ export class StudentsComponent implements OnInit {
       }
     );
     this.service.getPresentStudents();
+    var service = this.service
+    service.getPresentStudents();
+  
+    setInterval(function(){
+      service.getPresentStudents(); 
+    }, 7000);
   }
-
-  // private subscribeToData(): void {
-  //   var service = this.service
-  //   setInterval(function(){
-  //     service.getPresentStudents(); 
-  //   }, 7000);
-  // }
 }
