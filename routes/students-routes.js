@@ -10,12 +10,7 @@ var localConnection = mysql.createPool( {
     connectionLimit:   100,
     host: 'localhost',
     user: 'root', // < MySQL username >
-<<<<<<< HEAD
     // password: '1234', // < MySQL password COOKIE and MC >
-=======
-
-    password: '1234', // < MySQL password COOKIE and MC >
->>>>>>> 43f532f47b8e95a0c1918c59830d47ddf352eb9e
     // password: 'easyPass', // < MySQL password ANNA>
     // password: '147258', // < MySQL password OLGA>
 
