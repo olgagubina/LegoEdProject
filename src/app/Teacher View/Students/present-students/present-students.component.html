@@ -17,24 +17,23 @@
     <!-- Form Column -->
     <ng-container matColumnDef="form">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let student">
-        <form [formGroup]="transactionForm" novalidate>
 
-          <mat-select formControlName="selectedCatId" (change)="typeChanged()" placeholder="Type" style="width:70%;  margin-right:20px;">
-            <mat-option value="1">
-              <i class="material-icons star">grade</i>Reward</mat-option>
-            <mat-option value="2">
-              <i class="material-icons gavel">gavel</i>Penalty</mat-option>
-            <mat-option value="3">
-              <i class="material-icons satisfied">sentiment_very_satisfied</i>Prize</mat-option>
-          </mat-select>
+        <mat-cell *matCellDef="let student">
+          <form [formGroup]="transactionForm" novalidate>
 
-          <mat-select formControlName="selectedPointId" placeholder="Point" style="width:70%;  margin-right:20px;">
-            <mat-option *ngFor="let point of pointsAfterChangeEvent" [value]="point.pointId">
-              <i class="material-icons coin">monetization_on</i> {{ point.description }} - ({{ point.amount }})
-            </mat-option>
-          </mat-select>
+            <mat-select formControlName="selectedCatId" (change)="typeChanged()" placeholder="Type" style="width:70%;  margin-right:20px;">
+              <mat-option value="1"><i class="fa fa-star"></i>Reward</mat-option>
+              <mat-option value="2"><i class="fa fa-gavel"></i>Penalty</mat-option>
+              <mat-option value="3"><i class="fa fa-gift"></i>Prize</mat-option>
+            </mat-select>
 
+            <mat-select formControlName="selectedPointId" placeholder="Point" style="width:70%;  margin-right:20px;">
+              <mat-option *ngFor="let point of pointsAfterChangeEvent" [value]="point.pointId">
+                  <i class="material-icons coin">monetization_on</i> {{ point.description }} - ({{ point.amount }})
+              </mat-option>
+            </mat-select>
+
+   
           <input placeformControlName="comment" placeholder="leave comment">
           <button class='btn btn-info' (click)="submitForm(student.studentId)">
             <i class="material-icons circle">add_circle</i>
@@ -43,6 +42,7 @@
         </form>
 
       </mat-cell>
+
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
