@@ -29,7 +29,7 @@
     clear: both;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 850px) {
     .tables {
         width: 95%;
         margin-right: 15px;
@@ -46,13 +46,14 @@
 
 /* Portrait and Landscape */
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 851px) and (max-width: 1024px) {
     .tables {
         width: 44%;
     }
     .all-tables {
         padding-left: 15px;
-        padding-right: 15px;
+        padding-right: 15px; 
         /* width: 100%; */
-    }
+     }
 }
+
