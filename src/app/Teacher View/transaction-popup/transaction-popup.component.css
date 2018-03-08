@@ -31,4 +31,6 @@ mat-dialog-actions {
   left: 34%;
 }
 
-
+mat-dialog-content {
+  height: 150px;
+}
