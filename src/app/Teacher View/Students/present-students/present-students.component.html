@@ -1,5 +1,5 @@
 <h3>{{title}}</h3>
-  <div class="example-container mat-elevation-z8">
+  <div class="example-container mat-elevation-z8"[class.isMobile]="isMobile">
     <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="firstName">
         <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
