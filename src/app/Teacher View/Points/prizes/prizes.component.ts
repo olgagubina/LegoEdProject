@@ -70,12 +70,12 @@ export class PrizesComponent implements OnInit {
     let dialogRef = this.dialog.open(WarningDialogComponent, {
       width: '310px',
       data: {
-        text: 'Are you sure you want to remove point item "' + point.description + '" (' + point.amount + ') from the Prizes?'
+        text: 'Are you sure you want to remove "' + point.description + '" from Shop?'
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
+      if (result) {
       this.studentsViewService.
         archievePoint(point).subscribe(
           data => {
@@ -86,5 +86,5 @@ export class PrizesComponent implements OnInit {
           });
         }
     });
-  } 
+  }
 }
