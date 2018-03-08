@@ -12,24 +12,19 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
   styleUrls: ['./prizes.component.css']
 })
 export class PrizesComponent implements OnInit {
-  displayedColumns = [ 'Toggle', 'Prize', 'Cost', 'Edit' ];
-  myData: PointItem[] = [];
+  displayedColumns = ['Toggle', 'Prize', 'Cost', 'Edit'];
   dataSource: MatTableDataSource<PointItem>;
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-  this.service.prizesData$.subscribe(data => {
-      if (!this.dataSource) {
-        this.myData = data;
-        this.dataSource = new MatTableDataSource(this.myData);
-      } else { Object.assign(this.myData, data); }
+    this.service.prizesData$.subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
     },
-    error => {console.error(error);}
-  );
+      error => { console.error(error); }
+    );
     this.service.getPrizes();
   }
-
 
   displayItem(prize) {
     this.service.displayItem(prize).subscribe(data => {
@@ -48,7 +43,7 @@ export class PrizesComponent implements OnInit {
         description: point.description,
         amount: point.amount,
         btnText: 'Edit',
-        title: 'Edit '+ point.category
+        title: 'Edit ' + point.category
       }
     });
 
@@ -80,16 +75,16 @@ export class PrizesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
-      this.service.
-        archievePoint(point).subscribe(
-          data => {
-            this.service.getPrizes();
-          },
-          error => {
-            console.error(error)
-          });
-        }
+      if (result) {
+        this.service.
+          archievePoint(point).subscribe(
+            data => {
+              this.service.getPrizes();
+            },
+            error => {
+              console.error(error)
+            });
+      }
     });
   }
 }

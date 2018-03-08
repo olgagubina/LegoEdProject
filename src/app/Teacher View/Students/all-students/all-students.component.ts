@@ -21,8 +21,6 @@ export class AllStudentsComponent implements OnInit {
   displayedColumns = ['present', 'firstName', 'lastName', 'edit'];
   color = 'accent';
   disabled = false;
-
-  myData: Student[] = [];
   dataSource: MatTableDataSource<Student>;
 
   changedStudent: Student = new Student();
@@ -32,10 +30,7 @@ export class AllStudentsComponent implements OnInit {
   ngOnInit() {
     this.title = 'All Students';
     this.service.studentsData$.subscribe(data => {
-      if (!this.dataSource) {
-        this.myData = data;
-        this.dataSource = new MatTableDataSource(this.myData);
-      } else { Object.assign(this.myData, data); }
+      this.dataSource = new MatTableDataSource(data);
     },
       error => { console.error(error); }
     );
