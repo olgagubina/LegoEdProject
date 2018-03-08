@@ -5,7 +5,7 @@
     <p>{{data.text}}</p>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button class='remove-btn' mat-button [mat-dialog-close]="data">Remove</button>
     <button mat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+    <button class='remove-btn' mat-button [mat-dialog-close]="data">Remove</button>
   </mat-dialog-actions>
 </form>

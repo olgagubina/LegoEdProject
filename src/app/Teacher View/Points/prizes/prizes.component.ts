@@ -12,30 +12,35 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
   styleUrls: ['./prizes.component.css']
 })
 export class PrizesComponent implements OnInit {
-  displayedColumns = ['Toggle', 'Prize', 'Cost', 'Edit' ];
-  prizes: any[];
+  displayedColumns = [ 'Toggle', 'Prize', 'Cost', 'Edit' ];
+  myData: PointItem[] = [];
   dataSource: MatTableDataSource<PointItem>;
-  constructor(private studentsViewService: StudentsViewService, public dialog: MatDialog) { }
+
+  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.studentsViewService.prizesData$.subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-  }, error => {
-    console.error(error);
-  });
-    this.studentsViewService.getPrizes();
+  this.service.prizesData$.subscribe(data => {
+      if (!this.dataSource) {
+        this.myData = data;
+        this.dataSource = new MatTableDataSource(this.myData);
+      } else { Object.assign(this.myData, data); }
+    },
+    error => {console.error(error);}
+  );
+    this.service.getPrizes();
   }
 
+
   displayItem(prize) {
-    this.studentsViewService.displayItem(prize).subscribe(data => {
-      this.studentsViewService.getPrizes();
+    this.service.displayItem(prize).subscribe(data => {
+      this.service.getPrizes();
+      this.service.getDisplayedPoints();
     });
   }
 
-
   // EDIT POINT ITEM
   openEditDialog(point: PointItem): void {
-    this.studentsViewService.show = false;
+    this.service.show = false;
     let dialogRef = this.dialog.open(PointsFormDialogComponent, {
       width: '290px',
       data: {
@@ -54,13 +59,13 @@ export class PrizesComponent implements OnInit {
       updPointItem.cat_id = 3;
       console.log(updPointItem);
       if (result) {
-        this.studentsViewService
+        this.service
           .updPointItem(updPointItem)
           .subscribe(data => {
-            this.studentsViewService.getPrizes();
+            this.service.getPrizes();
           });
       }
-      this.studentsViewService.show = true;
+      this.service.show = true;
     });
   }
 
@@ -70,21 +75,21 @@ export class PrizesComponent implements OnInit {
     let dialogRef = this.dialog.open(WarningDialogComponent, {
       width: '310px',
       data: {
-        text: 'Are you sure you want to remove point item "' + point.description + '" (' + point.amount + ') from the Prizes?'
+        text: 'Are you sure you want to remove "' + point.description + '" from Shop?'
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result){
-      this.studentsViewService.
+      this.service.
         archievePoint(point).subscribe(
           data => {
-            this.studentsViewService.getPrizes();
+            this.service.getPrizes();
           },
           error => {
             console.error(error)
           });
         }
     });
-  } 
+  }
 }
