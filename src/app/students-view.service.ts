@@ -24,6 +24,8 @@ export class StudentsViewService {
   rewards: PointItem[];
   show: boolean = true;
 
+
+
   constructor(private http: HttpClient) { }
 
 

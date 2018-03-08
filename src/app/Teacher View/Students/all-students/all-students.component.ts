@@ -27,13 +27,19 @@ export class AllStudentsComponent implements OnInit {
   // selection = new SelectionModel<Student>(false, []);
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
-
+  myData : Student[] = [];
   ngOnInit() {
     this.title = 'All Students';
-    // this.allStudents = this.service.students;
     this.service.studentsData$.subscribe(
       data => {
-        this.dataSource = new MatTableDataSource(data);
+        console.log('subscribe');
+        if (!this.dataSource) {
+          this.myData = data;
+          this.dataSource = new MatTableDataSource(this.myData);
+        } else {
+          Object.assign(this.myData, data);
+        }
+          
       },
       error => {
         console.error(error);
