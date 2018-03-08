@@ -2,13 +2,11 @@
     background-color: white;
 }
 
-/* .mat-raised-button {
-    position: absolute;
-    right: 5px;
-    
-} */
+a {
+    position: relative;
+    left: 5px;
+}
 
 .material-icons {
-padding-right: 5px;
-
+    padding-right: 5px;
 }
