@@ -41,8 +41,8 @@ mat-row:nth-child(odd) {
 button {
   border: none;
   background: none;
-  /* cursor: pointer;
-  outline: none; */
+  cursor: pointer;
+  outline: none;
 }
 
 .mat-header-row {
