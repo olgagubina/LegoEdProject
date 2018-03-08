@@ -24,11 +24,4 @@ rewards: PointItem[];
     service.getDisplayedRewards(); 
   }, 7000);
   }
-
-  // private subscribeToData(): void {
-  //   var service = this.studentsViewService
-  //   setInterval(function(){
-  //     service.getDisplayedRewards(); 
-  //   }, 7000);
-  // }
 }
