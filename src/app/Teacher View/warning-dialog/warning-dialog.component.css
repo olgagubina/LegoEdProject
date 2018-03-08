@@ -1,14 +1,14 @@
 form {
-  height: auto;
-  width: auto;
-	text-align: center;
-  align-content: center;
-  /* background-color: #212121;
+    height: 200px;
+    width: auto;
+    text-align: center;
+    align-content: center;
+    /* background-color: #212121;
   color: white; */
-  overflow: hidden;
-  font-family: 'Roboto', sens-serif;
-  font-weight: 500;
-  font-size: 16px;
+    overflow: hidden;
+    font-family: 'Roboto', sens-serif;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 img {
@@ -19,15 +19,20 @@ img {
 
 .remove-btn {
     color: rgb(228, 40, 40);
-    /* text-decoration: rgb(228, 40, 40); */
+    position: absolute;
+    bottom: -10px;
+    right: 16px;
+}
+
+.cancel {
+  position: absolute;
+  bottom: -10px;
+  left: 16px;
 }
 
 mat-dialog-actions {
-  width: 100%;
-  margin: auto;
-  padding: 20px;
+    width: auto;
+    height: auto;
+    margin: auto;
+    position: relative;
 }
-
-
-
-
