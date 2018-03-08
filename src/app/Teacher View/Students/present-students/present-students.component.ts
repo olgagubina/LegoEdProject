@@ -61,7 +61,7 @@ export class PresentStudentsComponent implements OnInit {
   submitForm(stId) {
     if (this.transactionForm.status == 'INVALID') {
       console.log('transactionForm.status ', this.transactionForm.status);
-      this.openFeedbackDialog(`Oooops, thansaction NOT saved. Input wasn't filled correctly.`);
+      this.openFeedbackDialog(`Oops, transaction NOT saved. Input wasn't filled correctly.`);
       return
     };
     let newTrans = {
@@ -75,7 +75,7 @@ export class PresentStudentsComponent implements OnInit {
     },
       error => {
         console.error(error);
-        this.openFeedbackDialog('Oooops, thansaction NOT saved. Something went wrong :(');
+        this.openFeedbackDialog('Oops, transaction not saved. Something went wrong :(');
       });
   }
 
