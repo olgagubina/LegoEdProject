@@ -1,5 +1,15 @@
+form {
+  height: auto;
+  width: auto;
+	text-align: center;
+  align-content: center;
+  /* background-color: #212121;
+  color: white; */
+  overflow: hidden;
+}
+
 mat-dialog-actions {
-    width: 100%;
-    margin: auto;
-    padding: 20px;
+  width: 100%;
+  margin: auto;
+  padding: 20px;
 }
