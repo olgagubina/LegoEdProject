@@ -15,17 +15,13 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
 })
 export class RewardsComponent implements OnInit {
   displayedColumns = ['Toggle', 'Reward', 'Cost', 'Edit'];
-  myData: PointItem[] = [];
   dataSource: MatTableDataSource<PointItem>;
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.service.rewardsData$.subscribe(data => {
-      if (!this.dataSource) {
-        this.myData = data;
-        this.dataSource = new MatTableDataSource(this.myData);
-      } else { Object.assign(this.myData, data); }
+      this.dataSource = new MatTableDataSource(data);
     },
       error => { console.error(error); }
     );
