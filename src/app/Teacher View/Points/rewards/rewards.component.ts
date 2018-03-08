@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StudentsViewService } from '../../../students-view.service';
 import PointItem from '../../../../models/point-model';
 import { MatTableDataSource } from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PointsFormDialogComponent } from '../points-form-dialog/points-form-dialog.component';
 import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.component';
@@ -15,29 +15,32 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
 })
 export class RewardsComponent implements OnInit {
   displayedColumns = ['Toggle', 'Reward', 'Cost', 'Edit'];
-  rewards: PointItem[];
-
+  myData: PointItem[] = [];
   dataSource: MatTableDataSource<PointItem>;
-  constructor(private studentsViewService: StudentsViewService, public dialog: MatDialog) { }
+
+  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.studentsViewService.rewardsData$.subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-  }, error => {
-    console.error(error);
-  });
-    this.studentsViewService.getRewards();
+    this.service.rewardsData$.subscribe(data => {
+      if (!this.dataSource) {
+        this.myData = data;
+        this.dataSource = new MatTableDataSource(this.myData);
+      } else { Object.assign(this.myData, data); }
+    },
+      error => { console.error(error); }
+    );
+    this.service.getRewards();
   }
 
   displayItem(reward) {
-    this.studentsViewService.displayItem(reward).subscribe(data => {
-      this.studentsViewService.getRewards();
+    this.service.displayItem(reward).subscribe(data => {
+      this.service.getRewards();
     });
   }
 
   // EDIT POINT ITEM
   openEditDialog(point: PointItem): void {
-    this.studentsViewService.show = false;
+    this.service.show = false;
     let dialogRef = this.dialog.open(PointsFormDialogComponent, {
       width: '290px',
       data: {
@@ -45,7 +48,7 @@ export class RewardsComponent implements OnInit {
         description: point.description,
         amount: point.amount,
         btnText: 'Edit',
-        title: 'Edit '+ point.category
+        title: 'Edit ' + point.category
       }
     });
 
@@ -56,13 +59,13 @@ export class RewardsComponent implements OnInit {
       updPointItem.cat_id = 1;
       console.log(updPointItem);
       if (result) {
-        this.studentsViewService
+        this.service
           .updPointItem(updPointItem)
           .subscribe(data => {
-            this.studentsViewService.getRewards();
+            this.service.getRewards();
           });
       }
-      this.studentsViewService.show = true;
+      this.service.show = true;
     });
   }
 
@@ -76,17 +79,13 @@ export class RewardsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
-      this.studentsViewService.
-        archievePoint(point).subscribe(
-          data => {
-            this.studentsViewService.getRewards();
-          },
-          error => {
-            console.error(error)
-          });
-        }
+      if (result) {
+        this.service.archievePoint(point).subscribe(data => {
+          this.service.getRewards();
+        },
+          error => { console.error(error) });
+      }
     });
-  } 
+  }
 }
 
