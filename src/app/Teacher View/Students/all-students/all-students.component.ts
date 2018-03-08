@@ -17,40 +17,33 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   styleUrls: ['./all-students.component.css']
 })
 export class AllStudentsComponent implements OnInit {
+  title: String;
   displayedColumns = ['present', 'firstName', 'lastName', 'edit'];
   color = 'accent';
   disabled = false;
-  allStudents: Student[];
+
+  myData: Student[] = [];
   dataSource: MatTableDataSource<Student>;
-  title: String;
+
   changedStudent: Student = new Student();
-  // selection = new SelectionModel<Student>(false, []);
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.title = 'All Students';
-    // this.allStudents = this.service.students;
-    this.service.studentsData$.subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource(data);
-      },
-      error => {
-        console.error(error);
-      }
+    this.service.studentsData$.subscribe(data => {
+      if (!this.dataSource) {
+        this.myData = data;
+        this.dataSource = new MatTableDataSource(this.myData);
+      } else { Object.assign(this.myData, data); }
+    },
+      error => { console.error(error); }
     );
     this.service.getStudents();
   }
 
   // MARK STUDENT PRESENT
-
   markPresent(student) {
-    //   if (student.present === 0) {
-    //       student.present = 1;
-    // this.checked = false;
-    //   } else {
-    //     student.present = 0;
-    // }
     this.service.studentPresent(student).subscribe(data => {
       this.service.getPresentStudents();
       this.service.getStudents();
@@ -114,7 +107,6 @@ export class AllStudentsComponent implements OnInit {
     });
   }
 
-
   //DELETE (archieve) STUDENT
   openArchieveDialog(student: Student): void {
     let dialogRef = this.dialog.open(WarningDialogComponent, {
@@ -125,17 +117,17 @@ export class AllStudentsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result){
-      this.service.
-        archieveStudent(student).subscribe(
-          data => {
-            this.service.getPresentStudents();
-            this.service.getStudents();
-          },
-          error => {
-            console.error(error)
-          });
-        }
+      if (result) {
+        this.service.
+          archieveStudent(student).subscribe(
+            data => {
+              this.service.getPresentStudents();
+              this.service.getStudents();
+            },
+            error => {
+              console.error(error)
+            });
+      }
     });
-  } 
+  }
 }
