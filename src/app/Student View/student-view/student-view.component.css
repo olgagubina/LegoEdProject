@@ -7,6 +7,9 @@
 }
 
 .background {
+/* display: flex;
+flex-direction: column;
+height: 100vh; */
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
@@ -14,4 +17,8 @@
 .point-items {
   width: 100%;
 }
+
+/* .row {
+  flex-grow: 1;
+} */
 

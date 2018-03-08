@@ -75,7 +75,7 @@ export class PrizesComponent implements OnInit {
     let dialogRef = this.dialog.open(WarningDialogComponent, {
       width: '310px',
       data: {
-        text: 'Are you sure you want to remove point item "' + point.description + '" (' + point.amount + ') from the Prizes?'
+        text: 'Are you sure you want to remove "' + point.description + '" from Shop?'
       }
     });
 
@@ -91,5 +91,5 @@ export class PrizesComponent implements OnInit {
           });
         }
     });
-  } 
+  }
 }

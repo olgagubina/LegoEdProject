@@ -1,11 +1,14 @@
-mat-dialog-content {
-    padding: 0;
-}
-
-mat-dialog-actions {
-    width: 100%;
-    margin: auto;
-    padding: 30px;
+form {
+  height: auto;
+  width: auto;
+	text-align: center;
+  align-content: center;
+  /* background-color: #212121;
+  color: white; */
+  overflow: hidden;
+  font-family: 'Roboto', sens-serif;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 img {
@@ -14,17 +17,17 @@ img {
     margin: auto;
 }
 
-p {
-    font-family: 'Roboto', sens-serif;
-    font-weight: 500;
-    font-size: 16px;
-    width: 250px;
-    padding: 30px;
-    text-align: left;
-    margin: auto;
-}
-
 .remove-btn {
     color: rgb(228, 40, 40);
-    text-decoration: rgb(228, 40, 40);
+    /* text-decoration: rgb(228, 40, 40); */
 }
+
+mat-dialog-actions {
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+}
+
+
+
+

@@ -8,8 +8,8 @@
 }
 
 .student {
-    width: auto;
     height: auto;
+    width: auto;
     /* width: 15%;
     height: auto; */
     border-radius: 10px;
@@ -39,9 +39,9 @@
 
 .name {
     position: absolute;
-    bottom: 8px;
+    bottom: -15px;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 26px;
+    font-size: 30px;
 }
 

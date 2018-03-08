@@ -58,7 +58,7 @@ export class AllStudentsComponent implements OnInit {
         firstName: this.changedStudent.firstName,
         lastName: this.changedStudent.lastName,
         btnText: 'Add',
-        title: 'Add new student'
+        title: 'Add Student'
       },
     });
 
@@ -87,7 +87,7 @@ export class AllStudentsComponent implements OnInit {
         firstName: student.firstName,
         lastName: student.lastName,
         btnText: 'Edit',
-        title: 'Edit student'
+        title: 'Edit Student'
       }
     });
 
