@@ -29,7 +29,7 @@ export class StudentsComponent implements OnInit {
   // private subscribeToData(): void {
   //   var service = this.service
   //   setInterval(function(){
-  //     service.getPresentStudents();
+  //     service.getPresentStudents(); 
   //   }, 7000);
   // }
 }

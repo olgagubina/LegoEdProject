@@ -11,9 +11,10 @@ var localConnection = mysql.createPool( {
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-    password: '1234', // < MySQL password COOKIE and MC >
-    // password: 'easyPass', // < MySQL password ANNA>
-    //password: '147258', // < MySQL password OLGA>
+    // password: '1234', // < MySQL password COOKIE and MC >
+    password: 'easyPass', // < MySQL password ANNA>
+    // password: '147258', // < MySQL password OLGA>
+
     database: 'lego', // <your database name>
     debug:   false
 });

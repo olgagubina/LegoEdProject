@@ -24,7 +24,7 @@ rewards: PointItem[];
   // private subscribeToData(): void {
   //   var service = this.studentsViewService
   //   setInterval(function(){
-  //     service.getDisplayedRewards();
+  //     service.getDisplayedRewards(); 
   //   }, 7000);
   // }
 }

@@ -24,7 +24,7 @@ prizes: any;
   // private subscribeToData(): void {
   //   var service = this.studentsViewService
   //   setInterval(function(){
-  //     service.getDisplayedPrizes();
+  //     service.getDisplayedPrizes(); 
   //   }, 7000);
   // }
 }

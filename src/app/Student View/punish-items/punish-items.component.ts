@@ -25,7 +25,7 @@ export class PunishItemsComponent implements OnInit {
   // private subscribeToData(): void {
   //   var service = this.studentsViewService
   //   setInterval(function(){
-  //     service.getDisplayedPenalties();
+  //     service.getDisplayedPenalties(); 
   //   }, 7000);
   // }
 }

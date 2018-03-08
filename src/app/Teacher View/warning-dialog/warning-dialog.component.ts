@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -9,13 +9,15 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class WarningDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<WarningDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(
+    public dialogRef: MatDialogRef<WarningDialogComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: any) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
- onNoClick(): void {
-   this.dialogRef.close();
- }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

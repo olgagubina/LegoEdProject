@@ -22,6 +22,7 @@ export class StudentsViewService {
   prizes: PointItem[];
   penalties: PointItem[];
   rewards: PointItem[];
+  show: boolean = true;
 
   constructor(private http: HttpClient) { }
 
@@ -131,6 +132,18 @@ export class StudentsViewService {
         this.displayPointsData$.next(data)
       }
     );
+  }
+
+  //UPDATE POINT ITEM 
+  updPointItem(updPointItem:PointItem): Observable<PointItem> {
+    console.log(updPointItem);
+    return this.http.put<PointItem>('api/points/update/'+updPointItem.pointId, updPointItem);
+  }
+
+  //ARCHIEVE POINT ITEM
+  archievePoint(delPoint: PointItem): Observable<PointItem> {
+    console.log(delPoint);
+    return this.http.put<PointItem>('api/points/delete/'+delPoint.pointId, delPoint);
   }
 
   // SAVE TRANSACTIONS
