@@ -21,7 +21,7 @@ img {
 mat-dialog-actions {
   width: 100%;
   margin: auto;
-  padding: 20px;
+  padding: auto;
 }
 
 .remove-btn {

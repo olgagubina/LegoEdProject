@@ -50,12 +50,7 @@ button {
 }
 
 .mat-header-cell {
-
   color: white;
-
+  font-size: 16px;
 }
 
-/*
-  .material-icons {
-    display: inline;
-  } */
