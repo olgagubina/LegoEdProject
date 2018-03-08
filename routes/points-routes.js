@@ -6,14 +6,9 @@ var localConnection = {
     host: 'localhost',
     user: 'root', // < MySQL username >
 
-<<<<<<< HEAD
 
-    //password: '1234', // < MySQL password COOKIE and MC >
-    // password: 'easyPass', // < MySQL password ANNA>
-=======
     // password: '1234', // < MySQL password COOKIE and MC >
-    password: 'easyPass', // < MySQL password ANNA>
->>>>>>> a3c7d985ba208f5ca89385b832a0d561b1b4e895
+    //password: 'easyPass', // < MySQL password ANNA>
     // password: '147258', // < MySQL password OLGA>
     database: 'lego' // <your database name>
 }

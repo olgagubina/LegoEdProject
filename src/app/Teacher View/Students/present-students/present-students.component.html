@@ -1,6 +1,6 @@
 <h3>{{title}}</h3>
   <div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="dataSource" id="table">
       <ng-container matColumnDef="firstName">
         <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
         <mat-cell *matCellDef="let student">{{student.firstName}} </mat-cell>

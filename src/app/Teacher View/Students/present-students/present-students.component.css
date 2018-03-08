@@ -16,10 +16,10 @@
     width: 100%;
 }
 
-.mat-table {
+/* .mat-table {
     overflow: auto;
     max-height: 500px;
-}
+} */
 
 mat-row:nth-child(even) {
     background-color: #e0e0e0;
@@ -38,13 +38,8 @@ button {
     background-color: #005662;
 }
 
-mat-header-cell {
+.mat-header-cell {
     color: white;
-}
-
-.mat-table {
-    margin: 25px;
-    border-radius: 5px;
 }
 
 h3 {
@@ -74,11 +69,6 @@ form {
     flex: 0 0 60%;
 }
 
-
-/* ::ng-deep .mat-select-value{
-  width:85%;
-  font-size: 10px;   
-} */
 
 .fa-star {
     color: #D1D116;
