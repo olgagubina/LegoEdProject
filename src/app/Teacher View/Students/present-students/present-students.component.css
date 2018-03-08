@@ -37,8 +37,9 @@ button {
     background-color: #005662;
 }
 
-mat-header-cell {
-    color: white;
+.mat-header-cell {
+  color: white;
+  font-size: 16px;
 }
 
 .mat-table {
