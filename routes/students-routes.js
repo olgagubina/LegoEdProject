@@ -126,7 +126,7 @@ router.post('/add', (req, res) => {
         { firstname: newSt.firstName, lastname: newSt.lastName },
         function (err, rows, fields) {
             if (!err) res.send(rows);
-            else console.log('insert student', err);
+            else {console.log('insert student', err)};
         });
 });
 

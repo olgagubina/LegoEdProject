@@ -3,6 +3,7 @@ import { StudentsViewService } from '../../students-view.service';
 import { Observable } from 'rxjs/Observable';
 
 import Student from '../../../models/student-model';
+import * as io from '../../../../socket.js'
 
 @Component({
   selector: 'app-students',
@@ -10,8 +11,19 @@ import Student from '../../../models/student-model';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  socket: any;
+  io: any;
   students: Student[];
-  constructor(private service: StudentsViewService) { }
+
+  constructor(private service: StudentsViewService) { 
+    this.socket = io('http://localhost:3000');
+    this.socket.on('broadcast_objChange', function(data){
+      console.log(data);
+      if (data instanceof Student) {
+        this.students.push.data;
+      }
+  }.bind(this)); 
+  }
 
   ngOnInit() {
     this.service.presentStudentsData$.subscribe(
@@ -24,11 +36,10 @@ export class StudentsComponent implements OnInit {
       }
     );
     this.service.getPresentStudents();
-    var service = this.service
-    service.getPresentStudents();
+    // var service = this.service
   
-    setInterval(function(){
-      service.getPresentStudents(); 
-    }, 7000);
+    // setInterval(function(){
+    //   service.getPresentStudents(); 
+    // }, 7000);
   }
 }

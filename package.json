@@ -34,6 +34,7 @@
     "mysql": "^2.15.0",
     "rxjs": "^5.5.6",
     "serve-favicon": "^2.4.5",
+    "socket.io": "^2.0.4",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

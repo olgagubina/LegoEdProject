@@ -10,6 +10,8 @@ import { StudentFormDialogComponent } from '../student-form-dialog/student-form-
 import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+import * as io from '../../../../../socket.js'
+
 
 @Component({
   selector: 'app-all-students',
@@ -24,9 +26,13 @@ export class AllStudentsComponent implements OnInit {
   dataSource: MatTableDataSource<Student>;
   title: String;
   changedStudent: Student = new Student();
+  io:any; 
+  socket:any;
   // selection = new SelectionModel<Student>(false, []);
 
-  constructor(private service: StudentsViewService, public dialog: MatDialog) { }
+  constructor(private service: StudentsViewService, public dialog: MatDialog) {
+    this.socket = io('http://localhost:3000');
+  }
 
   ngOnInit() {
     this.title = 'All Students';
@@ -41,6 +47,11 @@ export class AllStudentsComponent implements OnInit {
     );
     this.service.getStudents();
   }
+
+  //SOCKET EMIT
+    socketEmit(data) {
+      this.socket.emit('objChange', data);
+    }
 
   // MARK STUDENT PRESENT
 
@@ -78,7 +89,10 @@ export class AllStudentsComponent implements OnInit {
       if (result) {
         this.service
           .addStudent(newStudent)
-          .subscribe(data => this.service.getStudents());
+          .subscribe(data => {
+            this.service.getStudents()
+            this.socketEmit(data);
+          });
       }
 
       // Clean the input
