@@ -14,8 +14,8 @@
           </mat-form-field>
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button mat-button (click)="onNoClick()">Cancel</button>
         <button mat-button [mat-dialog-close]="newItem" cdkFocusInitial>{{data.btnText}}</button>
+        <button mat-button (click)="onNoClick()">Cancel</button>
       </mat-dialog-actions>
     </form>
     

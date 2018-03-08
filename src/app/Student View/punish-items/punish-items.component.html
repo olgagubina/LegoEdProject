@@ -1,10 +1,8 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly center" class="penalties">
 <div *ngFor="let penalty of penalties; let i = index" class="penalty">
-  <div class="lego">
-    <img style="width: 200px;" src="http://icon-park.com/imagefiles/lego_brick_red.png">
-  </div>
-    <!-- <img class="coin" style="height:60px;" src="https://vignette.wikia.nocookie.net/restaurant-story-2/images/6/6b/Coin-icon.png/revision/latest?cb=20150508155053"> -->
-    <div class="amount">{{penalty.amount}}</div>
-    <p class="centered">{{penalty.description}}</p>
-    <img class="icon" style="height:60px;" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/lightning-icon.png"/>
-
+  <img class="lego" src="http://icon-park.com/imagefiles/lego_brick_red.png">
+  <div class="amount">{{penalty.amount}}</div>
+  <p class="centered">{{penalty.description}}</p>
+  <img class="icon" style="height:60px;" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/lightning-icon.png"/>
+</div>
 </div>
