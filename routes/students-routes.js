@@ -30,7 +30,7 @@ var realKirillClearDBConection = {
     host: 'eu-cdbr-west-02.cleardb.net',
     user: 'b13e4bf1011324',
     password: '0e2727fc',
-    database: ' heroku_c2b8c232850b096'
+    database: 'heroku_c2b8c232850b096'
 }
 
 var amazonDBConnection = {
