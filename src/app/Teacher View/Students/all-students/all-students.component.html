@@ -8,7 +8,7 @@
     <ng-container matColumnDef="present">
       <mat-header-cell *matHeaderCellDef> Mark Present </mat-header-cell>
       <mat-cell *matCellDef="let student">
-        <mat-slide-toggle [ngModel]="student.present" (click)="markPresent(student)">
+        <mat-slide-toggle [ngModel]="student.present" ng-reflect-animation='' (click)="markPresent(student)">
         </mat-slide-toggle>
         <!-- <button class='delete btn btn-info'>Present</button> -->
       </mat-cell>
