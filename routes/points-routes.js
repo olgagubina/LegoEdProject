@@ -19,6 +19,13 @@ var clearDBConnection = {
     database: 'heroku_365eb437c5f937e'
 }
 
+var realKirillClearDBConection = {
+    host: 'eu-cdbr-west-02.cleardb.net',
+    user: 'b13e4bf1011324',
+    password: '0e2727fc',
+    database: ' heroku_c2b8c232850b096'
+}
+
 var amazonDBConnection = {
     host: 'rds-legoproj-5dayhakathon.cflg4ssuo0rh.us-east-2.rds.amazonaws.com',
     user: 'oagubina',
@@ -28,7 +35,8 @@ var amazonDBConnection = {
 
 
 //DB SWITCHER
-connection = mysql.createConnection(amazonDBConnection);
+// connection = mysql.createConnection(amazonDBConnection);
+connection = mysql.createConnection(realKirillClearDBConection);
 // connection = mysql.createConnection(clearDBConnection);
 // connection = mysql.createConnection(localConnection);
 
