@@ -1,46 +1,47 @@
 .penalties {
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .penalty {
  padding:30px;
- margin: 5px;
- width: 125px;
- height: 125px;
+ width: 105px;
+ height: 105px;
  /* width: 15%; */
  border-radius: 10px;
  align-content: center;
  text-align: center;
- font-family: 'Luckiest Guy', cursive;
+ font-family:'Russo One', sans-serif;
  position: relative;
 }
 
 .penalty p {
+   padding: 7px;
     color: black;
     margin: auto;
-    font-size: 20px;
+    font-size: 12px;
 }
 
-.coin {
+/* .coin {
   position: absolute;
     top: 8px;
     left: 16px;
-}
+} */
 
 .amount {
   position: absolute;
-  top: 138px;
+  top: 125px;
   right: 67px;
   color: black;
 }
 
 .lego {
+  height: 130px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 110%;
+  width: auto;
 }
 
 .centered {

@@ -4,38 +4,39 @@
 }
 
 .reward {
-    /* display: flex; */
     padding:30px;
-    margin: 5px;
-    width: 125px;
-    height: 125px;
+    /* margin: 5px; */
+    width: 105px;
+    height: 105px;
     border-radius: 10px;
     align-content: center;
     text-align: center;
-    font-family: 'Luckiest Guy', cursive;
+    font-family:'Russo One', sans-serif;
     position: relative;
 }
 
 .reward p {
+    padding: 7px;
     color: black;
     margin: auto;
-    font-size: 20px;
-    text-transform: uppercase;
+    font-size: 12px;
+    /* text-transform: uppercase; */
 }
 
 .amount {
   position: absolute;
-  top: 138px;
+  top: 125px;
   right: 67px;
   color: black;
 }
 
 .lego {
+  height: 130px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 110%;
+  width: auto;
 }
 
 .centered {

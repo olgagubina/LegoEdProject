@@ -10,38 +10,57 @@
 .student {
     height: auto;
     width: auto;
-    /* width: 15%;
-    height: auto; */
     border-radius: 10px;
     background: linear-gradient(to bottom right, purple, #7C5DAF);
-    padding: 30px;
+    padding: 10px 15px 40px 15px;
     margin: 5px;
     text-align: center;
-    font-size: 20px;
-    font-family: 'Luckiest Guy', cursive;
+    font-size: 15px;
+    font-family: 'Rubik Mono One', sans-serif;
     color: white;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
     position: relative;
 }
 
+.robot {
+    height: 130px;
+    display: block;
+    margin: auto;
+}
+
 .left {
     position: absolute;
-    top: 8px;
-    left: 16px;
+    top: 170px;
+    left: 15px;
+    text-align: right;
+    margin-bottom: 8px;
 }
 
 .right {
     position: absolute;
-    top: 8px;
-    right: 16px;
+    top: 170px;
+    right: 15px;
+    text-align: right;
+    margin-bottom: 8px;
 }
 
 .name {
     position: absolute;
-    bottom: -15px;
+    bottom: -10px;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
 }
 
+.lives {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+.lives-wrap {
+    overflow: auto;
+}

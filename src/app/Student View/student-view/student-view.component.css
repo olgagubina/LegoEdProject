@@ -18,6 +18,14 @@ height: 100vh; */
   width: 100%;
 }
 
+.rewards {
+  width: 50%;
+}
+
+.punishments {
+  width: 50%;
+}
+
 /* .row {
   flex-grow: 1;
 } */
