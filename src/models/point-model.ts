@@ -1,8 +1,10 @@
 export default class PointItem {
     pointId: number;
-    description: string;
-    amount: number;
     catId: number;
-    category: string;
+    description: string;
+    money: number;
+    hearts: number;
+    xp:number;
+    deleted: boolean;
     display: boolean;
 }

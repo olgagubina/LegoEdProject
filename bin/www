@@ -7,6 +7,19 @@
 var app = require('../server');
 var debug = require('debug')('mean-app:server');
 var http = require('http');
+var forever = require('forever');
+
+/**
+ * Create forever Monitor
+ */
+var child = new (forever.Monitor)('../server.js',
+{
+'minUptime': 50, 
+'spinSleepTime': 10,
+'logFile': 'log_fr.txt', // Path to log output from forever process (when daemonized) 
+'outFile': 'out_fr.txt', // Path to log output from child stdout 
+'errFile': 'err_fr.txt' // Path to log output from child stderr 
+});
 
 /**
  * Create HTTP server.

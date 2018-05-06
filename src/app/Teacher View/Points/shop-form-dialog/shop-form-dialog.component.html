@@ -1,25 +1,12 @@
 <form>
   <h1 mat-dialog-title>{{data.title}}</h1>
   <mat-dialog-content>
-    <mat-form-field *ngIf='show'>
-      <mat-select matInput [(ngModel)]="newItem.cat_id" [ngModelOptions]="{standalone: true}" placeholder="Type">
-        <mat-option *ngFor="let comp of data.categ" [value]="comp.cat_id" required>{{ comp.category }}</mat-option>
-      </mat-select>
-    </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="newItem.description" [ngModelOptions]="{standalone: true}" autocomplete='name' placeholder="Name">
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput [(ngModel)]="newItem.xp" [ngModelOptions]="{standalone: true}" placeholder="XP">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
       <input matInput [(ngModel)]="newItem.money" [ngModelOptions]="{standalone: true}" placeholder="Money">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input matInput [(ngModel)]="newItem.hearts" [ngModelOptions]="{standalone: true}" placeholder="Hearts">
     </mat-form-field>
     <br>
   </mat-dialog-content>

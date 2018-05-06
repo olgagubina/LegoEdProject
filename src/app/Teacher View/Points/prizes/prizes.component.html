@@ -1,4 +1,6 @@
-<h3>Shop</h3>
+<h3>Shop <span matTooltip="Add Item"><button type="button" mat-fab (click)="openDialog()" 
+  class="btn"><i class="material-icons">add</i></button></span></h3>
+
 <div class="example-container mat-elevation-z8">
 
   <mat-table #table [dataSource]="dataSource">
@@ -13,13 +15,13 @@
     </ng-container>
 
     <ng-container matColumnDef="Prize">
-      <mat-header-cell *matHeaderCellDef> Shop </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let prize"> {{prize.description}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="Cost">
-      <mat-header-cell *matHeaderCellDef>Cost</mat-header-cell>
-      <mat-cell *matCellDef="let prize"> {{prize.amount}} </mat-cell>
+    <ng-container matColumnDef="Money">
+      <mat-header-cell *matHeaderCellDef>Money</mat-header-cell>
+      <mat-cell *matCellDef="let reward"> {{reward.money}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Edit">

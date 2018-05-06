@@ -14,7 +14,7 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
   styleUrls: ['./rewards.component.css']
 })
 export class RewardsComponent implements OnInit {
-  displayedColumns = ['Toggle', 'Reward', 'Cost', 'Edit'];
+  displayedColumns = ['Toggle', 'Reward', 'XP', 'Money', 'Edit'];
   dataSource: MatTableDataSource<PointItem>;
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
@@ -36,53 +36,53 @@ export class RewardsComponent implements OnInit {
   }
 
   // EDIT POINT ITEM
-  openEditDialog(point: PointItem): void {
-    this.service.show = false;
-    let dialogRef = this.dialog.open(PointsFormDialogComponent, {
-      width: '290px',
-      data: {
-        category: point.category,
-        description: point.description,
-        amount: point.amount,
-        btnText: 'Edit',
-        title: 'Edit ' + point.category
-      }
-    });
+  // openEditDialog(point: PointItem): void {
+  //   this.service.show = false;
+  //   let dialogRef = this.dialog.open(PointsFormDialogComponent, {
+  //     width: '290px',
+  //     data: {
+  //       category: point.category,
+  //       description: point.description,
+  //       amount: point.amount,
+  //       btnText: 'Edit',
+  //       title: 'Edit ' + point.category
+  //     }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      var updPointItem = Object.assign({}, result);
-      updPointItem.pointId = point.pointId;
-      updPointItem.cat_id = 1;
-      console.log(updPointItem);
-      if (result) {
-        this.service
-          .updPointItem(updPointItem)
-          .subscribe(data => {
-            this.service.getRewards();
-          });
-      }
-      this.service.show = true;
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     var updPointItem = Object.assign({}, result);
+  //     updPointItem.pointId = point.pointId;
+  //     updPointItem.cat_id = 1;
+  //     console.log(updPointItem);
+  //     if (result) {
+  //       this.service
+  //         .updPointItem(updPointItem)
+  //         .subscribe(data => {
+  //           this.service.getRewards();
+  //         });
+  //     }
+  //     this.service.show = true;
+  //   });
+  // }
 
-  //DELETE (archieve) POINT ITEM
-  openArchieveDialog(point: PointItem): void {
-    let dialogRef = this.dialog.open(WarningDialogComponent, {
-      width: '310px',
-      data: {
-        text: 'Are you sure you want to remove "' + point.description + '" from Rewards?'
-      }
-    });
+  // //DELETE (archieve) POINT ITEM
+  // openArchieveDialog(point: PointItem): void {
+  //   let dialogRef = this.dialog.open(WarningDialogComponent, {
+  //     width: '310px',
+  //     data: {
+  //       text: 'Are you sure you want to remove "' + point.description + '" from Rewards?'
+  //     }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.service.archievePoint(point).subscribe(data => {
-          this.service.getRewards();
-        },
-          error => { console.error(error) });
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       this.service.archievePoint(point).subscribe(data => {
+  //         this.service.getRewards();
+  //       },
+  //         error => { console.error(error) });
+  //     }
+  //   });
+  // }
 }
 

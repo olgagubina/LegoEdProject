@@ -1,11 +1,13 @@
-<h3>Penalties</h3>
+<h3>Penalties <span matTooltip="Add Item"><button type="button" mat-fab (click)="openDialog()" 
+  class="btn"><i class="material-icons">add</i></button></span></h3>
+
 <div class="example-container mat-elevation-z8">
 
       <mat-table #table [dataSource]="dataSource">
 
 
           <ng-container matColumnDef="Toggle">
-              <mat-header-cell *matHeaderCellDef>Display</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef><img class='icon' alt='show' src='assets/images/eye.png'></mat-header-cell>
               <mat-cell *matCellDef="let penalty">
                 <mat-slide-toggle [ngModel]="penalty.display" (click)="displayItem(penalty)">
                 </mat-slide-toggle>
@@ -13,13 +15,18 @@
           </ng-container>
 
         <ng-container matColumnDef="Penalty">
-          <mat-header-cell *matHeaderCellDef> Penalty </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
           <mat-cell *matCellDef="let penalty"> {{penalty.description}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="Cost">
-          <mat-header-cell *matHeaderCellDef>Cost</mat-header-cell>
-          <mat-cell *matCellDef="let penalty"> {{penalty.amount}} </mat-cell>
+        <ng-container class='small-col' matColumnDef="Hearts">
+          <mat-header-cell *matHeaderCellDef><img class='icon' alt='hearts' src='assets/images/heart.png'></mat-header-cell>
+          <mat-cell *matCellDef="let reward"> {{reward.hearts}} </mat-cell>
+        </ng-container>
+
+        <ng-container class='small-col' matColumnDef="Money">
+          <mat-header-cell *matHeaderCellDef><img class='icon' alt='coins' src='assets/images/coins.png'></mat-header-cell>
+          <mat-cell *matCellDef="let reward"> {{reward.money}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Edit">

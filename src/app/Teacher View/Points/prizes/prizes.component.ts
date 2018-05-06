@@ -5,6 +5,9 @@ import { MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PointsFormDialogComponent } from '../points-form-dialog/points-form-dialog.component';
 import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.component';
+import { ShopFormDialogComponent } from '../shop-form-dialog/shop-form-dialog.component';
+
+
 
 @Component({
   selector: 'app-prizes',
@@ -12,8 +15,9 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
   styleUrls: ['./prizes.component.css']
 })
 export class PrizesComponent implements OnInit {
-  displayedColumns = ['Toggle', 'Prize', 'Cost', 'Edit'];
+  displayedColumns = ['Toggle', 'Prize', 'Money', 'Edit'];
   dataSource: MatTableDataSource<PointItem>;
+  pointItem: PointItem = new PointItem();
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
@@ -33,17 +37,49 @@ export class PrizesComponent implements OnInit {
     });
   }
 
+  //ADD ITEM
+  openDialog(): void {
+        let dialogRef = this.dialog.open(ShopFormDialogComponent, {
+          width: '290px',
+          data: {
+            title: 'Add Prize',
+            btnText: 'Add',
+            description: this.pointItem.description,
+            money: this.pointItem.money
+          }
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          var newItem = Object.assign({}, result);
+          console.log(result);
+    
+          //Add to data array on service
+          if (result) {
+              result.cat_id = 3;
+              result.xp = 0;
+              result.hearts = 0;
+              this.service.addPointItems(result).subscribe(
+                data => this.service.getPrizes()
+              );
+            }
+    
+            //Clean the input
+            this.pointItem = new PointItem;
+          // }
+        });
+      }
+
   // EDIT POINT ITEM
   openEditDialog(point: PointItem): void {
     this.service.show = false;
-    let dialogRef = this.dialog.open(PointsFormDialogComponent, {
+    let dialogRef = this.dialog.open(ShopFormDialogComponent, {
       width: '290px',
       data: {
-        category: point.category,
         description: point.description,
-        amount: point.amount,
+        money: point.money,
         btnText: 'Edit',
-        title: 'Edit ' + point.category
+        title: 'Edit '
       }
     });
 

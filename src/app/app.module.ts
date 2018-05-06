@@ -35,6 +35,8 @@ import { PunishmentsComponent } from './Teacher View/Points/punishments/punishme
 import { DropdownPrizesComponent } from './dropdown-prizes/dropdown-prizes.component';
 import { WarningDialogComponent } from './Teacher View/warning-dialog/warning-dialog.component';
 import { TransactionPopupComponent } from './Teacher View/transaction-popup/transaction-popup.component';
+import { PunishmentsFormDialogComponent } from './Teacher View/Points/punishments-form-dialog/punishments-form-dialog.component';
+import { ShopFormDialogComponent } from './Teacher View/Points/shop-form-dialog/shop-form-dialog.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { TransactionPopupComponent } from './Teacher View/transaction-popup/tran
     PunishmentsComponent,
     DropdownPrizesComponent,
     WarningDialogComponent,
-    TransactionPopupComponent
+    TransactionPopupComponent,
+    PunishmentsFormDialogComponent,
+    ShopFormDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -74,7 +78,14 @@ import { TransactionPopupComponent } from './Teacher View/transaction-popup/tran
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  entryComponents: [PointsFormDialogComponent, StudentFormDialogComponent, WarningDialogComponent, TransactionPopupComponent],
+  entryComponents: [
+    PointsFormDialogComponent, 
+    StudentFormDialogComponent, 
+    WarningDialogComponent, 
+    TransactionPopupComponent, 
+    ShopFormDialogComponent,
+    PunishmentsFormDialogComponent,
+  ],
   providers: [StudentsViewService],
   bootstrap: [AppComponent]
 })

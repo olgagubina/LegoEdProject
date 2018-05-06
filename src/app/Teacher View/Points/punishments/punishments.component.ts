@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { PointsFormDialogComponent } from '../points-form-dialog/points-form-dialog.component';
+import { PunishmentsFormDialogComponent } from '../punishments-form-dialog/punishments-form-dialog.component';
 import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.component';
 
 @Component({
@@ -14,8 +14,9 @@ import { WarningDialogComponent } from '../../warning-dialog/warning-dialog.comp
   styleUrls: ['./punishments.component.css']
 })
 export class PunishmentsComponent implements OnInit {
-  displayedColumns = ['Toggle', 'Penalty', 'Cost', 'Edit'];
+  displayedColumns = ['Toggle', 'Penalty', 'Hearts', 'Money', 'Edit'];
   dataSource: MatTableDataSource<PointItem>;
+  pointItem: PointItem = new PointItem();
 
   constructor(private service: StudentsViewService, public dialog: MatDialog) { }
 
@@ -35,60 +36,69 @@ export class PunishmentsComponent implements OnInit {
     });
   }
 
-  // EDIT STUDENT
-  openEditDialog(point: PointItem): void {
-    this.service.show = false;
-    let dialogRef = this.dialog.open(PointsFormDialogComponent, {
+  //ADD ITEM
+  openDialog(): void {
+    let dialogRef = this.dialog.open(PunishmentsFormDialogComponent, {
       width: '290px',
       data: {
-        category: point.category,
-        description: point.description,
-        amount: point.amount,
-        btnText: 'Edit',
-        title: 'Edit ' + point.category
+        title: 'Add Penalty',
+        btnText: 'Add',
+        description: this.pointItem.description,
+        money: this.pointItem.money,
+        hearts: this.pointItem.hearts
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      var updPointItem = Object.assign({}, result);
-      updPointItem.pointId = point.pointId;
-      updPointItem.cat_id = 2;
-      console.log(updPointItem);
+      var newItem = Object.assign({}, result);
+      console.log(result);
+
+      //Add to data array on service
       if (result) {
-        this.service
-          .updPointItem(updPointItem)
-          .subscribe(data => {
-            this.service.getPenalties();
-          });
-      }
-      this.service.show = true;
+          result.cat_id = 2;
+          result.xp = 0;
+          this.service.addPointItems(result).subscribe(
+            data => this.service.getPenalties()
+          );
+        }
+
+        //Clean the input
+        this.pointItem = new PointItem;
+      // }
     });
   }
 
-
-  //DELETE (archieve) STUDENT
-  openArchieveDialog(point: PointItem): void {
-    let dialogRef = this.dialog.open(WarningDialogComponent, {
-      width: '310px',
-      data: {
-        text: 'Are you sure you want to remove "' + point.description + '" from Penalties?'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.service.
-          archievePoint(point).subscribe(
-            data => {
-              this.service.getPenalties();
-            },
-            error => {
-              console.error(error)
-            });
-      }
-    });
+// EDIT POINT ITEM
+openEditDialog(point: PointItem): void {
+this.service.show = false;
+let dialogRef = this.dialog.open(PunishmentsFormDialogComponent, {
+  width: '290px',
+  data: {
+    description: point.description,
+    money: this.pointItem.money,
+    hearts: this.pointItem.hearts,
+    btnText: 'Edit',
+    title: 'Edit '
   }
+});
+
+dialogRef.afterClosed().subscribe(result => {
+  console.log('The dialog was closed');
+  var updPointItem = Object.assign({}, result);
+  updPointItem.pointId = point.pointId;
+  updPointItem.cat_id = 2;
+  console.log(updPointItem);
+  if (result) {
+    this.service
+      .updPointItem(updPointItem)
+      .subscribe(data => {
+        this.service.getPenalties();
+      });
+  }
+  this.service.show = true;
+});
+}
 
 }
 
